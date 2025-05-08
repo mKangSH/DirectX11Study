@@ -1,6 +1,4 @@
 #pragma once
-#include "Pass.h"
-#include "Technique.h"
 
 struct ShaderDesc
 {

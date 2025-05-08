@@ -22,8 +22,6 @@ void TriangleDemo::Update()
 
 void TriangleDemo::Render()
 {
-	static UINT test = 0;
-	
 	uint32 stride = _buffer->GetStride();
 	uint32 offset = _buffer->GetOffset();
 
