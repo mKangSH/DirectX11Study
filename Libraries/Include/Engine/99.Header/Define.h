@@ -1,0 +1,15 @@
+#pragma once
+
+#define DECLARE_SINGLETON(ClassName)	\
+private:								\
+	ClassName() {}						\
+										\
+public:									\
+	static ClassName* GetInstance()		\
+	{									\
+		static ClassName s_instance;	\
+		return &s_instance;				\
+	}									\
+
+
+#define GET_SINGLE(ClassName) ClassName::GetInstance()

@@ -1,0 +1,33 @@
+#include "pch.h"
+#include "01. TriangleDemo.h"
+
+void TriangleDemo::Init()
+{
+	_shader = std::make_shared<Shader>(L"01. Triangle.fx");
+	{
+		_vertices.resize(3);
+
+		_vertices[0].position = Vec3{ -0.5f, 0.f, 0.f };
+		_vertices[1].position = Vec3{ 0.f, 0.5f, 0.f };
+		_vertices[2].position = Vec3{ 0.5f, 0.f, 0.f };
+	}
+	_buffer = std::make_shared<VertexBuffer>();
+	_buffer->CreateBuffer(_vertices);
+}
+
+void TriangleDemo::Update()
+{
+
+}
+
+void TriangleDemo::Render()
+{
+	static UINT test = 0;
+	
+	uint32 stride = _buffer->GetStride();
+	uint32 offset = _buffer->GetOffset();
+
+	DEVICECONTEXT->IASetVertexBuffers(0, 1, _buffer->GetBuffer().GetAddressOf(), &stride, &offset);
+
+	_shader->Draw(0, 0, _buffer->GetCount());
+}
