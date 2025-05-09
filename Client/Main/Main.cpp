@@ -3,7 +3,7 @@
 #include "Engine/02.Managers/Game.h"
 #include "../Game/01. TriangleDemo.h"
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
+int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
 	GameDesc desc;
 	desc.appName = L"GameCoding";
