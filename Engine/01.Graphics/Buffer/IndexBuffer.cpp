@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "IndexBuffer.h"
 
-IndexBuffer::IndexBuffer(ComPtr<ID3D11Device> device)
-	: _device(device)
+IndexBuffer::IndexBuffer()
 {
 }
 
@@ -29,6 +28,6 @@ void IndexBuffer::CreateBuffer(const std::vector<uint32>& indices)
 		data.pSysMem = indices.data();
 	}
 
-	HRESULT hr = _device->CreateBuffer(&desc, &data, _indexBuffer.GetAddressOf());
+	HRESULT hr = DEVICE->CreateBuffer(&desc, &data, _indexBuffer.GetAddressOf());
 	assert(SUCCEEDED(hr));
 }

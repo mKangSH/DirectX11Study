@@ -2,6 +2,7 @@
 #include "Main.h"
 #include "Engine/02.Managers/Game.h"
 #include "../Game/01. TriangleDemo.h"
+#include "../Game/02. QuadDemo.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
@@ -13,7 +14,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	desc.width = 1920;
 	desc.height = 1080;
 	desc.clearColor = DirectX::Colors::Black;
-	desc.app = std::make_shared<TriangleDemo>();
+	//desc.app = std::make_shared<TriangleDemo>();
+	desc.app = std::make_shared<QuadDemo>();
 
 	GAME->Run(desc);
 

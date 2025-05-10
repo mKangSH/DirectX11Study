@@ -3,7 +3,7 @@
 class IndexBuffer
 {
 public:
-	explicit IndexBuffer(ComPtr<ID3D11Device> device);
+	IndexBuffer();
 	~IndexBuffer();
 
 public:

@@ -24,6 +24,7 @@
     <ClInclude Include="01.Graphics\Shader\Technique.h" />
     <ClInclude Include="00.Engine\Resource\ResourceBase.h" />
     <ClInclude Include="00.Engine\Resource\Texture.h" />
+    <ClInclude Include="01.Graphics\Buffer\GeometryHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="99.Header\pch.cpp" />
@@ -46,6 +47,7 @@
     <ClCompile Include="01.Graphics\Shader\Technique.cpp" />
     <ClCompile Include="00.Engine\Resource\ResourceBase.cpp" />
     <ClCompile Include="00.Engine\Resource\Texture.cpp" />
+    <ClCompile Include="01.Graphics\Buffer\GeometryHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="98.Utils\SimpleMath.inl" />
