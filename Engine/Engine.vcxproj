@@ -185,6 +185,11 @@
     <ClInclude Include="02.Managers\InputManager.h" />
     <ClInclude Include="02.Managers\ResourceManager.h" />
     <ClInclude Include="02.Managers\TimeManager.h" />
+    <ClInclude Include="03.SceneObject\SceneObject.h" />
+    <ClInclude Include="04.Component\Camera.h" />
+    <ClInclude Include="04.Component\Component.h" />
+    <ClInclude Include="04.Component\MonoBehaviour.h" />
+    <ClInclude Include="04.Component\Transform.h" />
     <ClInclude Include="98.Utils\SimpleMath.h" />
     <ClInclude Include="98.Utils\tinyxml2.h" />
     <ClInclude Include="99.Header\Define.h" />
@@ -211,6 +216,11 @@
     <ClCompile Include="02.Managers\InputManager.cpp" />
     <ClCompile Include="02.Managers\ResourceManager.cpp" />
     <ClCompile Include="02.Managers\TimeManager.cpp" />
+    <ClCompile Include="03.SceneObject\SceneObject.cpp" />
+    <ClCompile Include="04.Component\Camera.cpp" />
+    <ClCompile Include="04.Component\Component.cpp" />
+    <ClCompile Include="04.Component\MonoBehaviour.cpp" />
+    <ClCompile Include="04.Component\Transform.cpp" />
     <ClCompile Include="98.Utils\SimpleMath.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

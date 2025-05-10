@@ -25,6 +25,11 @@
     <ClInclude Include="00.Engine\Resource\ResourceBase.h" />
     <ClInclude Include="00.Engine\Resource\Texture.h" />
     <ClInclude Include="01.Graphics\Buffer\GeometryHelper.h" />
+    <ClInclude Include="04.Component\Component.h" />
+    <ClInclude Include="03.SceneObject\SceneObject.h" />
+    <ClInclude Include="04.Component\Transform.h" />
+    <ClInclude Include="04.Component\MonoBehaviour.h" />
+    <ClInclude Include="04.Component\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="99.Header\pch.cpp" />
@@ -48,6 +53,11 @@
     <ClCompile Include="00.Engine\Resource\ResourceBase.cpp" />
     <ClCompile Include="00.Engine\Resource\Texture.cpp" />
     <ClCompile Include="01.Graphics\Buffer\GeometryHelper.cpp" />
+    <ClCompile Include="04.Component\Component.cpp" />
+    <ClCompile Include="03.SceneObject\SceneObject.cpp" />
+    <ClCompile Include="04.Component\Transform.cpp" />
+    <ClCompile Include="04.Component\MonoBehaviour.cpp" />
+    <ClCompile Include="04.Component\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="98.Utils\SimpleMath.inl" />

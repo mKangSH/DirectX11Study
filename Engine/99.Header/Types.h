@@ -21,3 +21,23 @@ using Vec3 = DirectX::SimpleMath::Vector3;
 using Vec4 = DirectX::SimpleMath::Vector4;
 using Matrix = DirectX::SimpleMath::Matrix;
 using Quaternion = DirectX::SimpleMath::Quaternion;
+
+enum class ComponentType : uint8
+{
+	Transform,
+	MeshRenderer,
+	Camera,
+	Animator,
+	//Light,
+	//Physics,
+	//Audio,
+	//UI,
+	Script,
+
+	Count
+};
+
+enum
+{
+	FIXED_COMPONENT_COUNT = static_cast<uint8>(ComponentType::Count) - 1,
+};

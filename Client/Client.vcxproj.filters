@@ -5,15 +5,23 @@
     <ClInclude Include="Main\Main.h" />
     <ClInclude Include="Game\01. TriangleDemo.h" />
     <ClInclude Include="Game\02. QuadDemo.h" />
+    <ClInclude Include="Game\03. ConstBufferDemo.h" />
+    <ClInclude Include="Game\04. CameraDemo.h" />
+    <ClInclude Include="Main\Camera\CameraScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\pch.cpp" />
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Game\01. TriangleDemo.cpp" />
     <ClCompile Include="Game\02. QuadDemo.cpp" />
+    <ClCompile Include="Game\03. ConstBufferDemo.cpp" />
+    <ClCompile Include="Game\04. CameraDemo.cpp" />
+    <ClCompile Include="Main\Camera\CameraScript.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Shaders\01. Triangle.fx" />
     <FxCompile Include="..\Shaders\02. Quad.fx" />
+    <FxCompile Include="..\Shaders\03. ConstBuffer.fx" />
+    <FxCompile Include="..\Shaders\04. World.fx" />
   </ItemGroup>
 </Project>
