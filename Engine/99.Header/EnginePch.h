@@ -66,9 +66,15 @@ using namespace Microsoft::WRL;
 #define RESOURCES				GET_SINGLE(ResourceManager)
 
 // Engine
+#include "../00.Engine/IExecute.h"
+#include "../00.Engine/Resource/Texture.h"
+
 #include "../01.Graphics/Buffer/VertexData.h"
 #include "../01.Graphics/Buffer/VertexBuffer.h"
 #include "../01.Graphics/Buffer/IndexBuffer.h"
 #include "../01.Graphics/Buffer/ConstantBuffer.h"
 #include "../01.Graphics/Shader/Shader.h"
-#include "../00.Engine/IExecute.h"
+
+#include "../03.SceneObject/SceneObject.h"
+#include "../04.Component/Component.h"
+#include "../04.Component/Transform.h"
