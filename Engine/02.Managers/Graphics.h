@@ -5,7 +5,7 @@ class Graphics
 	DECLARE_SINGLETON(Graphics)
 
 public:
-	void Init(HWND hwnd);
+	void Init(HWND hwnd, Color clearColor);
 	void RenderBegin();
 	void RenderEnd();
 
@@ -19,6 +19,7 @@ private:
 
 private:
 	HWND _hwnd = nullptr;
+	Color _clearColor = {};
 
 	// DirectX11 Device & SwapChain
 	ComPtr<ID3D11Device> _device = nullptr; // »ý¼º

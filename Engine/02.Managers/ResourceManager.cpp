@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "ResourceManager.h"
 
-void ResourceManager::Init()
+void ResourceManager::Init(const std::wstring& resourcePath)
 {
+	_resourcePath = resourcePath;
 	CreateDefaultMesh();
 }
 

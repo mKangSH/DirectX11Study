@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\05. TextureDemo.h" />
+    <ClInclude Include="Game\06. SamplerDemo.h" />
     <ClInclude Include="Main\Camera\CameraScript.h" />
     <ClInclude Include="Game\02. QuadDemo.h" />
     <ClInclude Include="Game\03. ConstBufferDemo.h" />
@@ -28,6 +30,8 @@
     <ClInclude Include="Game\01. TriangleDemo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\05. TextureDemo.cpp" />
+    <ClCompile Include="Game\06. SamplerDemo.cpp" />
     <ClCompile Include="Main\Camera\CameraScript.cpp" />
     <ClCompile Include="Game\02. QuadDemo.cpp" />
     <ClCompile Include="Game\03. ConstBufferDemo.cpp" />
@@ -70,7 +74,7 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\Shaders\04. World.fx">
+    <FxCompile Include="..\Shaders\04. Texture.fx">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
@@ -80,6 +84,7 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="..\Shaders\05. Sampler.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

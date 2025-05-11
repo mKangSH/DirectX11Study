@@ -11,7 +11,7 @@ class ResourceManager
 	DECLARE_SINGLETON(ResourceManager)
 
 public:
-	void Init();
+	void Init(const std::wstring& resourcePath);
 
 	template <typename T>
 	std::shared_ptr<T> Load(const std::wstring& key, const std::wstring& path);
@@ -55,7 +55,9 @@ inline std::shared_ptr<T> ResourceManager::Load(const std::wstring& key, const s
 	}
 
 	std::shared_ptr<T> object = std::make_shared<T>(resourceType);
-	object->Load(path);
+
+	std::wstring filePath = _resourcePath + path;
+	object->Load(filePath);
 	keyObjMap[key] = object;
 
 	return object;

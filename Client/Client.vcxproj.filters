@@ -8,6 +8,8 @@
     <ClInclude Include="Game\03. ConstBufferDemo.h" />
     <ClInclude Include="Game\04. CameraDemo.h" />
     <ClInclude Include="Main\Camera\CameraScript.h" />
+    <ClInclude Include="Game\05. TextureDemo.h" />
+    <ClInclude Include="Game\06. SamplerDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\pch.cpp" />
@@ -17,11 +19,14 @@
     <ClCompile Include="Game\03. ConstBufferDemo.cpp" />
     <ClCompile Include="Game\04. CameraDemo.cpp" />
     <ClCompile Include="Main\Camera\CameraScript.cpp" />
+    <ClCompile Include="Game\05. TextureDemo.cpp" />
+    <ClCompile Include="Game\06. SamplerDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Shaders\01. Triangle.fx" />
     <FxCompile Include="..\Shaders\02. Quad.fx" />
     <FxCompile Include="..\Shaders\03. ConstBuffer.fx" />
-    <FxCompile Include="..\Shaders\04. World.fx" />
+    <FxCompile Include="..\Shaders\04. Texture.fx" />
+    <FxCompile Include="..\Shaders\05. Sampler.fx" />
   </ItemGroup>
 </Project>

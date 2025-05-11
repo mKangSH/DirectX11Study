@@ -16,7 +16,7 @@ WPARAM Game::Run(GameDesc& desc)
 		return FALSE;
 	}
 	
-	GRAPHICS->Init(_desc.hWnd);
+	GRAPHICS->Init(_desc.hWnd, _desc.clearColor);
 	TIME->Init();
 	INPUT->Init(_desc.hWnd);
 

@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "Graphics.h"
 
-void Graphics::Init(HWND hwnd)
+void Graphics::Init(HWND hwnd, Color clearColor)
 {
 	_hwnd = hwnd;
+	_clearColor = clearColor;
 
 	// 1. Create Device and SwapChain
 	CreateDeviceAndSwapChain();
@@ -18,7 +19,7 @@ void Graphics::Init(HWND hwnd)
 void Graphics::RenderBegin()
 {
 	_deviceContext->OMSetRenderTargets(1, _renderTargetView.GetAddressOf(), nullptr);
-	_deviceContext->ClearRenderTargetView(_renderTargetView.Get(), DirectX::Colors::Black);
+	_deviceContext->ClearRenderTargetView(_renderTargetView.Get(), _clearColor);
 	_deviceContext->RSSetViewports(1, &_viewport);
 }
 
