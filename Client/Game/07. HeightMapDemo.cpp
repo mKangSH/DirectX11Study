@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "06. SamplerDemo.h"
+#include "07. HeightMapDemo.h"
 #include "Engine/00.Engine/Resource/ResourceBase.h"
 #include "Engine/00.Engine/Resource/Texture.h"
 #include "Engine/01.Graphics/Buffer/GeometryHelper.h"
@@ -8,14 +8,38 @@
 #include "Engine/04.Component/Camera.h"
 #include "../Main/Camera/CameraScript.h"
 
-void SamplerDemo::Init()
+void HeightMapDemo::Init()
 {
-	_shader = std::make_shared<Shader>(L"05. Sampler.fx");
-
 	RESOURCES->Init(L"..\\Resources\\");
 
+	_shader = std::make_shared<Shader>(L"05. Sampler.fx");
+
+	_texture = RESOURCES->Load<Texture>(L"Background", L"Textures\\Terrain\\desert_mntn_d.jpg");
+	_heightMap = RESOURCES->Load<Texture>(L"Height", L"Textures\\Terrain\\desert_mntn_h.jpg");
+
+	const int32 width = _heightMap->GetSize().x;
+	const int32 height = _heightMap->GetSize().y;
+
+	const DirectX::ScratchImage& img = _heightMap->GetInfo();
+	uint8* pixels = img.GetPixels();
+	
 	_geometry = std::make_shared<Geometry<VertexTextureData>>();
-	GeometryHelper::CreateGrid(_geometry, 20, 20);
+	GeometryHelper::CreateGrid(_geometry, width, height);
+
+	{
+		std::vector<VertexTextureData>& vertices = const_cast<std::vector<VertexTextureData>&>(_geometry->GetVertices());
+
+		for (int32 i = 0; i < height; ++i)
+		{
+			for (int32 j = 0; j < width; ++j)
+			{
+				int32 idx = i * width + j;
+				const uint8* pixel = pixels + (i * width + j) * 3;
+				float heightValue = static_cast<float>(pixel[idx]) / 255.0f;
+				vertices[idx].position.y = heightValue * 2.0f;
+			}
+		}
+	}
 
 	_vertexBuffer = std::make_shared<VertexBuffer>();
 	_vertexBuffer->CreateBuffer(_geometry->GetVertices());
@@ -34,14 +58,12 @@ void SamplerDemo::Init()
 	_mainCamera->AddComponent(perspectiveCamera);
 	_mainCamera->AddComponent(std::make_shared<CameraScript>());
 
-	_texture = RESOURCES->Load<Texture>(L"Background", L"Textures\\Background.png");
-
 	_textureVariable = _shader->GetSRV("Texture0");
 
 	_addressVariable = _shader->GetScalar("Address");
 }
 
-void SamplerDemo::Update()
+void HeightMapDemo::Update()
 {
 	if (INPUT->GetButtonDown(KEY_TYPE::TAB))
 	{
@@ -56,7 +78,7 @@ void SamplerDemo::Update()
 	_mainCamera->Update();
 }
 
-void SamplerDemo::Render()
+void HeightMapDemo::Render()
 {
 	_addressVariable->SetInt(_addressType);
 	_worldVariable->SetMatrix((float*)&_world);

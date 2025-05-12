@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Game\05. TextureDemo.h" />
     <ClInclude Include="Game\06. SamplerDemo.h" />
+    <ClInclude Include="Game\07. HeightMapDemo.h" />
     <ClInclude Include="Main\Camera\CameraScript.h" />
     <ClInclude Include="Game\02. QuadDemo.h" />
     <ClInclude Include="Game\03. ConstBufferDemo.h" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <ClCompile Include="Game\05. TextureDemo.cpp" />
     <ClCompile Include="Game\06. SamplerDemo.cpp" />
+    <ClCompile Include="Game\07. HeightMapDemo.cpp" />
     <ClCompile Include="Main\Camera\CameraScript.cpp" />
     <ClCompile Include="Game\02. QuadDemo.cpp" />
     <ClCompile Include="Game\03. ConstBufferDemo.cpp" />
@@ -85,6 +87,7 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="..\Shaders\05. Sampler.fx" />
+    <FxCompile Include="..\Shaders\06. Terrain.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

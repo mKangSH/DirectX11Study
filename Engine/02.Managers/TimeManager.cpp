@@ -25,8 +25,4 @@ void TimeManager::Update()
 		_frameTime = 0.0f;
 		_frameCount = 0;
 	}
-
-	// Set Window Title
-	std::wstring fps = GAME->GetGameDesc().appName + L" FPS : " + std::to_wstring(_fps);
-	SetWindowText(GAME->GetGameDesc().hWnd, fps.c_str());
 }

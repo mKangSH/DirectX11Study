@@ -30,12 +30,11 @@ void Texture::Save(const std::wstring& path)
 void Texture::CreateShaderResourceView(const std::wstring& path)
 {
 	DirectX::TexMetadata metadata;
-	DirectX::ScratchImage image;
 
-	HRESULT hr = ::LoadFromWICFile(path.c_str(), WIC_FLAGS_NONE, &metadata, image);
+	HRESULT hr = ::LoadFromWICFile(path.c_str(), WIC_FLAGS_NONE, &metadata, _img);
 	assert(SUCCEEDED(hr));
 
-	hr = ::CreateShaderResourceView(DEVICE.Get(), image.GetImages(), image.GetImageCount(), metadata, _shaderResourceView.GetAddressOf());
+	hr = ::CreateShaderResourceView(DEVICE.Get(), _img.GetImages(), _img.GetImageCount(), metadata, _shaderResourceView.GetAddressOf());
 	assert(SUCCEEDED(hr));
 
 	_size.x = static_cast<float>(metadata.width);
@@ -45,15 +44,14 @@ void Texture::CreateShaderResourceView(const std::wstring& path)
 void Texture::CreateShaderResourceViewFromMultiPageTiff(const std::wstring& path, bool is3DTexture)
 {
 	DirectX::TexMetadata metadata;
-	DirectX::ScratchImage image;
 
-	HRESULT hr = ::LoadFromWICFile(path.c_str(), WIC_FLAGS_ALL_FRAMES, &metadata, image);
+	HRESULT hr = ::LoadFromWICFile(path.c_str(), WIC_FLAGS_ALL_FRAMES, &metadata, _img);
 	assert(SUCCEEDED(hr));
 
 	DirectX::ScratchImage volumeImage;
 	if (is3DTexture)
 	{
-		hr = volumeImage.Initialize3DFromImages(image.GetImages(), image.GetImageCount());
+		hr = volumeImage.Initialize3DFromImages(_img.GetImages(), _img.GetImageCount());
 		assert(SUCCEEDED(hr));
 
 		metadata = volumeImage.GetMetadata();
@@ -63,7 +61,7 @@ void Texture::CreateShaderResourceViewFromMultiPageTiff(const std::wstring& path
 	}
 	else
 	{
-		hr = ::CreateShaderResourceView(DEVICE.Get(), image.GetImages(), image.GetImageCount(), metadata, _shaderResourceView.GetAddressOf());
+		hr = ::CreateShaderResourceView(DEVICE.Get(), _img.GetImages(), _img.GetImageCount(), metadata, _shaderResourceView.GetAddressOf());
 		assert(SUCCEEDED(hr));
 	}	
 
