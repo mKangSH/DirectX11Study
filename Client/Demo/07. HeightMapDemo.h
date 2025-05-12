@@ -8,14 +8,6 @@ enum class RasterizerType
 	WIREFRAME,
 };
 
-enum AddressType
-{
-	WRAP,
-	MIRROR,
-	CLAMP,
-	BORDER
-};
-
 class HeightMapDemo : public IExecute
 {
 public:
@@ -49,8 +41,5 @@ public:
 	// HeightMap
 	std::shared_ptr<class Texture> _heightMap;
 	ComPtr<ID3DX11EffectShaderResourceVariable> _heightMapVariable;
-
-	AddressType _addressType = AddressType::WRAP;
-	ComPtr<ID3DX11EffectScalarVariable> _addressVariable;
 };
 

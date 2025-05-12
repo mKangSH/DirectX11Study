@@ -23,3 +23,10 @@ struct Vertex3DTextureData
 	Vec2 uv = { 0, 0 };
 	Vec3 normal = { 0, 0, 0 };
 };
+
+struct VertexTextureNormalData
+{
+	Vec3 position = { 0, 0, 0 };
+	Vec2 uv = { 0, 0 };
+	Vec3 normal = { 0, 0, 0 };
+};

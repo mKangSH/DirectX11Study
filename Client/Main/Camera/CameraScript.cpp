@@ -56,14 +56,14 @@ void CameraScript::Update()
 		GetTransform()->SetRotation(rotation);
 	}
 
-	if (INPUT->GetButton(KEY_TYPE::Z))
+	if (INPUT->GetButton(KEY_TYPE::C))
 	{
 		Vec3 rotation = GetTransform()->GetRotation();
 		rotation.y += deltaTime * 0.5f;
 		GetTransform()->SetRotation(rotation);
 	}
 
-	if (INPUT->GetButton(KEY_TYPE::C))
+	if (INPUT->GetButton(KEY_TYPE::Z))
 	{
 		Vec3 rotation = GetTransform()->GetRotation();
 		rotation.y -= deltaTime * 0.5f;

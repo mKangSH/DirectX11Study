@@ -12,7 +12,7 @@ void HeightMapDemo::Init()
 {
 	RESOURCES->Init(L"..\\Resources\\");
 
-	_shader = std::make_shared<Shader>(L"05. Sampler.fx");
+	_shader = std::make_shared<Shader>(L"06. Terrain.fx");
 
 	_texture = RESOURCES->Load<Texture>(L"Background", L"Textures\\Terrain\\desert_mntn_d.jpg");
 	_heightMap = RESOURCES->Load<Texture>(L"Height", L"Textures\\Terrain\\desert_mntn_h.jpg");
@@ -26,6 +26,7 @@ void HeightMapDemo::Init()
 	_geometry = std::make_shared<Geometry<VertexTextureData>>();
 	GeometryHelper::CreateGrid(_geometry, width, height);
 
+	// height map data : 3 channels
 	{
 		std::vector<VertexTextureData>& vertices = const_cast<std::vector<VertexTextureData>&>(_geometry->GetVertices());
 
@@ -59,8 +60,6 @@ void HeightMapDemo::Init()
 	_mainCamera->AddComponent(std::make_shared<CameraScript>());
 
 	_textureVariable = _shader->GetSRV("Texture0");
-
-	_addressVariable = _shader->GetScalar("Address");
 }
 
 void HeightMapDemo::Update()
@@ -69,18 +68,11 @@ void HeightMapDemo::Update()
 	{
 		_rasterizerType = (_rasterizerType == RasterizerType::SOLID) ? RasterizerType::WIREFRAME : RasterizerType::SOLID;
 	}
-
-	if (INPUT->GetButtonDown(KEY_TYPE::RIGHT))
-	{
-		_addressType = static_cast<AddressType>((static_cast<int>(_addressType) + 1) % 4);
-	}
-
 	_mainCamera->Update();
 }
 
 void HeightMapDemo::Render()
 {
-	_addressVariable->SetInt(_addressType);
 	_worldVariable->SetMatrix((float*)&_world);
 	_viewVariable->SetMatrix((float*)&Camera::S_MatView);
 	_projectionVariable->SetMatrix((float*)&Camera::S_MatProjection);
