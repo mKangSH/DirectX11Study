@@ -30,6 +30,8 @@
     <ClInclude Include="04.Component\Transform.h" />
     <ClInclude Include="04.Component\MonoBehaviour.h" />
     <ClInclude Include="04.Component\Camera.h" />
+    <ClInclude Include="00.Engine\Resource\Mesh.h" />
+    <ClInclude Include="04.Component\MeshRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="99.Header\pch.cpp" />
@@ -58,6 +60,8 @@
     <ClCompile Include="04.Component\Transform.cpp" />
     <ClCompile Include="04.Component\MonoBehaviour.cpp" />
     <ClCompile Include="04.Component\Camera.cpp" />
+    <ClCompile Include="00.Engine\Resource\Mesh.cpp" />
+    <ClCompile Include="04.Component\MeshRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="98.Utils\SimpleMath.inl" />

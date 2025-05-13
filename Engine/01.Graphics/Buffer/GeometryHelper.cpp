@@ -89,82 +89,82 @@ void GeometryHelper::CreateQuad(std::shared_ptr<Geometry<VertexTextureNormalData
 	geometry->SetIndices(indices);
 }
 
-void GeometryHelper::CreateCube(std::shared_ptr<Geometry<VertexTextureData>> geometry)
-{
-	float w2 = 0.5f;
-	float h2 = 0.5f;
-	float d2 = 0.5f;
+//void GeometryHelper::CreateCube(std::shared_ptr<Geometry<VertexTextureData>> geometry)
+//{
+//	float w2 = 0.5f;
+//	float h2 = 0.5f;
+//	float d2 = 0.5f;
+//
+//	std::vector<VertexTextureData> vertices(24);
+//
+//	// Front
+//	vertices[0] = { Vec3{ -w2, -h2, -d2 }, Vec2{ 0.f, 1.f } };
+//	vertices[1] = { Vec3{ -w2, +h2, -d2 }, Vec2{ 0.f, 0.f } };
+//	vertices[2] = { Vec3{ +w2, +h2, -d2 }, Vec2{ 1.f, 0.f } };
+//	vertices[3] = { Vec3{ +w2, -h2, -d2 }, Vec2{ 1.f, 1.f } };
+//
+//	// Back
+//	vertices[4] = { Vec3{ -w2, -h2, +d2 }, Vec2{ 1.f, 1.f } };
+//	vertices[5] = { Vec3{ +w2, -h2, +d2 }, Vec2{ 0.f, 1.f } };
+//	vertices[6] = { Vec3{ +w2, +h2, +d2 }, Vec2{ 0.f, 0.f } };
+//	vertices[7] = { Vec3{ -w2, +h2, +d2 }, Vec2{ 1.f, 0.f } };
+//
+//	// Up
+//	vertices[8] = { Vec3{ -w2, +h2, -d2 }, Vec2{ 0.f, 1.f } };
+//	vertices[9] = { Vec3{ -w2, +h2, +d2 }, Vec2{ 0.f, 0.f } };
+//	vertices[10] = { Vec3{ +w2, +h2, +d2 }, Vec2{ 1.f, 0.f } };
+//	vertices[11] = { Vec3{ +w2, +h2, -d2 }, Vec2{ 1.f, 1.f } };
+//
+//	// Down
+//	vertices[12] = { Vec3{ -w2, -h2, -d2 }, Vec2{ 1.f, 1.f } };
+//	vertices[13] = { Vec3{ +w2, -h2, -d2 }, Vec2{ 0.f, 1.f } };
+//	vertices[14] = { Vec3{ +w2, -h2, +d2 }, Vec2{ 0.f, 0.f } };
+//	vertices[15] = { Vec3{ -w2, -h2, +d2 }, Vec2{ 1.f, 0.f } };
+//
+//	// Left
+//	vertices[16] = { Vec3{ -w2, -h2, +d2 }, Vec2{ 0.f, 1.f } };
+//	vertices[17] = { Vec3{ -w2, +h2, +d2 }, Vec2{ 0.f, 0.f } };
+//	vertices[18] = { Vec3{ -w2, +h2, -d2 }, Vec2{ 1.f, 0.f } };
+//	vertices[19] = { Vec3{ -w2, -h2, -d2 }, Vec2{ 1.f, 1.f } };
+//
+//	// Right
+//	vertices[20] = { Vec3{ +w2, -h2, -d2 }, Vec2{ 0.f, 1.f } };
+//	vertices[21] = { Vec3{ +w2, +h2, -d2 }, Vec2{ 0.f, 0.f } };
+//	vertices[22] = { Vec3{ +w2, +h2, +d2 }, Vec2{ 1.f, 0.f } };
+//	vertices[23] = { Vec3{ +w2, -h2, +d2 }, Vec2{ 1.f, 1.f } };
+//
+//	geometry->SetVertices(vertices);
+//
+//	std::vector<uint32> indices(36);
+//
+//	// Front
+//	indices[0] = 0; indices[1] = 1; indices[2] = 2;
+//	indices[3] = 2; indices[4] = 3; indices[5] = 0;
+//
+//	// Back
+//	indices[6] = 4; indices[7] = 5; indices[8] = 6;
+//	indices[9] = 6; indices[10] = 7; indices[11] = 4;
+//
+//	// Up
+//	indices[12] = 8; indices[13] = 9; indices[14] = 10;
+//	indices[15] = 10; indices[16] = 11; indices[17] = 8;
+//
+//	// Down
+//	indices[18] = 12; indices[19] = 13; indices[20] = 14;
+//	indices[21] = 14; indices[22] = 15; indices[23] = 12;
+//
+//	// Left
+//	indices[24] = 16; indices[25] = 17; indices[26] = 18;
+//	indices[27] = 18; indices[28] = 19; indices[29] = 16;
+//
+//	// Right
+//	indices[30] = 20; indices[31] = 21; indices[32] = 22;
+//	indices[33] = 22; indices[34] = 23; indices[35] = 20;
+//
+//	geometry->SetIndices(indices);
+//}
 
-	std::vector<VertexTextureData> vertices(24);
-
-	// Front
-	vertices[0] = { Vec3{ -w2, -h2, -d2 }, Vec2{ 0.f, 1.f } };
-	vertices[1] = { Vec3{ -w2, +h2, -d2 }, Vec2{ 0.f, 0.f } };
-	vertices[2] = { Vec3{ +w2, +h2, -d2 }, Vec2{ 1.f, 0.f } };
-	vertices[3] = { Vec3{ +w2, -h2, -d2 }, Vec2{ 1.f, 1.f } };
-
-	// Back
-	vertices[4] = { Vec3{ -w2, -h2, +d2 }, Vec2{ 1.f, 1.f } };
-	vertices[5] = { Vec3{ +w2, -h2, +d2 }, Vec2{ 0.f, 1.f } };
-	vertices[6] = { Vec3{ +w2, +h2, +d2 }, Vec2{ 0.f, 0.f } };
-	vertices[7] = { Vec3{ -w2, +h2, +d2 }, Vec2{ 1.f, 0.f } };
-
-	// Up
-	vertices[8] = { Vec3{ -w2, +h2, -d2 }, Vec2{ 0.f, 1.f } };
-	vertices[9] = { Vec3{ -w2, +h2, +d2 }, Vec2{ 0.f, 0.f } };
-	vertices[10] = { Vec3{ +w2, +h2, +d2 }, Vec2{ 1.f, 0.f } };
-	vertices[11] = { Vec3{ +w2, +h2, -d2 }, Vec2{ 1.f, 1.f } };
-
-	// Down
-	vertices[12] = { Vec3{ -w2, -h2, -d2 }, Vec2{ 1.f, 1.f } };
-	vertices[13] = { Vec3{ +w2, -h2, -d2 }, Vec2{ 0.f, 1.f } };
-	vertices[14] = { Vec3{ +w2, -h2, +d2 }, Vec2{ 0.f, 0.f } };
-	vertices[15] = { Vec3{ -w2, -h2, +d2 }, Vec2{ 1.f, 0.f } };
-
-	// Left
-	vertices[16] = { Vec3{ -w2, -h2, +d2 }, Vec2{ 0.f, 1.f } };
-	vertices[17] = { Vec3{ -w2, +h2, +d2 }, Vec2{ 0.f, 0.f } };
-	vertices[18] = { Vec3{ -w2, +h2, -d2 }, Vec2{ 1.f, 0.f } };
-	vertices[19] = { Vec3{ -w2, -h2, -d2 }, Vec2{ 1.f, 1.f } };
-
-	// Right
-	vertices[20] = { Vec3{ +w2, -h2, -d2 }, Vec2{ 0.f, 1.f } };
-	vertices[21] = { Vec3{ +w2, +h2, -d2 }, Vec2{ 0.f, 0.f } };
-	vertices[22] = { Vec3{ +w2, +h2, +d2 }, Vec2{ 1.f, 0.f } };
-	vertices[23] = { Vec3{ +w2, -h2, +d2 }, Vec2{ 1.f, 1.f } };
-
-	geometry->SetVertices(vertices);
-
-	std::vector<uint32> indices(36);
-
-	// Front
-	indices[0] = 0; indices[1] = 1; indices[2] = 2;
-	indices[3] = 2; indices[4] = 3; indices[5] = 0;
-
-	// Back
-	indices[6] = 4; indices[7] = 5; indices[8] = 6;
-	indices[9] = 6; indices[10] = 7; indices[11] = 4;
-
-	// Up
-	indices[12] = 8; indices[13] = 9; indices[14] = 10;
-	indices[15] = 10; indices[16] = 11; indices[17] = 8;
-
-	// Down
-	indices[18] = 12; indices[19] = 13; indices[20] = 14;
-	indices[21] = 14; indices[22] = 15; indices[23] = 12;
-
-	// Left
-	indices[24] = 16; indices[25] = 17; indices[26] = 18;
-	indices[27] = 18; indices[28] = 19; indices[29] = 16;
-
-	// Right
-	indices[30] = 20; indices[31] = 21; indices[32] = 22;
-	indices[33] = 22; indices[34] = 23; indices[35] = 20;
-
-	geometry->SetIndices(indices);
-}
-
-static void CreateCube(std::shared_ptr<Geometry<VertexTextureNormalData>> geometry)
+void GeometryHelper::CreateCube(std::shared_ptr<Geometry<VertexTextureNormalData>> geometry)
 {
 	float w2 = 0.5f;
 	float h2 = 0.5f;

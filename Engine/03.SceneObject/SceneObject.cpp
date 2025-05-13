@@ -2,7 +2,7 @@
 #include "SceneObject.h"
 #include "../04.Component/Component.h"
 #include "../04.Component/MonoBehaviour.h"
-//#include "../04.Component/Rendering/MeshRenderer.h"
+#include "../04.Component/MeshRenderer.h"
 //#include "../04.Component/Animation/Animator.h"
 #include "../04.Component/Camera.h"
 
@@ -124,11 +124,11 @@ std::shared_ptr<Camera> SceneObject::GetCamera()
 	return std::static_pointer_cast<Camera>(component);
 }
 
-//std::shared_ptr<MeshRenderer> SceneObject::GetMeshRenderer()
-//{
-//	std::shared_ptr<Component> component = GetFixedComponent(ComponentType::MeshRenderer);
-//	return std::static_pointer_cast<MeshRenderer>(component);
-//}
+std::shared_ptr<MeshRenderer> SceneObject::GetMeshRenderer()
+{
+	std::shared_ptr<Component> component = GetFixedComponent(ComponentType::MeshRenderer);
+	return std::static_pointer_cast<MeshRenderer>(component);
+}
  
 //std::shared_ptr<Animator> SceneObject::GetAnimator()
 //{

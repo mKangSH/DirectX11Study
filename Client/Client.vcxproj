@@ -23,6 +23,7 @@
     <ClInclude Include="Demo\06. SamplerDemo.h" />
     <ClInclude Include="Demo\07. HeightMapDemo.h" />
     <ClInclude Include="Demo\08. NormalDemo.h" />
+    <ClInclude Include="Demo\09. MeshDemo.h" />
     <ClInclude Include="Main\Camera\CameraScript.h" />
     <ClInclude Include="Demo\02. QuadDemo.h" />
     <ClInclude Include="Demo\03. ConstBufferDemo.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="Demo\06. SamplerDemo.cpp" />
     <ClCompile Include="Demo\07. HeightMapDemo.cpp" />
     <ClCompile Include="Demo\08. NormalDemo.cpp" />
+    <ClCompile Include="Demo\09. MeshDemo.cpp" />
     <ClCompile Include="Main\Camera\CameraScript.cpp" />
     <ClCompile Include="Demo\02. QuadDemo.cpp" />
     <ClCompile Include="Demo\03. ConstBufferDemo.cpp" />
