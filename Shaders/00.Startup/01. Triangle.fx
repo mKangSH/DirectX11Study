@@ -1,3 +1,6 @@
+#ifndef _01_TRIANGLE_FX_
+#define _01_TRIANGLE_FX_
+
 struct VertexInput
 {
     float4 position : POSITION;
@@ -54,3 +57,5 @@ technique11 T1
         SetPixelShader(CompileShader(ps_5_0, PS3()));
     }
 };
+
+#endif
