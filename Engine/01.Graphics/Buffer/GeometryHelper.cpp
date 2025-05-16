@@ -260,7 +260,7 @@ void GeometryHelper::CreateSphere(std::shared_ptr<Geometry<VertexTextureData>> g
 	float deltaU = 1.f / static_cast<float>(sliceCount);
 	float deltaV = 1.f / static_cast<float>(stackCount);
 
-	for (uint32 y = 1; y <= stackCount; ++y)
+	for (uint32 y = 1; y < stackCount; ++y)
 	{
 		float phi = stackAngle * y;
 		float posY = radius * cosf(phi);
@@ -314,7 +314,7 @@ void GeometryHelper::CreateSphere(std::shared_ptr<Geometry<VertexTextureData>> g
 	// Bottom cap
 	uint32 bottomIndex = static_cast<uint32>(vertices.size()) - 1;
 	uint32 lastRingStartIndex = bottomIndex - ringVertexCount;
-	for (uint32 i = 1; i <= sliceCount; ++i)
+	for (uint32 i = 1; i < sliceCount; ++i)
 	{
 		indices.push_back(bottomIndex);
 		indices.push_back(lastRingStartIndex + i);
@@ -349,7 +349,7 @@ void GeometryHelper::CreateSphere(std::shared_ptr<Geometry<VertexTextureNormalDa
 	float deltaU = 1.f / static_cast<float>(sliceCount);
 	float deltaV = 1.f / static_cast<float>(stackCount);
 
-	for (uint32 y = 1; y <= stackCount; ++y)
+	for (uint32 y = 1; y < stackCount; ++y)
 	{
 		float phi = stackAngle * y;
 		float posY = radius * cosf(phi);
@@ -412,7 +412,7 @@ void GeometryHelper::CreateSphere(std::shared_ptr<Geometry<VertexTextureNormalDa
 	// Bottom cap
 	uint32 bottomIndex = static_cast<uint32>(vertices.size()) - 1;
 	uint32 lastRingStartIndex = bottomIndex - ringVertexCount;
-	for (uint32 i = 1; i <= sliceCount; ++i)
+	for (uint32 i = 1; i < sliceCount; ++i)
 	{
 		indices.push_back(bottomIndex);
 		indices.push_back(lastRingStartIndex + i);

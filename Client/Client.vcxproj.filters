@@ -40,6 +40,9 @@
     <ClInclude Include="Main\pch.h">
       <Filter>Main</Filter>
     </ClInclude>
+    <ClInclude Include="Demo\01.Beginner\11. DepthStencilDemo.h">
+      <Filter>Demo\01.Beginner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo\00.Startup\01. TriangleDemo.cpp">
@@ -80,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="Main\pch.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo\01.Beginner\11. DepthStencilDemo.cpp">
+      <Filter>Demo\01.Beginner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

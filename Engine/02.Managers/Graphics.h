@@ -15,6 +15,7 @@ public:
 private:
 	void CreateDeviceAndSwapChain();
 	void CreateRenderTargetView();
+	void CreateDepthStencilView();
 	void SetViewport();
 
 private:
@@ -28,6 +29,10 @@ private:
 
 	// Render Target View
 	ComPtr<ID3D11RenderTargetView> _renderTargetView = nullptr;
+
+	// Depth Stencil View
+	ComPtr<ID3D11Texture2D> _depthStencilBuffer = nullptr;
+	ComPtr<ID3D11DepthStencilView> _depthStencilView = nullptr;
 
 	// MISC
 	D3D11_VIEWPORT _viewport = { 0 };
