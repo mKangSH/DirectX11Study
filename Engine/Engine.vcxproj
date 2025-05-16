@@ -205,6 +205,7 @@
     <ClInclude Include="01.Graphics\Shader\Shader.h" />
     <ClInclude Include="01.Graphics\Shader\Technique.h" />
     <ClInclude Include="01.Graphics\Buffer\GeometryHelper.h" />
+    <ClInclude Include="02.Managers\RenderManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="00.Engine\Resource\Mesh.cpp" />
@@ -246,6 +247,7 @@
     <ClCompile Include="01.Graphics\Shader\Shader.cpp" />
     <ClCompile Include="01.Graphics\Shader\Technique.cpp" />
     <ClCompile Include="01.Graphics\Buffer\GeometryHelper.cpp" />
+    <ClCompile Include="02.Managers\RenderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="98.Utils\SimpleMath.inl" />

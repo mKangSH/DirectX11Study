@@ -87,6 +87,15 @@ RasterizerState FillModeWireframe
 ///
 // Macro
 ///
+#define PASS_VP(name, vs, ps)                       \
+pass name                                           \
+{                                                   \
+    SetVertexShader(CompileShader(vs_5_0, vs()));   \
+    SetPixelShader(CompileShader(ps_5_0, ps()));    \
+}                     
 
+///
+// Function
+///
 
 #endif

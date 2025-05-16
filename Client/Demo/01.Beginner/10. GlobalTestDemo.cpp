@@ -12,6 +12,9 @@ void GlobalTestDemo::Init()
 {
 	RESOURCES->Init(L"..\\Resources\\");
 
+	_shader = std::make_shared<Shader>(L"01.Beginner\\08. GlobalTest.fx");
+	RENDER->Init(_shader);
+
 	// Camera
 	_mainCamera = std::make_shared<SceneObject>();
 	_mainCamera->GetOrAddTransform()->SetPosition(Vec3(0.0f, 0.0f, -2.0f));
@@ -24,9 +27,7 @@ void GlobalTestDemo::Init()
 	_object->GetOrAddTransform();
 	_object->AddComponent(std::make_shared<MeshRenderer>());
 	{
-		std::shared_ptr<Shader> shader = std::make_shared<Shader>(L"07. Normal.fx");
-		_object->GetMeshRenderer()->SetShader(shader);
-		_shader = shader;
+		_object->GetMeshRenderer()->SetShader(_shader);
 	}
 	{
 		std::shared_ptr<Mesh> mesh = RESOURCES->Get<Mesh>(L"Sphere");
@@ -46,7 +47,11 @@ void GlobalTestDemo::Update()
 	{
 		_rasterizerType = (_rasterizerType == RasterizerType::SOLID) ? RasterizerType::WIREFRAME : RasterizerType::SOLID;
 	}
+
 	_mainCamera->Update();
+
+	RENDER->Update();
+
 	_object->Update();
 }
 

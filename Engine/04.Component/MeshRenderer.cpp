@@ -28,12 +28,11 @@ void MeshRenderer::Update()
 	{
 		return;
 	}
+
+	_textureVariable->SetResource(_texture->GetShaderResourceView().Get());
 	
 	Matrix world = GetTransform()->GetWorldMatrix();
-	_worldVariable->SetMatrix((float*)&world);
-	_viewVariable->SetMatrix((float*)&Camera::S_MatView);
-	_projectionVariable->SetMatrix((float*)&Camera::S_MatProjection);
-	_textureVariable->SetResource(_texture->GetShaderResourceView().Get());
+	RENDER->UploadTransformDesc(TransformDesc(world));
 
 	uint32 stride = _mesh->GetVertexBuffer()->GetStride();
 	uint32 offset = _mesh->GetVertexBuffer()->GetOffset();

@@ -55,15 +55,7 @@ using namespace Microsoft::WRL;
 #include "../02.Managers/InputManager.h"
 #include "../02.Managers/TimeManager.h"
 #include "../02.Managers/ResourceManager.h"
-
-#define GAME					GET_SINGLE(Game)		
-#define GRAPHICS				GET_SINGLE(Graphics)
-#define DEVICE					GRAPHICS->GetDevice()
-#define DEVICECONTEXT			GRAPHICS->GetDeviceContext()
-#define INPUT					GET_SINGLE(InputManager)
-#define TIME					GET_SINGLE(TimeManager)
-#define DELTATIME				TIME->GetDeltaTime()
-#define RESOURCES				GET_SINGLE(ResourceManager)
+#include "../02.Managers/RenderManager.h"
 
 // Engine
 #include "../00.Engine/IExecute.h"

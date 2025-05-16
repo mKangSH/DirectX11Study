@@ -32,6 +32,7 @@
     <ClInclude Include="04.Component\Camera.h" />
     <ClInclude Include="00.Engine\Resource\Mesh.h" />
     <ClInclude Include="04.Component\MeshRenderer.h" />
+    <ClInclude Include="02.Managers\RenderManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="99.Header\pch.cpp" />
@@ -62,6 +63,7 @@
     <ClCompile Include="04.Component\Camera.cpp" />
     <ClCompile Include="00.Engine\Resource\Mesh.cpp" />
     <ClCompile Include="04.Component\MeshRenderer.cpp" />
+    <ClCompile Include="02.Managers\RenderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="98.Utils\SimpleMath.inl" />
