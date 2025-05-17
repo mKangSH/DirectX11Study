@@ -26,6 +26,7 @@
     <ClInclude Include="Demo\00.Startup\09. MeshDemo.h" />
     <ClInclude Include="Demo\01.Beginner\10. GlobalTestDemo.h" />
     <ClInclude Include="Demo\01.Beginner\11. DepthStencilDemo.h" />
+    <ClInclude Include="Demo\01.Beginner\12. AmbientDemo.h" />
     <ClInclude Include="Main\Camera\CameraScript.h" />
     <ClInclude Include="Demo\00.Startup\02. QuadDemo.h" />
     <ClInclude Include="Demo\00.Startup\03. ConstBufferDemo.h" />
@@ -42,6 +43,7 @@
     <ClCompile Include="Demo\00.Startup\09. MeshDemo.cpp" />
     <ClCompile Include="Demo\01.Beginner\10. GlobalTestDemo.cpp" />
     <ClCompile Include="Demo\01.Beginner\11. DepthStencilDemo.cpp" />
+    <ClCompile Include="Demo\01.Beginner\12. AmbientDemo.cpp" />
     <ClCompile Include="Main\Camera\CameraScript.cpp" />
     <ClCompile Include="Demo\00.Startup\02. QuadDemo.cpp" />
     <ClCompile Include="Demo\00.Startup\03. ConstBufferDemo.cpp" />
@@ -62,6 +64,7 @@
     <FxCompile Include="..\Shaders\00.Startup\06. Terrain.fx" />
     <FxCompile Include="..\Shaders\00.Startup\07. Normal.fx" />
     <FxCompile Include="..\Shaders\01.Beginner\08. GlobalTest.fx" />
+    <FxCompile Include="..\Shaders\01.Beginner\09. Lighting_Ambient.fx" />
     <FxCompile Include="..\Shaders\Common\00. Global.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -43,6 +43,9 @@
     <ClInclude Include="Demo\01.Beginner\11. DepthStencilDemo.h">
       <Filter>Demo\01.Beginner</Filter>
     </ClInclude>
+    <ClInclude Include="Demo\01.Beginner\12. AmbientDemo.h">
+      <Filter>Demo\01.Beginner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo\00.Startup\01. TriangleDemo.cpp">
@@ -85,6 +88,9 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Demo\01.Beginner\11. DepthStencilDemo.cpp">
+      <Filter>Demo\01.Beginner</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo\01.Beginner\12. AmbientDemo.cpp">
       <Filter>Demo\01.Beginner</Filter>
     </ClCompile>
   </ItemGroup>
@@ -144,6 +150,9 @@
     </FxCompile>
     <FxCompile Include="..\Shaders\Common\00. Global.fx">
       <Filter>Shaders\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\01.Beginner\09. Lighting_Ambient.fx">
+      <Filter>Shaders\01.Beginner</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

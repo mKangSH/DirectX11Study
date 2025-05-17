@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Main.h"
 #include "Engine/02.Managers/Game.h"
-#include "../Demo/01.Beginner/11. DepthStencilDemo.h"
+#include "../Demo/01.Beginner/12. AmbientDemo.h"
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
@@ -12,8 +12,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	desc.hWnd = NULL;
 	desc.width = 1920;
 	desc.height = 1080;
-	desc.clearColor = DirectX::Colors::LightGray;
-	desc.app = std::make_shared<DepthStencilDemo>();
+	desc.clearColor = DirectX::Colors::Black;
+	desc.app = std::make_shared<AmbientDemo>();
 
 	GAME->Run(desc);
 
