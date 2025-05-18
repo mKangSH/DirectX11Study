@@ -55,6 +55,9 @@
     <ClInclude Include="Demo\01.Beginner\15. EmissiveDemo.h">
       <Filter>Demo\01.Beginner</Filter>
     </ClInclude>
+    <ClInclude Include="Demo\01.Beginner\16. LightingDemo.h">
+      <Filter>Demo\01.Beginner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo\00.Startup\01. TriangleDemo.cpp">
@@ -109,6 +112,9 @@
       <Filter>Demo\01.Beginner</Filter>
     </ClCompile>
     <ClCompile Include="Demo\01.Beginner\15. EmissiveDemo.cpp">
+      <Filter>Demo\01.Beginner</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo\01.Beginner\16. LightingDemo.cpp">
       <Filter>Demo\01.Beginner</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,6 +185,12 @@
       <Filter>Shaders\01.Beginner</Filter>
     </FxCompile>
     <FxCompile Include="..\Shaders\01.Beginner\12. Lighting_Emissive.fx">
+      <Filter>Shaders\01.Beginner</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\Common\00. Light.fx">
+      <Filter>Shaders\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\01.Beginner\13. Lighting.fx">
       <Filter>Shaders\01.Beginner</Filter>
     </FxCompile>
   </ItemGroup>

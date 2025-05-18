@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "15. EmissiveDemo.h"
+#include "16. LightingDemo.h"
 #include "Engine/00.Engine/Resource/ResourceBase.h"
 #include "Engine/00.Engine/Resource/Texture.h"
 #include "Engine/00.Engine/Resource/Mesh.h"
@@ -8,13 +8,13 @@
 #include "Engine/04.Component/MeshRenderer.h"
 #include "../Main/Camera/CameraScript.h"
 
-void EmissiveDemo::Init()
+void LightingDemo::Init()
 {
 	RESOURCES->Init(L"..\\Resources\\");
 
-	_shader = std::make_shared<Shader>(L"01.Beginner\\12. Lighting_Emissive.fx");
+	_shader = std::make_shared<Shader>(L"01.Beginner\\13. Lighting.fx");
 	RENDER->Init(_shader);
-
+	
 	// Camera
 	_mainCamera = std::make_shared<SceneObject>();
 	_mainCamera->GetOrAddTransform()->SetPosition(Vec3(0.0f, 0.0f, -10.0f));
@@ -57,7 +57,7 @@ void EmissiveDemo::Init()
 	}
 }
 
-void EmissiveDemo::Update()
+void LightingDemo::Update()
 {
 	if (INPUT->GetButtonDown(KEY_TYPE::TAB))
 	{
@@ -72,14 +72,35 @@ void EmissiveDemo::Update()
 	}
 
 	{
-		Vec4 material(1.f, 0.f, 1.f, 1.f);
-		_shader->GetVector("MaterialEmissive")->SetFloatVector((float*)&material);
+		LightDesc lightDesc;
+		lightDesc.ambient = Vec4(0.7f, 0.7f, 0.7f, 1.0f);
+		lightDesc.diffuse = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		lightDesc.specular = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		lightDesc.emissive = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		lightDesc.direction = Vec3(0.0f, 0.0f, 1.0f);
+
+		RENDER->UploadLightDesc(lightDesc);
+	}
+
+	{
+		MaterialDesc materialDesc;
+		materialDesc.ambient = Vec4(0.3f, 0.3f, 0.3f, 1.0f);
+		materialDesc.diffuse = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		materialDesc.specular = Vec4(0.5f, 0.5f, 0.5f, 1.0f);
+		materialDesc.emissive = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+		RENDER->UploadMaterialDesc(materialDesc);
 		_object->Update();
 	}
 	
 	{
-		Vec4 material(1.f, 1.f, 0.f, 1.f);
-		_shader->GetVector("MaterialEmissive")->SetFloatVector((float*)&material);
+		MaterialDesc materialDesc;
+		materialDesc.ambient = Vec4(0.3f, 0.3f, 0.3f, 1.0f);
+		materialDesc.diffuse = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		materialDesc.specular = Vec4(0.5f, 0.5f, 0.5f, 1.0f);
+		materialDesc.emissive = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+		RENDER->UploadMaterialDesc(materialDesc);
 		_object2->Update();
 	}
 
@@ -87,7 +108,7 @@ void EmissiveDemo::Update()
 	RENDER->Update();
 }
 
-void EmissiveDemo::Render()
+void LightingDemo::Render()
 {
 
 }

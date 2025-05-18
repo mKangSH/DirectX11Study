@@ -9,15 +9,35 @@ struct GlobalDesc
 	Matrix ViewProjection = Matrix::Identity;
 };
 
+struct TransformDesc
+{
+	Matrix World = Matrix::Identity;
+};
+
+// Light
+struct LightDesc
+{
+	Vec4 ambient = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	Vec4 diffuse = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	Vec4 specular = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	Vec4 emissive = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+	Vec3 direction;
+	float padding0;
+};
+
+struct MaterialDesc
+{
+	Vec4 ambient = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	Vec4 diffuse = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	Vec4 specular = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	Vec4 emissive = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+};
+
 enum class RasterizerType
 {
 	SOLID,
 	WIREFRAME,
-};
-
-struct TransformDesc
-{
-	Matrix World = Matrix::Identity;
 };
 
 class RenderManager
@@ -30,6 +50,8 @@ public:
 
 	void UploadGlobalDesc(const Matrix& view, const Matrix& projection);
 	void UploadTransformDesc(const TransformDesc& desc);
+	void UploadLightDesc(const LightDesc& desc);
+	void UploadMaterialDesc(const MaterialDesc& desc);
 
 public:
 	void SetRasterizerState(RasterizerType type) { _rasterizerType = type; }
@@ -49,5 +71,13 @@ private:
 
 	// Rasterizer
 	RasterizerType _rasterizerType = RasterizerType::SOLID;
+
+	LightDesc _lightDesc = {};
+	std::shared_ptr<ConstantBuffer<LightDesc>> _lightBuffer = nullptr;
+	ComPtr<ID3DX11EffectConstantBuffer> _lightEffectBuffer = nullptr;
+
+	MaterialDesc _materialDesc = {};
+	std::shared_ptr<ConstantBuffer<MaterialDesc>> _materialBuffer = nullptr;
+	ComPtr<ID3DX11EffectConstantBuffer> _materialEffectBuffer = nullptr;
 };
 

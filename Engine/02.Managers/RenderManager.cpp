@@ -13,6 +13,14 @@ void RenderManager::Init(std::shared_ptr<Shader> shader)
 	_transformBuffer = std::make_shared<ConstantBuffer<TransformDesc>>();
 	_transformBuffer->CreateBuffer();
 	_transformEffectBuffer = _shader->GetConstantBuffer("TransformBuffer");
+
+	_lightBuffer = std::make_shared<ConstantBuffer<LightDesc>>();
+	_lightBuffer->CreateBuffer();
+	_lightEffectBuffer = _shader->GetConstantBuffer("LightBuffer");
+
+	_materialBuffer = std::make_shared<ConstantBuffer<MaterialDesc>>();
+	_materialBuffer->CreateBuffer();
+	_materialEffectBuffer = _shader->GetConstantBuffer("MaterialBuffer");
 }
 
 void RenderManager::Update()
@@ -36,4 +44,20 @@ void RenderManager::UploadTransformDesc(const TransformDesc& desc)
 
 	_transformBuffer->UpdateBuffer(_transformDesc);
 	_transformEffectBuffer->SetConstantBuffer(_transformBuffer->GetConstantBuffer().Get());
+}
+
+void RenderManager::UploadLightDesc(const LightDesc& desc)
+{
+	_lightDesc = desc;
+
+	_lightBuffer->UpdateBuffer(_lightDesc);
+	_lightEffectBuffer->SetConstantBuffer(_lightBuffer->GetConstantBuffer().Get());
+}
+
+void RenderManager::UploadMaterialDesc(const MaterialDesc& desc)
+{
+	_materialDesc = desc;
+
+	_materialBuffer->UpdateBuffer(_materialDesc);
+	_materialEffectBuffer->SetConstantBuffer(_materialBuffer->GetConstantBuffer().Get());
 }

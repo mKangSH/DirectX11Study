@@ -14,6 +14,13 @@ public:
 	virtual void Update() override;
 
 private:
+	void KeyboardScript(const float& deltaTime);
+	void MouseScript(const float& deltaTime);
+
+private:
 	float _speed = 10.0f;
+	POINT _prevMousePos = { 0, 0 };
+
+	std::shared_ptr<Transform> _cameraTransform = nullptr;
 };
 

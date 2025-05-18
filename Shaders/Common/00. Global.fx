@@ -105,5 +105,8 @@ pass name                                           \
 ///
 // Function
 ///
-
+float3 CameraPosition()
+{
+    return -View._41_42_43;
+}
 #endif
