@@ -58,6 +58,9 @@
     <ClInclude Include="Demo\01.Beginner\16. LightingDemo.h">
       <Filter>Demo\01.Beginner</Filter>
     </ClInclude>
+    <ClInclude Include="Demo\01.Beginner\17. MaterialDemo.h">
+      <Filter>Demo\01.Beginner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo\00.Startup\01. TriangleDemo.cpp">
@@ -115,6 +118,9 @@
       <Filter>Demo\01.Beginner</Filter>
     </ClCompile>
     <ClCompile Include="Demo\01.Beginner\16. LightingDemo.cpp">
+      <Filter>Demo\01.Beginner</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo\01.Beginner\17. MaterialDemo.cpp">
       <Filter>Demo\01.Beginner</Filter>
     </ClCompile>
   </ItemGroup>

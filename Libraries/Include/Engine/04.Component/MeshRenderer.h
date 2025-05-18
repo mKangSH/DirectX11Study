@@ -3,6 +3,7 @@
 
 class Mesh;
 class Shader;
+class Material;
 
 class MeshRenderer : public Component
 {
@@ -16,18 +17,20 @@ public:
 
 public:
 	void SetMesh(std::shared_ptr<Mesh> mesh) { _mesh = mesh; }
-	void SetShader(std::shared_ptr<Shader> shader);
-	void SetTexture(std::shared_ptr<Texture> texture) { _texture = texture; }
+	void SetMaterial(std::shared_ptr<Material> material) { _material = material; }
+
+	// Legacy
+	void SetShader(std::shared_ptr<Shader> shader) { }
+	void SetTexture(std::shared_ptr<Texture> texture) { }
 
 private:
 	// Mesh
 	std::shared_ptr<Mesh> _mesh = nullptr;
-	std::shared_ptr<Shader> _shader = nullptr;
-	std::shared_ptr<Texture> _texture = nullptr;
+	std::shared_ptr<Material> _material = nullptr;
 
-	ComPtr<ID3DX11EffectMatrixVariable> _worldVariable;
-	ComPtr<ID3DX11EffectMatrixVariable> _viewVariable;
-	ComPtr<ID3DX11EffectMatrixVariable> _projectionVariable;
-	ComPtr<ID3DX11EffectShaderResourceVariable> _textureVariable;
+	// std::shared_ptr<Shader> _shader = nullptr;
+	// std::shared_ptr<Texture> _texture = nullptr;
+
+	// ComPtr<ID3DX11EffectShaderResourceVariable> _textureVariable;
 };
 

@@ -2,6 +2,7 @@
 #include "MeshRenderer.h"
 #include "../00.Engine/Resource/Texture.h"
 #include "../00.Engine/Resource/Mesh.h"
+#include "../00.Engine/Resource/Material.h"
 #include "../01.Graphics/Shader/Shader.h"
 #include "../04.Component/Camera.h"
 
@@ -13,24 +14,21 @@ MeshRenderer::~MeshRenderer()
 {
 }
 
-void MeshRenderer::SetShader(std::shared_ptr<Shader> shader)
-{
-	_shader = shader;
-	_worldVariable = _shader->GetMatrix("World");
-	_viewVariable = _shader->GetMatrix("View");
-	_projectionVariable = _shader->GetMatrix("Projection");
-	_textureVariable = _shader->GetSRV("DiffuseMap");
-}
-
 void MeshRenderer::Update()
 {
-	if (_mesh == nullptr || _shader == nullptr || _texture == nullptr)
+	if (_mesh == nullptr || _material == nullptr)
 	{
 		return;
 	}
 
-	_textureVariable->SetResource(_texture->GetShaderResourceView().Get());
-	
+	std::shared_ptr<Shader> shader = _material->GetShader();
+	if (shader == nullptr)
+	{
+		return;
+	}
+
+	_material->Update();
+
 	Matrix world = GetTransform()->GetWorldMatrix();
 	RENDER->UploadTransformDesc(TransformDesc(world));
 
@@ -41,5 +39,5 @@ void MeshRenderer::Update()
 	DEVICECONTEXT->IASetIndexBuffer(_mesh->GetIndexBuffer()->GetBuffer().Get(), DXGI_FORMAT_R32_UINT, 0);
 
 	RasterizerType rasterizerType = RENDER->GetRasterizerState();
-	_shader->DrawIndexed(0, static_cast<UINT>(rasterizerType), _mesh->GetIndexBuffer()->GetCount(), 0, 0);
+	shader->DrawIndexed(0, static_cast<UINT>(rasterizerType), _mesh->GetIndexBuffer()->GetCount(), 0, 0);
 }
