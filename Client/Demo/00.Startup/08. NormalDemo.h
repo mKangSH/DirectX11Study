@@ -2,12 +2,6 @@
 #include "Engine/00.Engine/IExecute.h"
 #include "Engine/01.Graphics/Buffer/Geometry.h"
 
-enum class RasterizerType
-{
-	SOLID,
-	WIREFRAME,
-};
-
 class NormalDemo : public IExecute
 {
 public:

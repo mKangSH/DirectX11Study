@@ -27,6 +27,9 @@
     <ClInclude Include="Demo\01.Beginner\10. GlobalTestDemo.h" />
     <ClInclude Include="Demo\01.Beginner\11. DepthStencilDemo.h" />
     <ClInclude Include="Demo\01.Beginner\12. AmbientDemo.h" />
+    <ClInclude Include="Demo\01.Beginner\13. DiffuseDemo.h" />
+    <ClInclude Include="Demo\01.Beginner\14. SpecularDemo.h" />
+    <ClInclude Include="Demo\01.Beginner\15. EmissiveDemo.h" />
     <ClInclude Include="Main\Camera\CameraScript.h" />
     <ClInclude Include="Demo\00.Startup\02. QuadDemo.h" />
     <ClInclude Include="Demo\00.Startup\03. ConstBufferDemo.h" />
@@ -44,6 +47,9 @@
     <ClCompile Include="Demo\01.Beginner\10. GlobalTestDemo.cpp" />
     <ClCompile Include="Demo\01.Beginner\11. DepthStencilDemo.cpp" />
     <ClCompile Include="Demo\01.Beginner\12. AmbientDemo.cpp" />
+    <ClCompile Include="Demo\01.Beginner\13. DiffuseDemo.cpp" />
+    <ClCompile Include="Demo\01.Beginner\14. SpecularDemo.cpp" />
+    <ClCompile Include="Demo\01.Beginner\15. EmissiveDemo.cpp" />
     <ClCompile Include="Main\Camera\CameraScript.cpp" />
     <ClCompile Include="Demo\00.Startup\02. QuadDemo.cpp" />
     <ClCompile Include="Demo\00.Startup\03. ConstBufferDemo.cpp" />
@@ -65,6 +71,9 @@
     <FxCompile Include="..\Shaders\00.Startup\07. Normal.fx" />
     <FxCompile Include="..\Shaders\01.Beginner\08. GlobalTest.fx" />
     <FxCompile Include="..\Shaders\01.Beginner\09. Lighting_Ambient.fx" />
+    <FxCompile Include="..\Shaders\01.Beginner\10. Lighting_Diffuse.fx" />
+    <FxCompile Include="..\Shaders\01.Beginner\11. Lighting_Specular.fx" />
+    <FxCompile Include="..\Shaders\01.Beginner\12. Lighting_Emissive.fx" />
     <FxCompile Include="..\Shaders\Common\00. Global.fx" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

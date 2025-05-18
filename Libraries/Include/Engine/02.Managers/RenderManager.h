@@ -9,6 +9,12 @@ struct GlobalDesc
 	Matrix ViewProjection = Matrix::Identity;
 };
 
+enum class RasterizerType
+{
+	SOLID,
+	WIREFRAME,
+};
+
 struct TransformDesc
 {
 	Matrix World = Matrix::Identity;
@@ -25,6 +31,11 @@ public:
 	void UploadGlobalDesc(const Matrix& view, const Matrix& projection);
 	void UploadTransformDesc(const TransformDesc& desc);
 
+public:
+	void SetRasterizerState(RasterizerType type) { _rasterizerType = type; }
+
+	RasterizerType GetRasterizerState() const { return _rasterizerType; }
+
 private:
 	std::shared_ptr<Shader> _shader = nullptr;
 
@@ -35,5 +46,8 @@ private:
 	TransformDesc _transformDesc = {};
 	std::shared_ptr<ConstantBuffer<TransformDesc>> _transformBuffer = nullptr;
 	ComPtr<ID3DX11EffectConstantBuffer> _transformEffectBuffer = nullptr;
+
+	// Rasterizer
+	RasterizerType _rasterizerType = RasterizerType::SOLID;
 };
 
