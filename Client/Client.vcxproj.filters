@@ -61,6 +61,9 @@
     <ClInclude Include="Demo\01.Beginner\17. MaterialDemo.h">
       <Filter>Demo\01.Beginner</Filter>
     </ClInclude>
+    <ClInclude Include="Demo\01.Beginner\18. NormalMappingDemo.h">
+      <Filter>Demo\01.Beginner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo\00.Startup\01. TriangleDemo.cpp">
@@ -121,6 +124,9 @@
       <Filter>Demo\01.Beginner</Filter>
     </ClCompile>
     <ClCompile Include="Demo\01.Beginner\17. MaterialDemo.cpp">
+      <Filter>Demo\01.Beginner</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo\01.Beginner\18. NormalMappingDemo.cpp">
       <Filter>Demo\01.Beginner</Filter>
     </ClCompile>
   </ItemGroup>
@@ -197,6 +203,9 @@
       <Filter>Shaders\Common</Filter>
     </FxCompile>
     <FxCompile Include="..\Shaders\01.Beginner\13. Lighting.fx">
+      <Filter>Shaders\01.Beginner</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\01.Beginner\14. NormalMapping.fx">
       <Filter>Shaders\01.Beginner</Filter>
     </FxCompile>
   </ItemGroup>

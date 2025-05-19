@@ -7,6 +7,7 @@ struct GlobalDesc
 	Matrix View = Matrix::Identity;
 	Matrix Projection = Matrix::Identity;
 	Matrix ViewProjection = Matrix::Identity;
+	Matrix ViewInverse = Matrix::Identity;
 };
 
 struct TransformDesc

@@ -33,6 +33,7 @@ void RenderManager::UploadGlobalDesc(const Matrix& view, const Matrix& projectio
 	_globalDesc.View = view;
 	_globalDesc.Projection = projection;
 	_globalDesc.ViewProjection = view * projection;
+	_globalDesc.ViewInverse = view.Invert();
 	
 	_globalBuffer->UpdateBuffer(_globalDesc);
 	_globalEffectBuffer->SetConstantBuffer(_globalBuffer->GetConstantBuffer().Get());

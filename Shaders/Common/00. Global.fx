@@ -9,6 +9,8 @@ cbuffer GlobalBuffer
     matrix View;
     matrix Projection;
     matrix ViewProjection;
+    
+    matrix ViewInverse;
 };
 
 cbuffer TransformBuffer
@@ -44,6 +46,14 @@ struct VertexTextureNormal
     float3 normal : NORMAL;
 };
 
+struct VertexTextureNormalTangent
+{
+    float4 position : POSITION;
+    float2 uv : TEXCOORD;
+    float3 normal : NORMAL;
+    float3 tangent : TANGENT;
+};
+
 ///
 // Vertex Output
 ///
@@ -60,6 +70,7 @@ struct MeshOutput
     float3 worldPosition : POSITION1;
     float2 uv : TEXCOORD;
     float3 normal : NORMAL;
+    float3 tangent : TANGENT;
 };
 
 ///
@@ -107,6 +118,6 @@ pass name                                           \
 ///
 float3 CameraPosition()
 {
-    return -View._41_42_43;
+    return ViewInverse._41_42_43;
 }
 #endif

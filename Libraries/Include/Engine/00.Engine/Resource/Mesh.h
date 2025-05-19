@@ -23,7 +23,7 @@ private:
 	void CreateBuffers();
 
 private:
-	std::shared_ptr<Geometry<VertexTextureNormalData>> _geometry = nullptr;
+	std::shared_ptr<Geometry<VertexTextureNormalTangentData>> _geometry = nullptr;
 	std::shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	std::shared_ptr<IndexBuffer> _indexBuffer = nullptr;
 };
