@@ -28,6 +28,34 @@ bool Utils::StartsWith(wstring str, wstring comp)
 	}
 }
 
+void Utils::Replace(OUT std::string& str, std::string comp, std::string rep)
+{
+	std::string temp = str;
+
+	size_t startPos = 0;
+	while ((startPos = temp.find(comp, startPos)) != std::string::npos)
+	{
+		temp.replace(startPos, comp.length(), rep);
+		startPos += rep.length(); // Handles case where 'rep' is a substring of 'comp'
+	}
+
+	str = temp;
+}
+
+void Utils::Replace(OUT std::wstring& str, std::wstring comp, std::wstring rep)
+{
+	std::wstring temp = str;
+
+	size_t startPos = 0;
+	while ((startPos = temp.find(comp, startPos)) != std::wstring::npos)
+	{
+		temp.replace(startPos, comp.length(), rep);
+		startPos += rep.length(); // Handles case where 'rep' is a substring of 'comp'
+	}
+
+	str = temp;
+}
+
 wstring Utils::ToWString(string str)
 {
 	return wstring(str.begin(), str.end());

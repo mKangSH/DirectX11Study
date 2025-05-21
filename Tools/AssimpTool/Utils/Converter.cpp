@@ -1,0 +1,367 @@
+#include "pch.h"
+#include "Converter.h"
+#include "../Main/AsTypes.h"
+#include <filesystem>
+#include <98.Utils/Utils.h>
+#include <98.Utils/tinyxml2.h>
+
+Converter::Converter()
+{
+	_importer = std::make_shared<Assimp::Importer>();
+}
+
+Converter::~Converter()
+{
+
+}
+
+void Converter::ReadAssetFile(const std::wstring& path)
+{
+	using namespace std;
+	wstring fileString = _assetPath + path;
+
+	// Check if the file exists
+	auto systemPath = filesystem::path(fileString);
+	assert(filesystem::exists(systemPath));
+
+	_scene = _importer->ReadFile(
+		Utils::ToString(systemPath), 
+		aiProcess_ConvertToLeftHanded | 
+		aiProcess_Triangulate | 
+		aiProcess_GenUVCoords | 
+		aiProcess_GenNormals | 
+		aiProcess_CalcTangentSpace
+	);
+
+	assert(_scene != nullptr);
+}
+
+void Converter::ExportModelData(const std::wstring& savePath)
+{
+	std::wstring finalPath = _modelPath + savePath + L".mesh";
+	ReadModelData(_scene->mRootNode, -1, -1);
+	WriteModelFile(finalPath);
+}
+
+void Converter::ExportMaterialData(const std::wstring& savePath)
+{
+	std::wstring finalPath = _texturePath + savePath + L".xml";
+	ReadMaterialData();
+	WriteMaterialData(finalPath);
+}
+
+void Converter::ReadModelData(aiNode* node, int32 index, int32 parentIndex)
+{
+	std::shared_ptr<asBone> bone = std::make_shared<asBone>();
+	bone->index = index;
+	bone->parentIndex = parentIndex;
+	bone->name = node->mName.C_Str();
+
+	// 4x4 Matrix
+	// fbx인 경우 Transpose가 필요
+	Matrix transform(node->mTransformation[0]);
+	bone->transform = transform.Transpose();
+
+	Matrix matParent = Matrix::Identity;
+	if (parentIndex >= 0)
+	{
+		matParent = _bones[parentIndex]->transform;
+	}
+
+	// Local (Root) Transform
+	bone->transform = bone->transform * matParent;
+	_bones.push_back(bone);
+
+	// Mesh
+	ReadMeshData(node, index);
+
+	for (uint32 i = 0; i < node->mNumChildren; i++)
+	{
+		aiNode* childNode = node->mChildren[i];
+		ReadModelData(childNode, _bones.size(), index);
+	}
+}
+
+void Converter::ReadMeshData(aiNode* node, int32 bone)
+{
+	if (node->mNumMeshes < 1)
+	{
+		return;
+	}
+
+	std::shared_ptr<asMesh> mesh = std::make_shared<asMesh>();
+	mesh->name = node->mName.C_Str();
+	mesh->boneIndex = bone;
+
+	for (uint32 i = 0; i < node->mNumMeshes; i++)
+	{
+		uint32 meshIndex = node->mMeshes[i];
+		const aiMesh* srcMesh = _scene->mMeshes[meshIndex];
+
+		const aiMaterial* srcMaterial = _scene->mMaterials[srcMesh->mMaterialIndex];
+		mesh->materialName = srcMaterial->GetName().C_Str();
+
+		// 이전 vertex 개수
+		const uint32 startVertex = mesh->vertices.size();
+		mesh->vertices.reserve(startVertex + srcMesh->mNumVertices + 1);
+		for (uint32 v = 0; v < srcMesh->mNumVertices; v++)
+		{
+			// Vertex
+			VertexType vertex;
+			::memcpy(&vertex.position, &srcMesh->mVertices[v], sizeof(Vec3));
+
+			// UV
+			if (srcMesh->HasTextureCoords(0))
+			{
+				::memcpy(&vertex.uv, &srcMesh->mTextureCoords[0][v], sizeof(Vec2));
+			}
+			
+			// Normal
+			if (srcMesh->HasNormals())
+			{
+				::memcpy(&vertex.normal, &srcMesh->mNormals[v], sizeof(Vec3));
+			}
+			
+			mesh->vertices.push_back(vertex);
+		}
+
+		// Index
+		for (uint32 f = 0; f < srcMesh->mNumFaces; f++)
+		{
+			aiFace& face = srcMesh->mFaces[f];
+
+			for (uint32 k = 0; k < face.mNumIndices; k++)
+				mesh->indices.push_back(face.mIndices[k] + startVertex);
+		}
+	}
+
+	_meshes.push_back(mesh);
+}
+
+void Converter::WriteModelFile(std::wstring finalPath)
+{
+	using namespace std;
+	auto path = filesystem::path(finalPath);
+
+	// 폴더가 없으면 만든다.
+	//filesystem::create_directory(path.parent_path());
+
+	//shared_ptr<FileUtils> file = make_shared<FileUtils>();
+	//file->Open(finalPath, FileMode::Write);
+
+	//// Bone Data
+	//file->Write<uint32>(_bones.size());
+	//for (shared_ptr<asBone>& bone : _bones)
+	//{
+	//	file->Write<int32>(bone->index);
+	//	file->Write<string>(bone->name);
+	//	file->Write<int32>(bone->parent);
+	//	file->Write<Matrix>(bone->transform);
+	//}
+
+	//// Mesh Data
+	//file->Write<uint32>(_meshes.size());
+	//for (shared_ptr<asMesh>& meshData : _meshes)
+	//{
+	//	file->Write<string>(meshData->name);
+	//	file->Write<int32>(meshData->boneIndex);
+	//	file->Write<string>(meshData->materialName);
+
+	//	// Vertex Data
+	//	file->Write<uint32>(meshData->vertices.size());
+	//	file->Write(&meshData->vertices[0], sizeof(VertexType) * meshData->vertices.size());
+
+	//	// Index Data
+	//	file->Write<uint32>(meshData->indices.size());
+	//	file->Write(&meshData->indices[0], sizeof(uint32) * meshData->indices.size());
+	//}
+}
+
+void Converter::ReadMaterialData()
+{
+	for (uint32 i = 0; i < _scene->mNumMaterials; i++)
+	{
+		aiMaterial* srcMaterial = _scene->mMaterials[i];
+
+		std::shared_ptr<asMaterial> material = std::make_shared<asMaterial>();
+		material->name = srcMaterial->GetName().C_Str();
+
+		aiColor3D color;
+
+		// Ambient Color
+		srcMaterial->Get(AI_MATKEY_COLOR_AMBIENT, color);
+		material->ambient = Vec4(color.r, color.g, color.b, 1.0f);
+
+		// Diffuse Color
+		srcMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+		material->diffuse = Vec4(color.r, color.g, color.b, 1.0f);
+
+		// Ambient Color
+		srcMaterial->Get(AI_MATKEY_COLOR_SPECULAR, color);
+		material->specular = Vec4(color.r, color.g, color.b, 1.0f);
+		srcMaterial->Get(AI_MATKEY_SHININESS, material->specular.w);
+
+		// Ambient Color
+		srcMaterial->Get(AI_MATKEY_COLOR_AMBIENT, color);
+		material->ambient = Vec4(color.r, color.g, color.b, 1.0f);
+
+		aiString file;
+
+		// Diffuse Texture
+		srcMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &file);
+		if (file.length > 0)
+		{
+			material->diffuseFile = file.C_Str();
+		}
+
+		// Specular Texture
+		srcMaterial->GetTexture(aiTextureType_SPECULAR, 0, &file);
+		if (file.length > 0)
+		{
+			material->specularFile = file.C_Str();
+		}
+
+		// Normal Texture
+		srcMaterial->GetTexture(aiTextureType_NORMALS, 0, &file);
+		if (file.length > 0)
+		{
+			material->normalFile = file.C_Str();
+		}
+
+		_materials.push_back(material);
+	}
+}
+
+void Converter::WriteMaterialData(std::wstring finalPath)
+{
+	using namespace std;
+
+	filesystem::path path = filesystem::path(finalPath);
+	if (filesystem::exists(path.parent_path()) == false)
+	{
+		filesystem::create_directory(path.parent_path());
+	}
+
+	string folder = path.parent_path().string();
+
+	shared_ptr<tinyxml2::XMLDocument> document = make_shared<tinyxml2::XMLDocument>();
+
+	tinyxml2::XMLDeclaration* decl = document->NewDeclaration();
+	document->LinkEndChild(decl);
+
+	tinyxml2::XMLElement* root = document->NewElement("Materials");
+	document->LinkEndChild(root);
+
+	for (auto& material : _materials)
+	{
+		tinyxml2::XMLElement* node = document->NewElement("Material");
+		root->LinkEndChild(node);
+
+		tinyxml2::XMLElement* element = document->NewElement("Name");
+		element->SetText(material->name.c_str());
+		node->LinkEndChild(element);
+
+		element = document->NewElement("DiffuseFile");
+		element->SetText(WriteTexture(folder, material->diffuseFile).c_str());
+		node->LinkEndChild(element);
+
+		element = document->NewElement("SpecularFile");
+		element->SetText(WriteTexture(folder, material->specularFile).c_str());
+		node->LinkEndChild(element);
+
+		element = document->NewElement("NormalFile");
+		element->SetText(WriteTexture(folder, material->normalFile).c_str());
+		node->LinkEndChild(element);
+
+		element = document->NewElement("Ambient");
+		element->SetAttribute("R", material->ambient.x);
+		element->SetAttribute("G", material->ambient.y);
+		element->SetAttribute("B", material->ambient.z);
+		element->SetAttribute("A", material->ambient.w);
+		node->LinkEndChild(element);
+
+		element = document->NewElement("Diffuse");
+		element->SetAttribute("R", material->diffuse.x);
+		element->SetAttribute("G", material->diffuse.y);
+		element->SetAttribute("B", material->diffuse.z);
+		element->SetAttribute("A", material->diffuse.w);
+		node->LinkEndChild(element);
+
+		element = document->NewElement("Specular");
+		element->SetAttribute("R", material->specular.x);
+		element->SetAttribute("G", material->specular.y);
+		element->SetAttribute("B", material->specular.z);
+		element->SetAttribute("A", material->specular.w);
+		node->LinkEndChild(element);
+
+		element = document->NewElement("Emissive");
+		element->SetAttribute("R", material->emissive.x);
+		element->SetAttribute("G", material->emissive.y);
+		element->SetAttribute("B", material->emissive.z);
+		element->SetAttribute("A", material->emissive.w);
+		node->LinkEndChild(element);
+	}
+
+	document->SaveFile(Utils::ToString(finalPath).c_str());
+}
+
+std::string Converter::WriteTexture(std::string saveFolder, std::string file)
+{
+	using namespace std;
+
+	string fileName = filesystem::path(file).filename().string();
+	string folderName = filesystem::path(file).parent_path().string();
+
+	const aiTexture* srcTexture = _scene->GetEmbeddedTexture(file.c_str());
+	if (srcTexture)
+	{
+		string pathStr = saveFolder + fileName;
+
+		if (srcTexture->mHeight == 0)
+		{
+			//shared_ptr<FileUtils> file = make_shared<FileUtils>();
+			//file->Open(Utils::ToString(pathStr), FileMode::Write);
+			//file->Write(srcTexture->pcData, srcTexture->mWidth);
+		}
+		else
+		{
+			D3D11_TEXTURE2D_DESC desc;
+			ZeroMemory(&desc, sizeof(desc));
+			desc.Width = srcTexture->mWidth;
+			desc.Height = srcTexture->mHeight;
+			desc.MipLevels = 1;
+			desc.ArraySize = 1;
+			desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+			desc.SampleDesc.Count = 1;
+			desc.SampleDesc.Quality = 0;
+			desc.Usage = D3D11_USAGE_IMMUTABLE;
+
+			D3D11_SUBRESOURCE_DATA subResource;
+			ZeroMemory(&subResource, sizeof(subResource));
+			subResource.pSysMem = srcTexture->pcData;
+			
+			ComPtr<ID3D11Texture2D> texture;
+			HRESULT hr = DEVICE->CreateTexture2D(&desc, &subResource, texture.GetAddressOf());
+			assert(SUCCEEDED(hr));
+
+			DirectX::ScratchImage image;
+			::CaptureTexture(DEVICE.Get(), DEVICECONTEXT.Get(), texture.Get(), image);
+
+			// Save To File
+			hr = DirectX::SaveToDDSFile(*image.GetImages(), DirectX::DDS_FLAGS_NONE, Utils::ToWString(fileName).c_str());
+			assert(SUCCEEDED(hr));
+		}
+	}
+	else
+	{
+		string originalPath = (filesystem::path(_assetPath) / filesystem::path(saveFolder).filename() / file).string();
+		Utils::Replace(OUT originalPath, "\\", "/");
+
+		string pathStr = (filesystem::path(saveFolder) / fileName).string();
+		Utils::Replace(OUT pathStr, "\\", "/");
+
+		::CopyFileA(originalPath.c_str(), pathStr.c_str(), false);
+	}
+
+	return fileName;
+}

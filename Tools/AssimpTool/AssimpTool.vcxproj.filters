@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main\pch.cpp" />
+    <ClCompile Include="Utils\CameraScript.cpp" />
+    <ClCompile Include="Main\Main.cpp" />
+    <ClCompile Include="Utils\Converter.cpp" />
+    <ClCompile Include="Demo\AssimpToolDemo.cpp" />
+    <ClCompile Include="Main\AsTypes.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main\pch.h" />
+    <ClInclude Include="Utils\CameraScript.h" />
+    <ClInclude Include="Main\Main.h" />
+    <ClInclude Include="Utils\Converter.h" />
+    <ClInclude Include="Demo\AssimpToolDemo.h" />
+    <ClInclude Include="Main\AsTypes.h" />
+  </ItemGroup>
+</Project>
