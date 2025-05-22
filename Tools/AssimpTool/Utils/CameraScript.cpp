@@ -19,7 +19,7 @@ void CameraScript::Update()
 	float deltaTime = TIME->GetDeltaTime();
 
 	KeyboardScript(deltaTime);
-	MouseScript(deltaTime);
+	//MouseScript(deltaTime);
 }
 
 void CameraScript::KeyboardScript(const float& deltaTime)
@@ -85,8 +85,8 @@ void CameraScript::MouseScript(const float& deltaTime)
 	if (INPUT->GetButton(KEY_TYPE::LBUTTON))
 	{
 		Vec3 rotation = GetTransform()->GetRotation();
-		rotation.x += mouseDelta.y * 0.2f * deltaTime;
-		rotation.y += mouseDelta.x * 0.2f * deltaTime;
+		rotation.x += mouseDelta.y * 0.1f * deltaTime;
+		rotation.y += mouseDelta.x * 0.1f * deltaTime;
 		GetTransform()->SetRotation(rotation);
 	}
 

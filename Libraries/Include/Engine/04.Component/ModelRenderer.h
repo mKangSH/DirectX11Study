@@ -15,7 +15,7 @@ public:
 	void SetPass(uint8 pass) { _pass = pass; }
 
 private:
-	uint8 _pass;
+	uint8 _pass = 0;
 	std::shared_ptr<class Shader> _shader;
 	std::shared_ptr<class Model> _model;
 };

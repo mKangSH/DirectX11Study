@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Demo\ImGuiDemo.h" />
     <ClInclude Include="Main\AsTypes.h" />
     <ClInclude Include="Demo\AssimpToolDemo.h" />
     <ClInclude Include="Demo\StaticMeshDemo.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Main\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Demo\ImGuiDemo.cpp" />
     <ClCompile Include="Main\AsTypes.cpp" />
     <ClCompile Include="Demo\AssimpToolDemo.cpp" />
     <ClCompile Include="Demo\StaticMeshDemo.cpp" />

@@ -8,6 +8,8 @@ public:
 	void Render() override;
 
 	void CreateWolf();
+	void CreateTower();
+	void CreateTank();
 
 private:
 	std::shared_ptr<Shader> _shader;

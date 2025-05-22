@@ -42,6 +42,11 @@ using namespace Microsoft::WRL;
 #include <Assimp/scene.h>
 #include <Assimp/postprocess.h>
 
+// ImGUI
+#include "../98.Utils/ImGUI/imgui.h"
+#include "../98.Utils/ImGUI/imgui_impl_dx11.h"
+#include "../98.Utils/ImGUI/imgui_impl_win32.h"
+
 // Libs
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
@@ -63,6 +68,7 @@ using namespace Microsoft::WRL;
 #include "../02.Managers/TimeManager.h"
 #include "../02.Managers/ResourceManager.h"
 #include "../02.Managers/RenderManager.h"
+#include "../02.Managers/ImGuiManager.h"
 
 // Engine
 #include "../00.Engine/IExecute.h"

@@ -35,6 +35,18 @@ struct MaterialDesc
 	Vec4 emissive = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
 };
 
+#define MAX_BONE_TRANSFORMS 50
+
+struct BoneDesc
+{
+	Matrix transforms[MAX_BONE_TRANSFORMS];
+
+	BoneDesc()
+	{
+		std::fill(std::begin(transforms), std::end(transforms), Matrix::Identity);
+	}
+};
+
 enum class RasterizerType
 {
 	SOLID,
@@ -53,6 +65,7 @@ public:
 	void UploadTransformDesc(const TransformDesc& desc);
 	void UploadLightDesc(const LightDesc& desc);
 	void UploadMaterialDesc(const MaterialDesc& desc);
+	void UploadBoneDesc(const BoneDesc& desc);
 
 public:
 	void SetRasterizerState(RasterizerType type) { _rasterizerType = type; }
@@ -80,5 +93,9 @@ private:
 	MaterialDesc _materialDesc = {};
 	std::shared_ptr<ConstantBuffer<MaterialDesc>> _materialBuffer = nullptr;
 	ComPtr<ID3DX11EffectConstantBuffer> _materialEffectBuffer = nullptr;
+
+	BoneDesc _boneDesc = {};
+	std::shared_ptr<ConstantBuffer<BoneDesc>> _boneBuffer = nullptr;
+	ComPtr< ID3DX11EffectConstantBuffer> _boneEffectBuffer = nullptr;
 };
 

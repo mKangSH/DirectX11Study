@@ -27,7 +27,7 @@ void StaticMeshDemo::Init()
 	_mainCamera->Start();
 
 	// Object
-	CreateWolf();
+	CreateTank();
 }
 
 void StaticMeshDemo::Update()
@@ -81,5 +81,39 @@ void StaticMeshDemo::CreateWolf()
 	{
 		_object->GetModelRenderer()->SetModel(model);
 		_object->GetModelRenderer()->SetPass(3);
+	}
+}
+
+void StaticMeshDemo::CreateTower()
+{
+	std::shared_ptr<Model> model = std::make_shared<Model>();
+	model->ReadModel(L"Tower/Tower");
+	model->ReadMaterial(L"Tower/Tower");
+
+	_object = std::make_shared<SceneObject>();
+	_object->GetOrAddTransform()->SetPosition(Vec3(0, 0, 50));
+	_object->GetOrAddTransform()->SetScale(Vec3(1.f));
+
+	_object->AddComponent(std::make_shared<ModelRenderer>(_shader));
+	{
+		_object->GetModelRenderer()->SetModel(model);
+		_object->GetModelRenderer()->SetPass(3);
+	}
+}
+
+void StaticMeshDemo::CreateTank()
+{
+	std::shared_ptr<Model> model = std::make_shared<Model>();
+	model->ReadModel(L"Tank/Tank");
+	model->ReadMaterial(L"Tank/Tank");
+
+	_object = std::make_shared<SceneObject>();
+	_object->GetOrAddTransform()->SetPosition(Vec3(0, 0, 50));
+	_object->GetOrAddTransform()->SetScale(Vec3(1.f));
+
+	_object->AddComponent(std::make_shared<ModelRenderer>(_shader));
+	{
+		_object->GetModelRenderer()->SetModel(model);
+		_object->GetModelRenderer()->SetPass(2);
 	}
 }
