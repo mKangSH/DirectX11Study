@@ -39,5 +39,5 @@ void MeshRenderer::Update()
 	DEVICECONTEXT->IASetIndexBuffer(_mesh->GetIndexBuffer()->GetBuffer().Get(), DXGI_FORMAT_R32_UINT, 0);
 
 	RasterizerType rasterizerType = RENDER->GetRasterizerState();
-	shader->DrawIndexed(0, static_cast<UINT>(rasterizerType), _mesh->GetIndexBuffer()->GetCount(), 0, 0);
+	shader->DrawIndexed(1, static_cast<UINT>(rasterizerType), _mesh->GetIndexBuffer()->GetCount(), 0, 0);
 }

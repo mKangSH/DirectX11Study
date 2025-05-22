@@ -35,22 +35,19 @@ struct MaterialDesc
 	Vec4 emissive = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
 };
 
-#define MAX_BONE_TRANSFORMS 50
+#define MAX_BONE_TRANSFORMS 100
 
 struct BoneDesc
 {
 	Matrix transforms[MAX_BONE_TRANSFORMS];
-
-	BoneDesc()
-	{
-		std::fill(std::begin(transforms), std::end(transforms), Matrix::Identity);
-	}
 };
 
 enum class RasterizerType
 {
 	SOLID,
 	WIREFRAME,
+	SOLID_RED,
+	WIREFRAME_RED,
 };
 
 class RenderManager
