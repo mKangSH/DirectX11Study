@@ -28,22 +28,22 @@ void CameraScript::KeyboardScript(const float& deltaTime)
 
 	if (INPUT->GetButton(KEY_TYPE::A))
 	{
-		pos -= _cameraTransform->GetRight() * 3.f * deltaTime;
+		pos -= _cameraTransform->GetRight() * _speed * deltaTime;
 	}
 
 	if (INPUT->GetButton(KEY_TYPE::D))
 	{
-		pos += _cameraTransform->GetRight() * 3.f * deltaTime;
+		pos += _cameraTransform->GetRight() * _speed * deltaTime;
 	}
 
 	if (INPUT->GetButton(KEY_TYPE::W))
 	{
-		pos += _cameraTransform->GetLook() * 3.f * deltaTime;
+		pos += _cameraTransform->GetLook() * _speed * deltaTime;
 	}
 
 	if (INPUT->GetButton(KEY_TYPE::S))
 	{
-		pos -= _cameraTransform->GetLook() * 3.f * deltaTime;
+		pos -= _cameraTransform->GetLook() * _speed * deltaTime;
 	}
 
 	_cameraTransform->SetPosition(pos);
@@ -85,8 +85,8 @@ void CameraScript::MouseScript(const float& deltaTime)
 	if (INPUT->GetButton(KEY_TYPE::LBUTTON))
 	{
 		Vec3 rotation = GetTransform()->GetRotation();
-		rotation.x += mouseDelta.y * 0.1f * deltaTime;
-		rotation.y += mouseDelta.x * 0.05f * deltaTime;
+		rotation.x += mouseDelta.y * 0.2f * deltaTime;
+		rotation.y += mouseDelta.x * 0.2f * deltaTime;
 		GetTransform()->SetRotation(rotation);
 	}
 

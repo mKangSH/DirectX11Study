@@ -74,5 +74,6 @@ using namespace Microsoft::WRL;
 #include "../01.Graphics/Shader/Shader.h"
 
 #include "../03.SceneObject/SceneObject.h"
-#include "../04.Component/Component.h"
 #include "../04.Component/Transform.h"
+#include "../00.Engine/Resource/Texture.h"
+#include "../00.Engine/Resource/Mesh.h"

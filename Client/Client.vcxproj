@@ -82,6 +82,7 @@
     <FxCompile Include="..\Shaders\01.Beginner\12. Lighting_Emissive.fx" />
     <FxCompile Include="..\Shaders\01.Beginner\13. Lighting.fx" />
     <FxCompile Include="..\Shaders\01.Beginner\14. NormalMapping.fx" />
+    <FxCompile Include="..\Shaders\02.Intermediate\15. ModelDemo.fx" />
     <FxCompile Include="..\Shaders\Common\00. Global.fx" />
     <FxCompile Include="..\Shaders\Common\00. Light.fx" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/01.Graphics/Buffer/Geometry.h"
+#include "../Buffer/Geometry.h"
 
 class GeometryHelper
 {

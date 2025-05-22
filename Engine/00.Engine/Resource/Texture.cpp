@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Texture.h"
 
-Texture::Texture(ResourceType type) : Super(type)
+Texture::Texture() : Super(ResourceType::Texture)
 {
 }
 

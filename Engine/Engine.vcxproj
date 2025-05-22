@@ -207,6 +207,10 @@
     <ClInclude Include="01.Graphics\Buffer\GeometryHelper.h" />
     <ClInclude Include="02.Managers\RenderManager.h" />
     <ClInclude Include="00.Engine\Resource\Material.h" />
+    <ClInclude Include="98.Utils\FileUtils.h" />
+    <ClInclude Include="00.Engine\Resource\Model\Model.h" />
+    <ClInclude Include="00.Engine\Resource\Model\ModelMesh.h" />
+    <ClInclude Include="04.Component\ModelRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="00.Engine\Resource\Mesh.cpp" />
@@ -250,6 +254,10 @@
     <ClCompile Include="01.Graphics\Buffer\GeometryHelper.cpp" />
     <ClCompile Include="02.Managers\RenderManager.cpp" />
     <ClCompile Include="00.Engine\Resource\Material.cpp" />
+    <ClCompile Include="98.Utils\FileUtils.cpp" />
+    <ClCompile Include="00.Engine\Resource\Model\Model.cpp" />
+    <ClCompile Include="00.Engine\Resource\Model\ModelMesh.cpp" />
+    <ClCompile Include="04.Component\ModelRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="98.Utils\SimpleMath.inl" />

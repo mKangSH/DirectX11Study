@@ -7,6 +7,7 @@
     <ClCompile Include="Utils\Converter.cpp" />
     <ClCompile Include="Demo\AssimpToolDemo.cpp" />
     <ClCompile Include="Main\AsTypes.cpp" />
+    <ClCompile Include="Demo\StaticMeshDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\pch.h" />
@@ -15,5 +16,6 @@
     <ClInclude Include="Utils\Converter.h" />
     <ClInclude Include="Demo\AssimpToolDemo.h" />
     <ClInclude Include="Main\AsTypes.h" />
+    <ClInclude Include="Demo\StaticMeshDemo.h" />
   </ItemGroup>
 </Project>

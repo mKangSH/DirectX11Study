@@ -6,7 +6,7 @@ class Texture : public ResourceBase
 	using Super = ResourceBase;
 
 public:
-	Texture(ResourceType type);
+	Texture();
 	~Texture();
 
 public:

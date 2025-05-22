@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="Main\AsTypes.h" />
     <ClInclude Include="Demo\AssimpToolDemo.h" />
+    <ClInclude Include="Demo\StaticMeshDemo.h" />
     <ClInclude Include="Utils\Converter.h" />
     <ClInclude Include="Utils\CameraScript.h" />
     <ClInclude Include="Main\Main.h" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="Main\AsTypes.cpp" />
     <ClCompile Include="Demo\AssimpToolDemo.cpp" />
+    <ClCompile Include="Demo\StaticMeshDemo.cpp" />
     <ClCompile Include="Utils\Converter.cpp" />
     <ClCompile Include="Utils\CameraScript.cpp" />
     <ClCompile Include="Main\Main.cpp" />

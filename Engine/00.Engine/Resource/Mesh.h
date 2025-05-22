@@ -1,6 +1,6 @@
 #pragma once
-#include "Engine/01.Graphics/Buffer/Geometry.h"
 #include "ResourceBase.h"
+#include "../../01.Graphics/Buffer/Geometry.h"
 
 class Mesh : public ResourceBase
 {

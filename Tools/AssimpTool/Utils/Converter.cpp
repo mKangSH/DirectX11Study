@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <98.Utils/Utils.h>
 #include <98.Utils/tinyxml2.h>
+#include <98.Utils/FileUtils.h>
 
 Converter::Converter()
 {
@@ -141,40 +142,42 @@ void Converter::ReadMeshData(aiNode* node, int32 bone)
 void Converter::WriteModelFile(std::wstring finalPath)
 {
 	using namespace std;
-	auto path = filesystem::path(finalPath);
+	
+	filesystem::path path = filesystem::path(finalPath);
+	if (filesystem::exists(path.parent_path()) == false)
+	{
+		filesystem::create_directory(path.parent_path());
+	}
 
-	// 폴더가 없으면 만든다.
-	//filesystem::create_directory(path.parent_path());
+	shared_ptr<FileUtils> file = make_shared<FileUtils>();
+	file->Open(finalPath, FileMode::Write);
 
-	//shared_ptr<FileUtils> file = make_shared<FileUtils>();
-	//file->Open(finalPath, FileMode::Write);
+	// Bone Data
+	file->Write<uint32>(_bones.size());
+	for (shared_ptr<asBone>& bone : _bones)
+	{
+		file->Write<int32>(bone->index);
+		file->Write<string>(bone->name);
+		file->Write<int32>(bone->parentIndex);
+		file->Write<Matrix>(bone->transform);
+	}
 
-	//// Bone Data
-	//file->Write<uint32>(_bones.size());
-	//for (shared_ptr<asBone>& bone : _bones)
-	//{
-	//	file->Write<int32>(bone->index);
-	//	file->Write<string>(bone->name);
-	//	file->Write<int32>(bone->parent);
-	//	file->Write<Matrix>(bone->transform);
-	//}
+	// Mesh Data
+	file->Write<uint32>(_meshes.size());
+	for (shared_ptr<asMesh>& meshData : _meshes)
+	{
+		file->Write<string>(meshData->name);
+		file->Write<int32>(meshData->boneIndex);
+		file->Write<string>(meshData->materialName);
 
-	//// Mesh Data
-	//file->Write<uint32>(_meshes.size());
-	//for (shared_ptr<asMesh>& meshData : _meshes)
-	//{
-	//	file->Write<string>(meshData->name);
-	//	file->Write<int32>(meshData->boneIndex);
-	//	file->Write<string>(meshData->materialName);
+		// Vertex Data
+		file->Write<uint32>(meshData->vertices.size());
+		file->Write(&meshData->vertices[0], sizeof(VertexType) * meshData->vertices.size());
 
-	//	// Vertex Data
-	//	file->Write<uint32>(meshData->vertices.size());
-	//	file->Write(&meshData->vertices[0], sizeof(VertexType) * meshData->vertices.size());
-
-	//	// Index Data
-	//	file->Write<uint32>(meshData->indices.size());
-	//	file->Write(&meshData->indices[0], sizeof(uint32) * meshData->indices.size());
-	//}
+		// Index Data
+		file->Write<uint32>(meshData->indices.size());
+		file->Write(&meshData->indices[0], sizeof(uint32) * meshData->indices.size());
+	}
 }
 
 void Converter::ReadMaterialData()
@@ -319,9 +322,9 @@ std::string Converter::WriteTexture(std::string saveFolder, std::string file)
 
 		if (srcTexture->mHeight == 0)
 		{
-			//shared_ptr<FileUtils> file = make_shared<FileUtils>();
-			//file->Open(Utils::ToString(pathStr), FileMode::Write);
-			//file->Write(srcTexture->pcData, srcTexture->mWidth);
+			shared_ptr<FileUtils> file = make_shared<FileUtils>();
+			file->Open(Utils::ToWString(pathStr), FileMode::Write);
+			file->Write(srcTexture->pcData, srcTexture->mWidth);
 		}
 		else
 		{

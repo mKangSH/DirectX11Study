@@ -23,6 +23,8 @@ public:
 	template <typename T>
 	std::shared_ptr<T> Get(const std::wstring& key);
 
+	std::shared_ptr<Texture> GetOrAddTexture(const std::wstring& key, const std::wstring& path);
+
 	// Get<Texture>() 
 	template <typename T>
 	ResourceType GetResourceType();
@@ -55,7 +57,7 @@ inline std::shared_ptr<T> ResourceManager::Load(const std::wstring& key, const s
 		return std::static_pointer_cast<T>(iter->second);
 	}
 
-	std::shared_ptr<T> object = std::make_shared<T>(resourceType);
+	std::shared_ptr<T> object = std::make_shared<T>();
 
 	std::wstring filePath = _resourcePath + path;
 	object->Load(filePath);
