@@ -13,7 +13,7 @@
 
 void ImGuiDemo::Init()
 {
-	RESOURCES->Init(L"..\\..\\Resources\\");
+	RESOURCES->Init(L"");
 	_shader = std::make_shared<Shader>(L"02.Intermediate\\15. ModelDemo.fx");
 	RENDER->Init(_shader);
 
@@ -29,11 +29,11 @@ void ImGuiDemo::Init()
 			material->SetShader(_shader);
 		}
 		{
-			std::shared_ptr<Texture> texture = RESOURCES->Load<Texture>(L"Background", L"Textures\\Background.png");
+			std::shared_ptr<Texture> texture = RESOURCES->Load<Texture>(L"Background", L"..\\..\\Resources\\Textures\\Background.png");
 			material->SetDiffuseMap(texture);
 		}
 		{
-			std::shared_ptr<Texture> texture = RESOURCES->Load<Texture>(L"BlueIceNormal", L"Textures\\BlueIce_Normal.jpg");
+			std::shared_ptr<Texture> texture = RESOURCES->Load<Texture>(L"BlueIceNormal", L"..\\..\\Resources\\Textures\\BlueIce_Normal.jpg");
 			material->SetNormalMap(texture);
 		}
 

@@ -20,7 +20,7 @@ void Model::ReadMaterial(const std::wstring& fileName)
 	using namespace std;
 
 	wstring fullPath = _texturePath + fileName + L".xml";
-	filesystem::path parentPath = (filesystem::path(fullPath).parent_path() / L"Textures");
+	filesystem::path parentPath = (filesystem::path(fullPath).parent_path());
 
 	tinyxml2::XMLDocument* document = new tinyxml2::XMLDocument();
 	tinyxml2::XMLError error = document->LoadFile(Utils::ToString(fullPath).c_str());

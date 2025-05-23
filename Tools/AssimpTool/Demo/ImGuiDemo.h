@@ -24,7 +24,7 @@ private:
 	std::shared_ptr<SceneObject> _cube;
 	std::shared_ptr<SceneObject> _mainCamera;
 
-	bool show_setting_window = false;
+	bool show_setting_window = true;
 	bool show_demo_window = false;
 	bool show_detail_window = false;
 
