@@ -109,11 +109,17 @@ void Game::Update()
 	TIME->Update();
 	INPUT->Update();
 
-	GRAPHICS->RenderBegin();
+	ComPtr<ID3D11RenderTargetView> imguiRTV = GUI->GetRenderTargetView();
+	GRAPHICS->RenderBegin(imguiRTV);
 
-	GUI->Update();
 	_desc.app->Update();
 	_desc.app->Render();
+
+	ComPtr<ID3D11RenderTargetView> mainRTV = GRAPHICS->GetRenderTargetView();
+	GRAPHICS->RenderBegin(mainRTV);
+
+	GUI->Update();
+	_desc.app->ImGuiRender();
 	GUI->Render();
 
 	GRAPHICS->RenderEnd();

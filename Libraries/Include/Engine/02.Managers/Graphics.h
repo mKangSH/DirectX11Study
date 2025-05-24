@@ -6,11 +6,12 @@ class Graphics
 
 public:
 	void Init(HWND hwnd, Color clearColor);
-	void RenderBegin();
+	void RenderBegin(ComPtr<ID3D11RenderTargetView> renderTargetView);
 	void RenderEnd();
 
 	ComPtr<ID3D11Device> GetDevice() { return _device; }
 	ComPtr<ID3D11DeviceContext> GetDeviceContext() { return _deviceContext; }
+	ComPtr< ID3D11RenderTargetView> GetRenderTargetView() { return _renderTargetView; }
 
 private:
 	void CreateDeviceAndSwapChain();

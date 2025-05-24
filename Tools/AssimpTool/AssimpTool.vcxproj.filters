@@ -25,6 +25,7 @@
     <ClCompile Include="Demo\ImGuiDemo.cpp">
       <Filter>Demo</Filter>
     </ClCompile>
+    <ClCompile Include="Demo\ImGuiDemo_Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Demo\AssimpToolDemo.h">
@@ -51,6 +52,7 @@
     <ClInclude Include="Demo\ImGuiDemo.h">
       <Filter>Demo</Filter>
     </ClInclude>
+    <ClInclude Include="Demo\ImGuiDemo_Window.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Demo">
