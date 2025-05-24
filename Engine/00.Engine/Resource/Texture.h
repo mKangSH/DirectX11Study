@@ -6,8 +6,12 @@ class Texture : public ResourceBase
 	using Super = ResourceBase;
 
 public:
-	explicit Texture(ComPtr<ID3D11Device> device);
+	Texture();
 	~Texture();
+
+public:
+	void Load(const std::wstring& path) override;
+	void Save(const std::wstring& path) override;
 
 public:
 	void CreateShaderResourceView(const std::wstring& path);
@@ -19,10 +23,13 @@ public:
 	ComPtr<ID3D11ShaderResourceView> GetShaderResourceView() { return _shaderResourceView; }
 	Vec2 GetSize() { return _size; }
 
+	const DirectX::ScratchImage& GetInfo() { return _img; }
+
 private:
-	ComPtr<ID3D11Device> _device = nullptr;
 	ComPtr<ID3D11ShaderResourceView> _shaderResourceView = nullptr;
 
 	Vec2 _size = { 0.0f, 0.0f };
+
+	DirectX::ScratchImage _img = {};
 };
 

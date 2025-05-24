@@ -13,3 +13,14 @@ public:									\
 
 
 #define GET_SINGLE(ClassName) ClassName::GetInstance()
+
+#define GAME			GET_SINGLE(Game)		
+#define GRAPHICS		GET_SINGLE(Graphics)
+#define DEVICE			GRAPHICS->GetDevice()
+#define DEVICECONTEXT	GRAPHICS->GetDeviceContext()
+#define INPUT			GET_SINGLE(InputManager)
+#define TIME			GET_SINGLE(TimeManager)
+#define DELTATIME		TIME->GetDeltaTime()
+#define RESOURCES		GET_SINGLE(ResourceManager)
+#define RENDER			GET_SINGLE(RenderManager)
+#define GUI				GET_SINGLE(ImGuiManager)

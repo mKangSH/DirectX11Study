@@ -37,6 +37,16 @@ using namespace Microsoft::WRL;
 
 #include <FX11/d3dx11effect.h>
 
+// Assimp
+#include <Assimp/Importer.hpp>
+#include <Assimp/scene.h>
+#include <Assimp/postprocess.h>
+
+// ImGUI
+#include "../98.Utils/ImGUI/imgui.h"
+#include "../98.Utils/ImGUI/imgui_impl_dx11.h"
+#include "../98.Utils/ImGUI/imgui_impl_win32.h"
+
 // Libs
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
@@ -44,9 +54,11 @@ using namespace Microsoft::WRL;
 #ifdef _DEBUG
 	#pragma comment(lib, "DirectXTex/DirectXTex_debug.lib")
 	#pragma comment(lib, "FX11/Effects11d.lib")
+	#pragma comment(lib, "Assimp/assimp-vc143-mtd.lib")
 #else
 	#pragma comment(lib, "DirectXTex/DirectXTex.lib")
 	#pragma comment(lib, "FX11/Effects11.lib")
+	#pragma comment(lib, "Assimp/assimp-vc143-mt.lib")
 #endif
 
 // Managers
@@ -55,19 +67,11 @@ using namespace Microsoft::WRL;
 #include "../02.Managers/InputManager.h"
 #include "../02.Managers/TimeManager.h"
 #include "../02.Managers/ResourceManager.h"
-
-#define GAME					GET_SINGLE(Game)		
-#define GRAPHICS				GET_SINGLE(Graphics)
-#define DEVICE					GRAPHICS->GetDevice()
-#define DEVICECONTEXT			GRAPHICS->GetDeviceContext()
-#define INPUT					GET_SINGLE(InputManager)
-#define TIME					GET_SINGLE(TimeManager)
-#define DELTATIME				TIME->GetDeltaTime()
-#define RESOURCES				GET_SINGLE(ResourceManager)
+#include "../02.Managers/RenderManager.h"
+#include "../02.Managers/ImGuiManager.h"
 
 // Engine
 #include "../00.Engine/IExecute.h"
-#include "../00.Engine/Resource/Texture.h"
 
 #include "../01.Graphics/Buffer/VertexData.h"
 #include "../01.Graphics/Buffer/VertexBuffer.h"
@@ -76,5 +80,6 @@ using namespace Microsoft::WRL;
 #include "../01.Graphics/Shader/Shader.h"
 
 #include "../03.SceneObject/SceneObject.h"
-#include "../04.Component/Component.h"
 #include "../04.Component/Transform.h"
+#include "../00.Engine/Resource/Texture.h"
+#include "../00.Engine/Resource/Mesh.h"

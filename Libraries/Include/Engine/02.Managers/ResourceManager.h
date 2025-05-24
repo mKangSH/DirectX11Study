@@ -5,13 +5,14 @@
 class Shader;
 class Texture;
 class Mesh;
+class Material;
 
 class ResourceManager
 {
 	DECLARE_SINGLETON(ResourceManager)
 
 public:
-	void Init();
+	void Init(const std::wstring& resourcePath);
 
 	template <typename T>
 	std::shared_ptr<T> Load(const std::wstring& key, const std::wstring& path);
@@ -21,6 +22,8 @@ public:
 
 	template <typename T>
 	std::shared_ptr<T> Get(const std::wstring& key);
+
+	std::shared_ptr<Texture> GetOrAddTexture(const std::wstring& key, const std::wstring& path);
 
 	// Get<Texture>() 
 	template <typename T>
@@ -54,8 +57,10 @@ inline std::shared_ptr<T> ResourceManager::Load(const std::wstring& key, const s
 		return std::static_pointer_cast<T>(iter->second);
 	}
 
-	std::shared_ptr<T> object = std::make_shared<T>(resourceType);
-	object->Load(path);
+	std::shared_ptr<T> object = std::make_shared<T>();
+
+	std::wstring filePath = _resourcePath + path;
+	object->Load(filePath);
 	keyObjMap[key] = object;
 
 	return object;
@@ -112,6 +117,10 @@ inline ResourceType ResourceManager::GetResourceType()
 	else if (std::is_same_v<T, Mesh>)
 	{
 		return ResourceType::Mesh;
+	}
+	else if (std::is_same_v<T, Material>)
+	{
+		return ResourceType::Material;
 	}
 	else
 	{

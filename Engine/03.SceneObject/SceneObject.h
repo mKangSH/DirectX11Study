@@ -5,7 +5,8 @@ class Transform;
 class Component;
 class MonoBehaviour;
 class Camera;
-//class MeshRenderer;
+class MeshRenderer;
+class ModelRenderer;
 //class Animator;
 
 class SceneObject : public std::enable_shared_from_this<SceneObject>
@@ -23,7 +24,8 @@ public:
 	std::shared_ptr<Component> GetFixedComponent(ComponentType type);
 	std::shared_ptr<Transform> GetTransform();
 	std::shared_ptr<Camera> GetCamera();
-	//std::shared_ptr<MeshRenderer> GetMeshRenderer();
+	std::shared_ptr<MeshRenderer> GetMeshRenderer();
+	std::shared_ptr<ModelRenderer> GetModelRenderer();
 	//std::shared_ptr<Animator> GetAnimator();
 
 	std::shared_ptr<Transform> GetOrAddTransform();
