@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main\Main.cpp" />
+    <ClCompile Include="Main\pch.cpp" />
+    <ClCompile Include="Main\Camera\CameraScript.cpp" />
+    <ClCompile Include="Main\ImGuiDemo_TSoD.cpp" />
+    <ClCompile Include="UI\AssetBrowser.cpp" />
+    <ClCompile Include="UI\UIComponentBase.cpp" />
+    <ClCompile Include="UI\DirectXScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main\Main.h" />
+    <ClInclude Include="Main\pch.h" />
+    <ClInclude Include="Main\Camera\CameraScript.h" />
+    <ClInclude Include="Main\ImGuiDemo_TSoD.h" />
+    <ClInclude Include="UI\AssetBrowser.h" />
+    <ClInclude Include="UI\UIComponentBase.h" />
+    <ClInclude Include="UI\DirectXScene.h" />
+  </ItemGroup>
+</Project>

@@ -5,7 +5,7 @@
 #include "../98.Utils/Utils.h"
 
 using namespace std;
-Shader::Shader(wstring file) : _file(L"..\\..\\Shaders\\" + file)
+Shader::Shader(wstring file) : _file(file)
 {
 	_initialStateBlock = make_shared<StateBlock>();
 	{

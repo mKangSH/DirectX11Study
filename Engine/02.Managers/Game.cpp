@@ -18,7 +18,7 @@ WPARAM Game::Run(GameDesc& desc)
 		return FALSE;
 	}
 	
-	GRAPHICS->Init(_desc.hWnd, _desc.clearColor);
+	GRAPHICS->Init(_desc.hWnd);
 	TIME->Init();
 	INPUT->Init(_desc.hWnd);
 	GUI->Init();
@@ -93,14 +93,29 @@ LRESULT CALLBACK Game::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM 
 
 	switch (message)
 	{
-	case WM_SIZE:
-		break;
-	case WM_CLOSE:
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	default:
-		return ::DefWindowProc(handle, message, wParam, lParam);
+		case WM_SIZE: 
+			{
+				if (wParam == SIZE_MINIMIZED)
+				{
+					return 0;
+				}
+
+				uint32 width = (UINT)LOWORD(lParam);
+				uint32 height = (UINT)HIWORD(lParam);
+
+				if (width == 0 || height == 0)
+				{
+					return 0;
+				}
+			}
+			break;
+
+		case WM_CLOSE:
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			break;
+		default:
+			return ::DefWindowProc(handle, message, wParam, lParam);
 	}
 }
 
@@ -109,15 +124,11 @@ void Game::Update()
 	TIME->Update();
 	INPUT->Update();
 
-	ComPtr<ID3D11RenderTargetView> imguiRTV = GUI->GetRenderTargetView();
-	GRAPHICS->RenderBegin(imguiRTV);
-
+	GRAPHICS->RenderBegin();
 	_desc.app->Update();
 	_desc.app->Render();
-
-	ComPtr<ID3D11RenderTargetView> mainRTV = GRAPHICS->GetRenderTargetView();
-	GRAPHICS->RenderBegin(mainRTV);
-
+	
+	GRAPHICS->UIRenderBegin();
 	GUI->Update();
 	_desc.app->ImGuiRender();
 	GUI->Render();

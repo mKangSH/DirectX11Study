@@ -3,7 +3,7 @@
 struct GameDesc
 {
 	std::shared_ptr<class IExecute> app = nullptr;
-	std::wstring appName = L"TheStoneOfDays";
+	std::wstring appName = L"";
 	HINSTANCE hInstance = nullptr;
 	HWND hWnd = nullptr;
 	float width = 1920.0f;

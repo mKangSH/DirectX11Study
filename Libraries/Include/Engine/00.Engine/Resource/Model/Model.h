@@ -29,8 +29,8 @@ private:
 	void BindCacheInfo();
 
 private:
-	std::wstring _modelPath = L"../../Resources/Models/";
-	std::wstring _texturePath = L"../../Resources/Textures/";
+	std::wstring _modelPath = L"../Resources/Models/";
+	std::wstring _texturePath = L"../Resources/Textures/";
 
 private:
 	std::shared_ptr<struct ModelBone> _root = nullptr;

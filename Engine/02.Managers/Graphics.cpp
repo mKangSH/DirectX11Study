@@ -1,30 +1,38 @@
 #include "pch.h"
 #include "Graphics.h"
 
-void Graphics::Init(HWND hwnd, Color clearColor)
+void Graphics::Init(HWND hwnd)
 {
 	_hwnd = hwnd;
-	_clearColor = clearColor;
 
 	// 1. Create Device and SwapChain
 	CreateDeviceAndSwapChain();
 
-	// 2. Create RenderTargetView
+	// 2. Create UI RenderTargetView
+	CreateUIRenderTargetView();
+
+	// 3. Create RenderTargetView
 	CreateRenderTargetView();
 
-	// 3. Create DepthStencilView
+	// 4. Create DepthStencilView
 	CreateDepthStencilView();
 
-	// 4. Set Viewport
+	// 5. Set Viewport
 	SetViewport();
 }
 
-void Graphics::RenderBegin(ComPtr<ID3D11RenderTargetView> renderTargetView)
+void Graphics::RenderBegin()
 {
-	_deviceContext->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), _depthStencilView.Get());
-	_deviceContext->ClearRenderTargetView(renderTargetView.Get(), _clearColor);
+	_deviceContext->OMSetRenderTargets(1, _renderTargetView.GetAddressOf(), _depthStencilView.Get());
+	_deviceContext->ClearRenderTargetView(_renderTargetView.Get(), GAME->GetGameDesc().clearColor);
 	_deviceContext->ClearDepthStencilView(_depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	_deviceContext->RSSetViewports(1, &_viewport);
+}
+
+void Graphics::UIRenderBegin()
+{
+	_deviceContext->OMSetRenderTargets(1, _uiRenderTargetView.GetAddressOf(), _depthStencilView.Get());
+	_deviceContext->ClearRenderTargetView(_uiRenderTargetView.Get(), GAME->GetGameDesc().clearColor);
 }
 
 void Graphics::RenderEnd()
@@ -76,7 +84,7 @@ void Graphics::CreateDeviceAndSwapChain()
 	assert(SUCCEEDED(hr));
 }
 
-void Graphics::CreateRenderTargetView()
+void Graphics::CreateUIRenderTargetView()
 {
 	HRESULT hr;
 
@@ -84,7 +92,40 @@ void Graphics::CreateRenderTargetView()
 	hr = _swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(backBuffer.GetAddressOf()));
 	assert(SUCCEEDED(hr));
 
-	hr = _device->CreateRenderTargetView(backBuffer.Get(), nullptr, _renderTargetView.GetAddressOf());
+	hr = _device->CreateRenderTargetView(backBuffer.Get(), nullptr, _uiRenderTargetView.GetAddressOf());
+	assert(SUCCEEDED(hr));
+}
+
+void Graphics::CreateRenderTargetView()
+{
+	// 텍스처 설명자 설정
+	D3D11_TEXTURE2D_DESC texDesc = {};
+	texDesc.Width = static_cast<UINT>(GAME->GetGameDesc().width);
+	texDesc.Height = static_cast<UINT>(GAME->GetGameDesc().height);
+	texDesc.MipLevels = 1;
+	texDesc.ArraySize = 1;
+	texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	texDesc.SampleDesc.Count = 1;
+	texDesc.Usage = D3D11_USAGE_DEFAULT;
+	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+	// 텍스처 생성
+	HRESULT hr = DEVICE->CreateTexture2D(&texDesc, nullptr, _renderTargetTexture.GetAddressOf());
+	assert(SUCCEEDED(hr));
+
+	// RTV 생성
+	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+	rtvDesc.Format = texDesc.Format;
+	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+	hr = DEVICE->CreateRenderTargetView(_renderTargetTexture.Get(), &rtvDesc, &_renderTargetView);
+	assert(SUCCEEDED(hr));
+
+	// SRV 생성
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Format = texDesc.Format;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+	hr = DEVICE->CreateShaderResourceView(_renderTargetTexture.Get(), &srvDesc, &_shaderResourceView);
 	assert(SUCCEEDED(hr));
 }
 
