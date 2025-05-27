@@ -14,6 +14,7 @@
     <ClCompile Include="UI\AssetBrowser.cpp" />
     <ClCompile Include="UI\UIComponentBase.cpp" />
     <ClCompile Include="UI\DirectXScene.cpp" />
+    <ClCompile Include="UI\VisualSequenceGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\Main.h" />
@@ -23,5 +24,6 @@
     <ClInclude Include="UI\AssetBrowser.h" />
     <ClInclude Include="UI\UIComponentBase.h" />
     <ClInclude Include="UI\DirectXScene.h" />
+    <ClInclude Include="UI\VisualSequenceGraph.h" />
   </ItemGroup>
 </Project>

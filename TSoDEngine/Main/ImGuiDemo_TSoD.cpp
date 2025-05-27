@@ -13,6 +13,7 @@
 #include "../UI/UIComponentBase.h"
 #include "../UI/AssetBrowser.h"
 #include "../UI/DirectXScene.h"
+#include "../UI/VisualSequenceGraph.h"
 
 void ImGuiDemo_TSoD::Init()
 {
@@ -93,6 +94,9 @@ void ImGuiDemo_TSoD::Init()
 
 	std::shared_ptr<AssetBrowser> assetBrowser = std::make_shared<AssetBrowser>();
 	_uiComponents.push_back(assetBrowser);
+
+	std::shared_ptr<VisualSequenceGraph> vsg = std::make_shared<VisualSequenceGraph>();
+	_uiComponents.push_back(vsg);
 }
 
 void ImGuiDemo_TSoD::Update()
@@ -107,6 +111,8 @@ void ImGuiDemo_TSoD::Update()
 
 		RENDER->UploadLightDesc(lightDesc);
 	}
+
+	// TODO : Transform 테스트 해볼까요
 
 	switch (selected)
 	{
@@ -198,7 +204,7 @@ void ImGuiDemo_TSoD::CreateTank()
 
 	_tank = std::make_shared<SceneObject>();
 	_tank->GetOrAddTransform()->SetPosition(Vec3(0, 0, 50));
-	_tank->GetOrAddTransform()->SetScale(Vec3(1.f));
+	_tank->GetOrAddTransform()->SetScale(Vec3(5.f));
 
 	_tank->AddComponent(std::make_shared<ModelRenderer>(_shader));
 	{

@@ -11,6 +11,9 @@ public:
 	virtual void Render() {}
 
 protected:
+	virtual void Draw() abstract;
+
+protected:
 	std::string _title = "";
 	bool _isVisible = true;
 };

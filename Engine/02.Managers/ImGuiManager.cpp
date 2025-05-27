@@ -14,8 +14,12 @@ void ImGuiManager::Init()
 	io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\CascadiaCode.ttf", 14.0f);
 
 	// Setup Dear ImGui style
-	ImGui::StyleColorsDark();
+	//ImGui::StyleColorsDark();
 	//ImGui::StyleColorsLight();
+	ImGui::StyleColorsClassic();
+
+	ImGuiStyle& style = ImGui::GetStyle();
+	style.FrameBorderSize = 1.0f;
 
 	// Setup Platform/Renderer backends
 	ImGui_ImplWin32_Init(GAME->GetGameDesc().hWnd);
