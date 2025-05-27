@@ -153,7 +153,24 @@ void ImGuiDemo_TSoD::Render()
 
 void ImGuiDemo_TSoD::ImGuiRender()
 {
-	CreateDockSpace();
+	ImGui::DockSpaceOverViewport();
+
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("View"))
+		{
+			ImGui::MenuItem("Demo Window", "", &show_demo_window);
+			ImGui::Separator();
+
+			for (auto uiComponent : _uiComponents)
+			{
+				ImGui::MenuItem(uiComponent->GetTitle().c_str(), "", uiComponent->IsVisible());
+			}
+
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+	}
 
 	ConstructUI();
 
@@ -214,7 +231,6 @@ void ImGuiDemo_TSoD::CreateTank()
 
 void ImGuiDemo_TSoD::ConstructUI()
 {
-	// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
 	if (show_demo_window)
 	{
 		ImGui::ShowDemoWindow(&show_demo_window);
@@ -286,45 +302,3 @@ void ImGuiDemo_TSoD::ConstructUI()
 	}
 }
 
-void ImGuiDemo_TSoD::CreateDockSpace()
-{
-	ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-	
-	const ImGuiViewport* viewport = ImGui::GetMainViewport();
-	ImGui::SetNextWindowPos(viewport->WorkPos);
-	ImGui::SetNextWindowSize(viewport->WorkSize);
-	ImGui::SetNextWindowViewport(viewport->ID);
-	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-	window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-	window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-	window_flags |= ImGuiWindowFlags_NoBackground;
-
-	bool p_open = true;
-	ImGui::Begin("DockSpaceDemo", &p_open, window_flags);
-
-	ImGui::PopStyleVar(2);
-	ImGuiIO& io = ImGui::GetIO();
-
-	ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
-	if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
-	{
-		ImGuiID dockspace_id = ImGui::GetID("DockSpace");
-		ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
-	}
-
-	if (ImGui::BeginMenuBar())
-	{
-		if (ImGui::BeginMenu("View"))
-		{
-			ImGui::MenuItem("Setting Window", NULL, &show_setting_window);
-			ImGui::MenuItem("Show Demo Window", NULL, &show_demo_window);
-			ImGui::MenuItem("Show Detail Window", NULL, &show_detail_window);
-			ImGui::EndMenu();
-		}
-
-		ImGui::EndMenuBar();
-	}
-
-	ImGui::End();
-}

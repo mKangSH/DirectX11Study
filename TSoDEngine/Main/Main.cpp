@@ -12,7 +12,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	desc.hWnd = NULL;
 	desc.width = 1920;
 	desc.height = 1080;
-	desc.clearColor = DirectX::Colors::Black;
+	desc.clearColor = DirectX::Colors::Gray;
 	desc.app = std::make_shared<ImGuiDemo_TSoD>();
 
 	GAME->Run(desc);

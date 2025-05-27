@@ -11,6 +11,7 @@
 #include <array>
 #include <vector>
 #include <list>
+#include <queue>
 #include <map>
 #include <unordered_map>
 #include <string>
@@ -20,6 +21,7 @@
 #include <windows.h>
 #include <assert.h>
 #include <optional>
+#include <shellapi.h>
 
 // DirectX
 #include <d3d11.h>

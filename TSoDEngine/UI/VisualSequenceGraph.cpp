@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "VisualSequenceGraph.h"
 
-VisualSequenceGraph::VisualSequenceGraph()
+VisualSequenceGraph::VisualSequenceGraph() : Super()
 {
+    _title = "Visual Sequence Graph";
 }
 
 VisualSequenceGraph::~VisualSequenceGraph()
@@ -24,7 +25,7 @@ void VisualSequenceGraph::Render()
 
 void VisualSequenceGraph::Draw()
 {
-	ImGui::Begin("Visual Sequence Graph");
+	ImGui::Begin("Visual Sequence Graph", &_isVisible);
 
     ImGui::Checkbox("Enable grid", &_optEnableGrid);
     ImGui::Checkbox("Enable context menu", &_optEnableContextMenu);

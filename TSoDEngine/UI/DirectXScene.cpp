@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "DirectXScene.h"
 
-DirectXScene::DirectXScene()
+DirectXScene::DirectXScene() : Super()
 {
+	_title = "DirectX Scene";
 }
 
 DirectXScene::~DirectXScene()
@@ -24,7 +25,7 @@ void DirectXScene::Render()
 
 void DirectXScene::Draw()
 {
-	ImGui::Begin("Dx11 Scene");
+	ImGui::Begin("DirectX Scene", &_isVisible);
 
 	ImVec2 sceneRegionMin = ImGui::GetWindowContentRegionMin();
 	ImVec2 sceneRegionMax = ImGui::GetWindowContentRegionMax();
@@ -40,17 +41,9 @@ void DirectXScene::Draw()
 		ImGuiIO& io = ImGui::GetIO();
 
 		ImGuiKey start_key = ImGuiKey_NamedKey_BEGIN;
-		struct funcs
-		{
-			static bool IsLegacyNativeDupe(ImGuiKey)
-			{
-				return false;
-			}
-		};
-
 		for (ImGuiKey key = start_key; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1))
 		{
-			if (funcs::IsLegacyNativeDupe(key) || ImGui::IsKeyPressed(key) == false)
+			if (ImGui::IsKeyPressed(key) == false)
 			{
 				continue;
 			}

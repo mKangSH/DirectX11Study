@@ -13,6 +13,10 @@ public:
 protected:
 	virtual void Draw() abstract;
 
+public:
+	std::string GetTitle() { return _title; }
+	bool* IsVisible() { return &_isVisible; }
+
 protected:
 	std::string _title = "";
 	bool _isVisible = true;

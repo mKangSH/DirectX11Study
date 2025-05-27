@@ -17,6 +17,8 @@ WPARAM Game::Run(GameDesc& desc)
 	{
 		return FALSE;
 	}
+
+	DragAcceptFiles(_desc.hWnd, TRUE);
 	
 	GRAPHICS->Init(_desc.hWnd);
 	TIME->Init();
@@ -25,8 +27,7 @@ WPARAM Game::Run(GameDesc& desc)
 
 	_desc.app->Init();
 
-	MSG msg = { 0 };
-
+	MSG msg = { 0 }; 
 	while (msg.message != WM_QUIT)
 	{
 		if (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -100,14 +101,31 @@ LRESULT CALLBACK Game::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM 
 					return 0;
 				}
 
-				uint32 width = (UINT)LOWORD(lParam);
-				uint32 height = (UINT)HIWORD(lParam);
-
-				if (width == 0 || height == 0)
-				{
-					return 0;
-				}
+				GAME->GetGameDesc().width = static_cast<float>(LOWORD(lParam));
+				GAME->GetGameDesc().height = static_cast<float>(HIWORD(lParam));
 			}
+			break;
+
+		case WM_DROPFILES: 
+			{
+				UINT count = DragQueryFile((HDROP)wParam, 0xFFFFFFFF, NULL, 0);
+				
+				ImGuiIO& io = ImGui::GetIO();
+				
+				ImGuiID guiId = io.MouseHoveredViewport;
+				std::wstring dataBuffer = L"";
+				for (UINT i = 0; i < count; i++)
+				{
+					UINT nLength = DragQueryFile((HDROP)wParam, i, NULL, 0);
+					std::wstring buffer;
+					buffer.reserve(nLength + 1);
+
+					DragQueryFile((HDROP)wParam, i, buffer.data(), nLength + 1);
+
+					dataBuffer.append(buffer.data());
+				}
+
+			} 
 			break;
 
 		case WM_CLOSE:
@@ -134,4 +152,6 @@ void Game::Update()
 	GUI->Render();
 
 	GRAPHICS->RenderEnd();
+
+	GRAPHICS->UIResize();
 }

@@ -4,7 +4,7 @@
 
 AssetBrowser::AssetBrowser() : Super()
 {
-    _title = "AssetBrowser";
+    _title = "Asset Browser";
 }
 
 AssetBrowser::~AssetBrowser()
@@ -26,7 +26,7 @@ void AssetBrowser::Render()
 
 void AssetBrowser::Draw()
 {
-    ImGui::Begin(_title.c_str());
+    ImGui::Begin(_title.c_str(), &_isVisible);
 
     // Menu bar
     if (ImGui::BeginMenuBar())

@@ -31,14 +31,33 @@ void Graphics::RenderBegin()
 
 void Graphics::UIRenderBegin()
 {
-	_deviceContext->OMSetRenderTargets(1, _uiRenderTargetView.GetAddressOf(), _depthStencilView.Get());
-	_deviceContext->ClearRenderTargetView(_uiRenderTargetView.Get(), GAME->GetGameDesc().clearColor);
+	_deviceContext->OMSetRenderTargets(1, _uiRenderTargetView.GetAddressOf(), nullptr);
+	_deviceContext->ClearRenderTargetView(_uiRenderTargetView.Get(), DirectX::Colors::Black);
 }
 
 void Graphics::RenderEnd()
 {
 	HRESULT hr = _swapChain->Present(1, 0);
 	assert(SUCCEEDED(hr));
+}
+
+void Graphics::UIResize()
+{
+	float width = GAME->GetGameDesc().width;
+	float height = GAME->GetGameDesc().height;
+	if (_viewport.Width != width || _viewport.Height != height)
+	{
+		_uiRenderTargetView = nullptr;
+		_swapChain->ResizeBuffers(0, GAME->GetGameDesc().width, GAME->GetGameDesc().height, DXGI_FORMAT_UNKNOWN, 0);
+
+		ID3D11Texture2D* pBackBuffer;
+		_swapChain->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer));
+		DEVICE->CreateRenderTargetView(pBackBuffer, nullptr, &_uiRenderTargetView);
+		pBackBuffer->Release();
+
+		_viewport.Width = width;
+		_viewport.Height = height;
+	}
 }
 
 void Graphics::CreateDeviceAndSwapChain()
@@ -55,6 +74,7 @@ void Graphics::CreateDeviceAndSwapChain()
 		desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		desc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 		desc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+		desc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 		desc.SampleDesc.Count = 1;
 		desc.SampleDesc.Quality = 0;

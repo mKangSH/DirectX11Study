@@ -13,7 +13,6 @@ public:
 	void CreateTank();
 
 	void ConstructUI();
-	void CreateDockSpace();
 	
 private:
 	std::shared_ptr<Shader> _shader;
