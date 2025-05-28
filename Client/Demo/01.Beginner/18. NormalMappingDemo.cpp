@@ -11,9 +11,9 @@
 
 void NormalMappingDemo::Init()
 {
-	RESOURCES->Init(L"..\\Resources\\");
+	RESOURCES->Init(L"");
 
-	_shader = std::make_shared<Shader>(L"01.Beginner\\14. NormalMapping.fx");
+	_shader = std::make_shared<Shader>(L"..\\Shaders\\01.Beginner\\14. NormalMapping.fx");
 	RENDER->Init(_shader);
 
 	// Material
@@ -23,11 +23,11 @@ void NormalMappingDemo::Init()
 			material->SetShader(_shader);
 		}
 		{
-			std::shared_ptr<Texture> texture = RESOURCES->Load<Texture>(L"Background", L"Textures\\Background.png");
+			std::shared_ptr<Texture> texture = RESOURCES->Load<Texture>(L"Background", L"..\\Resources\\Textures\\Background.png");
 			material->SetDiffuseMap(texture);
 		}
 		{
-			std::shared_ptr<Texture> texture = RESOURCES->Load<Texture>(L"BlueIceNormal", L"Textures\\BlueIce_Normal.jpg");
+			std::shared_ptr<Texture> texture = RESOURCES->Load<Texture>(L"BlueIceNormal", L"..\\Resources\\Textures\\BlueIce_Normal.jpg");
 			material->SetNormalMap(texture);
 		}
 

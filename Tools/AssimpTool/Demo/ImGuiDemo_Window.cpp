@@ -14,7 +14,7 @@
 void ImGuiDemo_Window::Init()
 {
 	RESOURCES->Init(L"");
-	_shader = std::make_shared<Shader>(L"02.Intermediate\\15. ModelDemo.fx");
+	_shader = std::make_shared<Shader>(L"..\\..\\Shaders\\02.Intermediate\\15. ModelDemo.fx");
 	RENDER->Init(_shader);
 
 	// Material
@@ -344,7 +344,7 @@ void ImGuiDemo_Window::CreateDX11Scene()
 		}
 	}
 		
-	ComPtr<ID3D11ShaderResourceView> test = GUI->GetShaderResourceView();
+	ComPtr<ID3D11ShaderResourceView> test = GRAPHICS->GetShaderResourceView();
 
 	ImGui::Image((ImTextureID)test.Get(), ImVec2(GAME->GetGameDesc().width, GAME->GetGameDesc().height));
 	
