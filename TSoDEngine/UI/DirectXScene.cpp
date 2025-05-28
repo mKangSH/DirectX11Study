@@ -87,7 +87,7 @@ void DirectXScene::Draw()
 
 	ComPtr<ID3D11ShaderResourceView> test = GRAPHICS->GetShaderResourceView();
 
-	ImGui::Image((ImTextureID)test.Get(), ImVec2(GAME->GetGameDesc().width, GAME->GetGameDesc().height));
+	ImGui::Image((ImTextureID)test.Get(), ImGui::GetContentRegionAvail());
 
 	ImGui::End();
 }

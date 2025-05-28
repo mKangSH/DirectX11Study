@@ -124,7 +124,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\Include\;$(ProjectDir)99.Header\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\Include\;$(ProjectDir)99.Header;$(ProjectDir)98.Utils\ImGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -153,7 +153,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\Include\;$(ProjectDir)99.Header\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\Include\;$(ProjectDir)99.Header\;$(ProjectDir)98.Utils\ImGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -192,6 +192,12 @@
     <ClInclude Include="04.Component\MeshRenderer.h" />
     <ClInclude Include="04.Component\MonoBehaviour.h" />
     <ClInclude Include="04.Component\Transform.h" />
+    <ClInclude Include="98.Utils\ImGUINodeEditor\crude_json.h" />
+    <ClInclude Include="98.Utils\ImGUINodeEditor\imgui_bezier_math.h" />
+    <ClInclude Include="98.Utils\ImGUINodeEditor\imgui_canvas.h" />
+    <ClInclude Include="98.Utils\ImGUINodeEditor\imgui_extra_math.h" />
+    <ClInclude Include="98.Utils\ImGUINodeEditor\imgui_node_editor.h" />
+    <ClInclude Include="98.Utils\ImGUINodeEditor\imgui_node_editor_internal.h" />
     <ClInclude Include="98.Utils\ImGUI\imconfig.h" />
     <ClInclude Include="98.Utils\ImGUI\imgui.h" />
     <ClInclude Include="98.Utils\ImGUI\imgui_impl_dx11.h" />
@@ -240,6 +246,18 @@
     <ClCompile Include="04.Component\MeshRenderer.cpp" />
     <ClCompile Include="04.Component\MonoBehaviour.cpp" />
     <ClCompile Include="04.Component\Transform.cpp" />
+    <ClCompile Include="98.Utils\ImGUINodeEditor\crude_json.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="98.Utils\ImGUINodeEditor\imgui_canvas.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="98.Utils\ImGUINodeEditor\imgui_node_editor.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="98.Utils\ImGUINodeEditor\imgui_node_editor_api.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="98.Utils\ImGUI\imgui.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -298,6 +316,10 @@
     <ClCompile Include="02.Managers\ImGuiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="98.Utils\ImGUINodeEditor\imgui_bezier_math.inl" />
+    <None Include="98.Utils\ImGUINodeEditor\imgui_extra_math.inl" />
+    <None Include="98.Utils\ImGUINodeEditor\imgui_node_editor_internal.inl" />
+    <None Include="98.Utils\ImGUINodeEditor\LICENSE" />
     <None Include="98.Utils\SimpleMath.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

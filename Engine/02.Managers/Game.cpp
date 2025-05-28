@@ -17,8 +17,6 @@ WPARAM Game::Run(GameDesc& desc)
 	{
 		return FALSE;
 	}
-
-	DragAcceptFiles(_desc.hWnd, TRUE);
 	
 	GRAPHICS->Init(_desc.hWnd);
 	TIME->Init();
@@ -105,29 +103,6 @@ LRESULT CALLBACK Game::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM 
 				GAME->GetGameDesc().height = static_cast<float>(HIWORD(lParam));
 			}
 			break;
-
-		case WM_DROPFILES: 
-			{
-				UINT count = DragQueryFile((HDROP)wParam, 0xFFFFFFFF, NULL, 0);
-				
-				ImGuiIO& io = ImGui::GetIO();
-				
-				ImGuiID guiId = io.MouseHoveredViewport;
-				std::wstring dataBuffer = L"";
-				for (UINT i = 0; i < count; i++)
-				{
-					UINT nLength = DragQueryFile((HDROP)wParam, i, NULL, 0);
-					std::wstring buffer;
-					buffer.reserve(nLength + 1);
-
-					DragQueryFile((HDROP)wParam, i, buffer.data(), nLength + 1);
-
-					dataBuffer.append(buffer.data());
-				}
-
-			} 
-			break;
-
 		case WM_CLOSE:
 		case WM_DESTROY:
 			PostQuitMessage(0);

@@ -1,6 +1,13 @@
 #pragma once
 #include "UIComponentBase.h"
 
+struct LinkInfo
+{
+	ax::NodeEditor::LinkId Id;
+	ax::NodeEditor::PinId  InputId;
+	ax::NodeEditor::PinId  OutputId;
+};
+
 class VisualSequenceGraph : public UIComponentBase
 {
 	using Super = UIComponentBase;
@@ -22,5 +29,10 @@ private:
 	bool _optEnableGrid = true;
 	bool _optEnableContextMenu = true;
 	bool _addingLine = false;
+
+	ax::NodeEditor::EditorContext* _editorContext = nullptr;
+
+	ImVector<LinkInfo>   m_Links;
+	int                  m_NextLinkId = 100;
 };
 

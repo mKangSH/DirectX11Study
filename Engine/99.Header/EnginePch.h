@@ -48,6 +48,7 @@ using namespace Microsoft::WRL;
 #include "../98.Utils/ImGUI/imgui.h"
 #include "../98.Utils/ImGUI/imgui_impl_dx11.h"
 #include "../98.Utils/ImGUI/imgui_impl_win32.h"
+#include "../98.Utils/ImGUINodeEditor/imgui_node_editor.h"
 
 // Libs
 #pragma comment(lib, "d3d11.lib")
