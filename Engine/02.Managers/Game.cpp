@@ -42,7 +42,6 @@ WPARAM Game::Run(GameDesc& desc)
 	return msg.wParam;
 }
 
-
 ATOM Game::MyRegisterClass()
 {
 	WNDCLASSEXW wcex;
@@ -107,6 +106,15 @@ LRESULT CALLBACK Game::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM 
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			break;
+		case WM_DPICHANGED:
+			if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_DpiEnableScaleViewports)
+			{
+				//const int dpi = HIWORD(wParam);
+				//printf("WM_DPICHANGED to %d (%.0f%%)\n", dpi, (float)dpi / 96.0f * 100.0f);
+				const RECT* suggested_rect = (RECT*)lParam;
+				::SetWindowPos(handle, nullptr, suggested_rect->left, suggested_rect->top, suggested_rect->right - suggested_rect->left, suggested_rect->bottom - suggested_rect->top, SWP_NOZORDER | SWP_NOACTIVATE);
+			}
+			break;
 		default:
 			return ::DefWindowProc(handle, message, wParam, lParam);
 	}
@@ -128,5 +136,6 @@ void Game::Update()
 
 	GRAPHICS->RenderEnd();
 
+	GRAPHICS->MainRenderResize();
 	GRAPHICS->UIResize();
 }

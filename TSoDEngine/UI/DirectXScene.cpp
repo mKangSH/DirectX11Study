@@ -27,13 +27,14 @@ void DirectXScene::Draw()
 {
 	ImGui::Begin("DirectX Scene", &_isVisible);
 
-	ImVec2 sceneRegionMin = ImGui::GetWindowContentRegionMin();
-	ImVec2 sceneRegionMax = ImGui::GetWindowContentRegionMax();
-
-	if ((sceneRegionMax.x - sceneRegionMin.x != GAME->GetGameDesc().width) &&
-		(sceneRegionMax.y - sceneRegionMin.y != GAME->GetGameDesc().height))
+	ImVec2 size = ImGui::GetContentRegionAvail();
+	if ((size.x != GRAPHICS->GetSceneTextureWidth()) || (size.y != GRAPHICS->GetSceneTextureHeight()))
 	{
 		// Resize the ImGui window to match the game window size
+		if(size.x < GAME->GetGameDesc().width && size.y < GAME->GetGameDesc().height)
+		{
+			GRAPHICS->SetSceneTextureSize(static_cast<UINT>(size.x), static_cast<UINT>(size.y));
+		}
 	}
 
 	if (ImGui::IsWindowFocused())
@@ -87,7 +88,7 @@ void DirectXScene::Draw()
 
 	ComPtr<ID3D11ShaderResourceView> test = GRAPHICS->GetShaderResourceView();
 
-	ImGui::Image((ImTextureID)test.Get(), ImGui::GetContentRegionAvail());
+	ImGui::Image((ImTextureID)test.Get(), size);
 
 	ImGui::End();
 }

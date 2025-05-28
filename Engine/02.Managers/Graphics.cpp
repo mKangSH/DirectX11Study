@@ -5,6 +5,9 @@ void Graphics::Init(HWND hwnd)
 {
 	_hwnd = hwnd;
 
+	_sceneTextureWidth = GAME->GetGameDesc().width;
+	_sceneTextureHeight = GAME->GetGameDesc().height;
+
 	// 1. Create Device and SwapChain
 	CreateDeviceAndSwapChain();
 
@@ -57,6 +60,25 @@ void Graphics::UIResize()
 
 		_viewport.Width = width;
 		_viewport.Height = height;
+	}
+}
+
+void Graphics::MainRenderResize()
+{
+	if (_resizeFlag)
+	{
+		_resizeFlag = false;
+
+		// Resize the ImGui window to match the game window size
+		_renderTargetTexture = nullptr;
+		_renderTargetView = nullptr;
+		_shaderResourceView = nullptr;
+
+		_depthStencilBuffer = nullptr;
+		_depthStencilView = nullptr;
+
+		CreateRenderTargetView();
+		CreateDepthStencilView();
 	}
 }
 
@@ -120,8 +142,8 @@ void Graphics::CreateRenderTargetView()
 {
 	// 텍스처 설명자 설정
 	D3D11_TEXTURE2D_DESC texDesc = {};
-	texDesc.Width = static_cast<UINT>(GAME->GetGameDesc().width);
-	texDesc.Height = static_cast<UINT>(GAME->GetGameDesc().height);
+	texDesc.Width = static_cast<UINT>(_sceneTextureWidth);
+	texDesc.Height = static_cast<UINT>(_sceneTextureHeight);
 	texDesc.MipLevels = 1;
 	texDesc.ArraySize = 1;
 	texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -154,8 +176,8 @@ void Graphics::CreateDepthStencilView()
 	D3D11_TEXTURE2D_DESC depthStencilDesc;
 	ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
 	{
-		depthStencilDesc.Width = static_cast<uint32>(GAME->GetGameDesc().width);
-		depthStencilDesc.Height = static_cast<uint32>(GAME->GetGameDesc().height);
+		depthStencilDesc.Width = static_cast<uint32>(_sceneTextureWidth);
+		depthStencilDesc.Height = static_cast<uint32>(_sceneTextureHeight);
 		depthStencilDesc.MipLevels = 1;
 		depthStencilDesc.ArraySize = 1;
 		depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;

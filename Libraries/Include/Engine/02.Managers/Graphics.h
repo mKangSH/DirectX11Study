@@ -15,6 +15,17 @@ public:
 	ComPtr<ID3D11ShaderResourceView> GetShaderResourceView() { return _shaderResourceView; }
 
 	void UIResize();
+	void MainRenderResize();
+
+	UINT GetSceneTextureWidth() const { return _sceneTextureWidth; }
+	UINT GetSceneTextureHeight() const { return _sceneTextureHeight; }
+
+	void SetSceneTextureSize(UINT width, UINT height)
+	{
+		_sceneTextureWidth = width;
+		_sceneTextureHeight = height;
+		_resizeFlag = true;
+	}
 
 private:
 	void CreateDeviceAndSwapChain();
@@ -25,6 +36,11 @@ private:
 
 private:
 	HWND _hwnd = nullptr;
+
+	UINT _sceneTextureWidth = 0; // Scene Texture Size
+	UINT _sceneTextureHeight = 0; // Scene Texture Size
+
+	bool _resizeFlag = false; // Resize Flag
 
 	// DirectX11 Device & SwapChain
 	ComPtr<ID3D11Device> _device = nullptr; // »ý¼º

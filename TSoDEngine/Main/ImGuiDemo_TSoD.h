@@ -11,8 +11,6 @@ public:
 	void CreateWolf();
 	void CreateTower();
 	void CreateTank();
-
-	void ConstructUI();
 	
 private:
 	std::shared_ptr<Shader> _shader;
@@ -23,13 +21,7 @@ private:
 	std::shared_ptr<SceneObject> _cube;
 	std::shared_ptr<SceneObject> _mainCamera;
 
-	std::vector<std::shared_ptr<class UIComponentBase>> _uiComponents;
-
-	bool show_setting_window = true;
-	bool show_demo_window = true;
-	bool show_detail_window = false;
-
-	int selected = -1;
+	std::shared_ptr<class LayoutManager> _layoutManager = nullptr;
 
 	Vec4 clear_color = Vec4(0.f);
 };

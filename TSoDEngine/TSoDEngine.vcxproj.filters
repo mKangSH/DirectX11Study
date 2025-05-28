@@ -15,6 +15,7 @@
     <ClCompile Include="UI\UIComponentBase.cpp" />
     <ClCompile Include="UI\DirectXScene.cpp" />
     <ClCompile Include="UI\VisualSequenceGraph.cpp" />
+    <ClCompile Include="Manager\LayoutManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\Main.h" />
@@ -25,5 +26,6 @@
     <ClInclude Include="UI\UIComponentBase.h" />
     <ClInclude Include="UI\DirectXScene.h" />
     <ClInclude Include="UI\VisualSequenceGraph.h" />
+    <ClInclude Include="Manager\LayoutManager.h" />
   </ItemGroup>
 </Project>

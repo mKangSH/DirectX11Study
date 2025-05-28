@@ -26,50 +26,50 @@ void CameraScript::KeyboardScript(const float& deltaTime)
 {
 	Vec3 pos = _cameraTransform->GetPosition();
 
-	if (INPUT->GetButton(KEY_TYPE::A))
+	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_A))
 	{
 		pos -= _cameraTransform->GetRight() * 3.f * deltaTime;
 	}
 
-	if (INPUT->GetButton(KEY_TYPE::D))
+	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_D))
 	{
 		pos += _cameraTransform->GetRight() * 3.f * deltaTime;
 	}
 
-	if (INPUT->GetButton(KEY_TYPE::W))
+	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_W))
 	{
 		pos += _cameraTransform->GetLook() * 3.f * deltaTime;
 	}
 
-	if (INPUT->GetButton(KEY_TYPE::S))
+	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_S))
 	{
 		pos -= _cameraTransform->GetLook() * 3.f * deltaTime;
 	}
 
 	_cameraTransform->SetPosition(pos);
 
-	if (INPUT->GetButton(KEY_TYPE::Q))
+	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Q))
 	{
 		Vec3 rotation = _cameraTransform->GetRotation();
 		rotation.x += deltaTime * 0.5f;
 		_cameraTransform->SetRotation(rotation);
 	}
 
-	if (INPUT->GetButton(KEY_TYPE::E))
+	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_E))
 	{
 		Vec3 rotation = _cameraTransform->GetRotation();
 		rotation.x -= deltaTime * 0.5f;
 		_cameraTransform->SetRotation(rotation);
 	}
 
-	if (INPUT->GetButton(KEY_TYPE::C))
+	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_C))
 	{
 		Vec3 rotation = _cameraTransform->GetRotation();
 		rotation.y += deltaTime * 0.5f;
 		_cameraTransform->SetRotation(rotation);
 	}
 
-	if (INPUT->GetButton(KEY_TYPE::Z))
+	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Z))
 	{
 		Vec3 rotation = _cameraTransform->GetRotation();
 		rotation.y -= deltaTime * 0.5f;

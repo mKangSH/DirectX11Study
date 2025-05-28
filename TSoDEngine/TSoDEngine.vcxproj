@@ -151,6 +151,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Manager\LayoutManager.cpp" />
     <ClCompile Include="UI\DirectXScene.cpp" />
     <ClCompile Include="UI\AssetBrowser.cpp" />
     <ClCompile Include="Main\Camera\CameraScript.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="UI\VisualSequenceGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Manager\LayoutManager.h" />
     <ClInclude Include="UI\DirectXScene.h" />
     <ClInclude Include="UI\AssetBrowser.h" />
     <ClInclude Include="Main\Camera\CameraScript.h" />
