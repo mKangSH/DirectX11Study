@@ -55,6 +55,19 @@ void AssimpToolDemo::Init()
 
 		// CustomData (File) -> Memory
 	}
+
+	{
+		std::shared_ptr<Converter> converter = std::make_shared<Converter>();
+
+		// FBX -> Memory
+		converter->ReadAssetFile(L"Kachujin/mesh.fbx");
+
+		// Memory -> CustomData (File)
+		converter->ExportMaterialData(L"Kachujin/Kachujin");
+		converter->ExportModelData(L"Kachujin/Kachujin");
+
+		// CustomData (File) -> Memory
+	}
 }
 
 void AssimpToolDemo::Update()

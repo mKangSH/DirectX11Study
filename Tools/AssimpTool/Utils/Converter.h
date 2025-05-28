@@ -14,12 +14,15 @@ public:
 private:
 	void ReadModelData(aiNode* node, int32 index, int32 parentIndex );
 	void ReadMeshData(aiNode* node, int32 bone);
+	void ReadSkinData();
 	void WriteModelFile(std::wstring finalPath);
 
 private:
 	void ReadMaterialData();
 	void WriteMaterialData(std::wstring finalPath);
 	std::string WriteTexture(std::string saveFolder, std::string file);
+
+	uint32 GetBoneIndex(const std::string& name) const;
 
 private:
 	std::wstring _assetPath = L"../../Resources/Assets/";

@@ -39,8 +39,46 @@ void Converter::ReadAssetFile(const std::wstring& path)
 
 void Converter::ExportModelData(const std::wstring& savePath)
 {
-	std::wstring finalPath = _modelPath + savePath + L".mesh";
+	using namespace std;
+
+	wstring finalPath = _modelPath + savePath + L".mesh";
 	ReadModelData(_scene->mRootNode, -1, -1);
+	ReadSkinData();
+
+	//Write CSV File
+	{
+		FILE* file;
+		::fopen_s(&file, "../Vertices.csv", "w");
+
+		for (shared_ptr<asBone>& bone : _bones)
+		{
+			string name = bone->name;
+			::fprintf(file, "%d,%s\n", bone->index, bone->name.c_str());
+		}
+
+		::fprintf(file, "\n");
+
+		for (shared_ptr<asMesh>& mesh : _meshes)
+		{
+			string name = mesh->name;
+			::printf("%s\n", name.c_str());
+
+			for (UINT i = 0; i < mesh->vertices.size(); i++)
+			{
+				Vec3 p = mesh->vertices[i].position;
+				Vec4 indices = mesh->vertices[i].blendIndices;
+				Vec4 weights = mesh->vertices[i].blendWeights;
+
+				::fprintf(file, "%f,%f,%f,", p.x, p.y, p.z);
+				::fprintf(file, "%f,%f,%f,%f,", indices.x, indices.y, indices.z, indices.w);
+				::fprintf(file, "%f,%f,%f,%f\n", weights.x, weights.y, weights.z, weights.w);
+			}
+		}
+
+		::fclose(file);
+	}
+
+
 	WriteModelFile(finalPath);
 }
 
@@ -137,6 +175,48 @@ void Converter::ReadMeshData(aiNode* node, int32 bone)
 	}
 
 	_meshes.push_back(mesh);
+}
+
+void Converter::ReadSkinData()
+{
+	using namespace std;
+	for (uint32 i = 0; i < _scene->mNumMeshes; i++)
+	{
+		const aiMesh* srcMesh = _scene->mMeshes[i];
+		if (srcMesh->HasBones() == false)
+		{
+			continue;
+		}
+
+		shared_ptr<asMesh> mesh = _meshes[i];
+
+		vector<asBoneWeights> tempVertexBoneWeights;
+		tempVertexBoneWeights.resize(mesh->vertices.size());
+
+		// Bone을 순회하면서 VertexId, Weight를 찾아서 기록
+		for (uint32 j = 0; j < srcMesh->mNumBones; j++)
+		{
+			const aiBone* srcMeshBone = srcMesh->mBones[j];
+			uint32 boneIndex = GetBoneIndex(srcMeshBone->mName.C_Str());
+
+			for(uint32 w = 0; w < srcMeshBone->mNumWeights; w++)
+			{
+				uint32 index = srcMeshBone->mWeights[w].mVertexId;
+				float weight = srcMeshBone->mWeights[w].mWeight;
+				tempVertexBoneWeights[index].AddWeights(boneIndex, weight);
+			}
+		}
+
+		// 최종 결과 계산
+		for (uint32 v = 0; v < tempVertexBoneWeights.size(); v++)
+		{
+			tempVertexBoneWeights[v].Normalize();
+
+			asBlendWeight blendWeight = tempVertexBoneWeights[v].GetBlendWeight();
+			mesh->vertices[v].blendIndices = blendWeight.indices;
+			mesh->vertices[v].blendWeights = blendWeight.weights;
+		}
+	}
 }
 
 void Converter::WriteModelFile(std::wstring finalPath)
@@ -367,4 +447,17 @@ std::string Converter::WriteTexture(std::string saveFolder, std::string file)
 	}
 
 	return fileName;
+}
+
+uint32 Converter::GetBoneIndex(const std::string& name) const
+{
+	for(std::shared_ptr<asBone> bone : _bones)
+	{
+		if (bone->name == name)
+		{
+			return bone->index;
+		}
+	}
+
+	assert(false);
 }
