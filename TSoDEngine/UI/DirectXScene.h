@@ -14,5 +14,9 @@ public:
 
 private:
 	void Draw();
+
+private:
+	int _rasterizerState;
+	int _topology;
 };
 

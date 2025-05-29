@@ -25,8 +25,42 @@ void DirectXScene::Render()
 
 void DirectXScene::Draw()
 {
-	ImGui::Begin("DirectX Scene", &_isVisible);
+	ImGuiColorEditFlags base_flags = ImGuiColorEditFlags_None;
 
+	D3D11_PRIMITIVE_TOPOLOGY topology;
+	DEVICECONTEXT->IAGetPrimitiveTopology(&topology);
+
+	_topology = topology;
+	_rasterizerState = static_cast<int>(RENDER->GetRasterizerState());
+
+	ImGui::Begin("DirectX Scene", &_isVisible, ImGuiWindowFlags_MenuBar);
+
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::BeginTable("Scene Tool Bar", 3))
+		{
+			ImGui::TableNextColumn();
+
+			ImGui::RadioButton("SOLID", &_rasterizerState, static_cast<int>(RasterizerType::SOLID));
+			ImGui::RadioButton("WIREFRAME", &_rasterizerState, static_cast<int>(RasterizerType::WIREFRAME));
+			ImGui::RadioButton("SOLID_RED", &_rasterizerState, static_cast<int>(RasterizerType::SOLID_RED));
+			ImGui::RadioButton("WIREFRAME_RED", &_rasterizerState, static_cast<int>(RasterizerType::WIREFRAME_RED));
+
+			ImGui::TableNextColumn();
+
+			ImGui::RadioButton("UNDEFINED", &_topology, D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_UNDEFINED);
+			ImGui::RadioButton("POINTLIST", &_topology, D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+			
+			ImGui::TableNextColumn();
+
+			ImGui::Text("Background Color");
+			ImGui::ColorEdit4("BG Color Picker", (float*)(&GAME->GetGameDesc().clearColor), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | base_flags);
+			ImGui::EndTable();
+		}
+
+		ImGui::EndMenuBar();
+	}
+	
 	ImVec2 size = ImGui::GetContentRegionAvail();
 	if ((size.x != GRAPHICS->GetSceneTextureWidth()) || (size.y != GRAPHICS->GetSceneTextureHeight()))
 	{
@@ -37,54 +71,8 @@ void DirectXScene::Draw()
 		}
 	}
 
-	if (ImGui::IsWindowFocused())
-	{
-		ImGuiIO& io = ImGui::GetIO();
-
-		ImGuiKey start_key = ImGuiKey_NamedKey_BEGIN;
-		for (ImGuiKey key = start_key; key < ImGuiKey_NamedKey_END; key = (ImGuiKey)(key + 1))
-		{
-			if (ImGui::IsKeyPressed(key) == false)
-			{
-				continue;
-			}
-
-			if (key == ImGuiKey::ImGuiKey_Tab)
-			{
-				if (RENDER->GetRasterizerState() == RasterizerType::SOLID)
-				{
-					RENDER->SetRasterizerState(RasterizerType::WIREFRAME);
-				}
-				else if (RENDER->GetRasterizerState() == RasterizerType::WIREFRAME)
-				{
-					RENDER->SetRasterizerState(RasterizerType::SOLID_RED);
-				}
-				else if (RENDER->GetRasterizerState() == RasterizerType::SOLID_RED)
-				{
-					RENDER->SetRasterizerState(RasterizerType::WIREFRAME_RED);
-				}
-				else if (RENDER->GetRasterizerState() == RasterizerType::WIREFRAME_RED)
-				{
-					RENDER->SetRasterizerState(RasterizerType::SOLID);
-				}
-			}
-
-			if (key == ImGuiKey::ImGuiKey_LeftShift)
-			{
-				D3D11_PRIMITIVE_TOPOLOGY topology;
-				DEVICECONTEXT->IAGetPrimitiveTopology(&topology);
-				if (topology == D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_UNDEFINED)
-				{
-					topology = D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
-				}
-				else if (topology == D3D11_PRIMITIVE_TOPOLOGY_POINTLIST)
-				{
-					topology = D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_UNDEFINED;
-				}
-				DEVICECONTEXT->IASetPrimitiveTopology(topology);
-			}
-		}
-	}
+	DEVICECONTEXT->IASetPrimitiveTopology(static_cast<D3D11_PRIMITIVE_TOPOLOGY>(_topology));
+	RENDER->SetRasterizerState(static_cast<RasterizerType>(_rasterizerState));
 
 	ComPtr<ID3D11ShaderResourceView> test = GRAPHICS->GetShaderResourceView();
 

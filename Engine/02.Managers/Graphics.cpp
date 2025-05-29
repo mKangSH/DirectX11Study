@@ -27,7 +27,7 @@ void Graphics::Init(HWND hwnd)
 void Graphics::RenderBegin()
 {
 	_deviceContext->OMSetRenderTargets(1, _renderTargetView.GetAddressOf(), _depthStencilView.Get());
-	_deviceContext->ClearRenderTargetView(_renderTargetView.Get(), GAME->GetGameDesc().clearColor);
+	_deviceContext->ClearRenderTargetView(_renderTargetView.Get(), (float*)(&GAME->GetGameDesc().clearColor));
 	_deviceContext->ClearDepthStencilView(_depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	_deviceContext->RSSetViewports(1, &_viewport);
 }

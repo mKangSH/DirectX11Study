@@ -26,7 +26,7 @@ void AssetBrowser::Render()
 
 void AssetBrowser::Draw()
 {
-    ImGui::Begin(_title.c_str(), &_isVisible);
+    ImGui::Begin(_title.c_str(), &_isVisible, ImGuiWindowFlags_MenuBar);
 
     // Menu bar
     if (ImGui::BeginMenuBar())

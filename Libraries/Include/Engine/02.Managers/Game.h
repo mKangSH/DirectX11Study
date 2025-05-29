@@ -10,7 +10,7 @@ struct GameDesc
 	float height = 1080.0f;
 	bool vsync = false;
 	bool windowed = true;
-	Color clearColor = DirectX::Colors::Black;
+	Vec4 clearColor = Vec4(0.0f, 0.0f, 0.0f, 255.0f);
 };
 
 class Game
