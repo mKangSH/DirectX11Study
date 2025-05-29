@@ -89,6 +89,15 @@ void Converter::ExportMaterialData(const std::wstring& savePath)
 	WriteMaterialData(finalPath);
 }
 
+void Converter::ExportAnimationData(const std::wstring& savePath, uint32 index)
+{
+	std::wstring finalPath = _modelPath + savePath + L".clip";
+	assert(index < _scene->mNumAnimations);
+
+	std::shared_ptr<asAnimation> animation = ReadAnimationData(_scene->mAnimations[index]);
+	WriteAnimationFile(animation, finalPath);
+}
+
 void Converter::ReadModelData(aiNode* node, int32 index, int32 parentIndex)
 {
 	std::shared_ptr<asBone> bone = std::make_shared<asBone>();
@@ -260,6 +269,164 @@ void Converter::WriteModelFile(std::wstring finalPath)
 	}
 }
 
+std::shared_ptr<asAnimation> Converter::ReadAnimationData(const aiAnimation* srcAnimation)
+{
+	std::shared_ptr<asAnimation> animation = std::make_shared<asAnimation>();
+	animation->name = srcAnimation->mName.C_Str();
+	animation->frameRate = static_cast<float>(srcAnimation->mTicksPerSecond);
+	animation->frameCount = static_cast<uint32>(srcAnimation->mDuration + 1);
+
+	std::map<std::string, std::shared_ptr<asAnimationNode>> cacheAnimNode;
+
+	for(uint32 i = 0; i < srcAnimation->mNumChannels; i++)
+	{
+		aiNodeAnim* srcNode = srcAnimation->mChannels[i];
+
+		// Animation Node Parsing
+		std::shared_ptr<asAnimationNode> node = ParseAnimationNode(animation, srcNode);
+
+		animation->duration = max(animation->duration, node->keyframe.back().time);
+
+		cacheAnimNode[srcNode->mNodeName.C_Str()] = node;
+	}
+
+	ReadKeyframeData(animation, _scene->mRootNode, cacheAnimNode);
+
+	return animation;
+}
+
+std::shared_ptr<asAnimationNode> Converter::ParseAnimationNode(std::shared_ptr<asAnimation> animation, aiNodeAnim* srcNode)
+{
+	std::shared_ptr<asAnimationNode> node = std::make_shared<asAnimationNode>();
+	node->name = srcNode->mNodeName.C_Str();
+	
+	uint32 keyCount = max(max(srcNode->mNumPositionKeys, srcNode->mNumScalingKeys), srcNode->mNumRotationKeys);
+	for(uint32 k = 0; k < keyCount; k++)
+	{
+		asKeyframeData frameData;
+
+		bool found = false;
+		uint32 t = node->keyframe.size();
+
+		// Position
+		if (::fabsf(static_cast<float>(srcNode->mPositionKeys[k].mTime) - static_cast<float>(t)) <= 0.0001f)
+		{
+			aiVectorKey key = srcNode->mPositionKeys[k];
+			frameData.time = static_cast<float>(key.mTime);
+			::memcpy_s(&frameData.translation, sizeof(Vec3), &key.mValue, sizeof(aiVector3D));
+
+			found = true;
+		}
+
+		// Rotation
+		if (::fabsf(static_cast<float>(srcNode->mRotationKeys[k].mTime) - static_cast<float>(t)) <= 0.0001f)
+		{
+			aiQuatKey key = srcNode->mRotationKeys[k];
+			frameData.time = static_cast<float>(key.mTime);
+
+			frameData.rotation.x = key.mValue.x;
+			frameData.rotation.y = key.mValue.y;
+			frameData.rotation.z = key.mValue.z;
+			frameData.rotation.w = key.mValue.w;
+
+			found = true;
+		}
+
+		// Scaling
+		if (::fabsf(static_cast<float>(srcNode->mScalingKeys[k].mTime) - static_cast<float>(t)) <= 0.0001f)
+		{
+			aiVectorKey key = srcNode->mScalingKeys[k];
+			frameData.time = static_cast<float>(key.mTime);
+			::memcpy_s(&frameData.scale, sizeof(Vec3), &key.mValue, sizeof(aiVector3D));
+
+			found = true;
+		}
+
+		if (found)
+		{
+			node->keyframe.push_back(frameData);
+		}
+	}
+
+	if (node->keyframe.size() < animation->frameCount)
+	{
+		// Fill the rest of the keyframes with the last frame data
+		asKeyframeData lastFrame = node->keyframe.back();
+		for (uint32 t = node->keyframe.size(); t < animation->frameCount; t++)
+		{
+			node->keyframe.push_back(lastFrame);
+			node->keyframe.back().time = static_cast<float>(t);
+		}
+	}
+
+	return node;
+}
+
+void Converter::ReadKeyframeData(std::shared_ptr<asAnimation> animation, aiNode* srcNode, std::map<std::string, std::shared_ptr<asAnimationNode>>& cache)
+{
+	std::shared_ptr<asKeyframe> keyframe = std::make_shared<asKeyframe>();
+	keyframe->boneName = srcNode->mName.C_Str();
+
+	std::shared_ptr<asAnimationNode> findNode = cache[srcNode->mName.C_Str()];
+	keyframe->transforms.reserve(animation->frameCount);
+
+	for(uint32 i = 0; i < animation->frameCount; i++)
+	{
+		asKeyframeData frameData;
+		frameData.time = static_cast<float>(i);
+		if (findNode)
+		{
+			frameData = findNode->keyframe[i];
+		}
+		else
+		{
+			Matrix transform(srcNode->mTransformation[0]);
+			transform = transform.Transpose(); // Assimp uses right-handed, we need left-handed
+			frameData.time = static_cast<float>(i);
+			transform.Decompose(OUT frameData.scale, OUT frameData.rotation, OUT frameData.translation);
+		}
+
+		keyframe->transforms.push_back(frameData);
+	}
+
+	animation->keyframes.push_back(keyframe);
+
+	for (uint32 i = 0; i < srcNode->mNumChildren; i++)
+	{
+		aiNode* childNode = srcNode->mChildren[i];
+		ReadKeyframeData(animation, childNode, cache);
+	}
+}
+
+void Converter::WriteAnimationFile(std::shared_ptr<asAnimation> animation, std::wstring finalPath)
+{
+	using namespace std;
+
+	filesystem::path path = filesystem::path(finalPath);
+	if (filesystem::exists(path.parent_path()) == false)
+	{
+		filesystem::create_directory(path.parent_path());
+	}
+
+	shared_ptr<FileUtils> file = make_shared<FileUtils>();
+	file->Open(finalPath, FileMode::Write);
+
+	// Bone Data
+	file->Write<std::string>(animation->name);
+	file->Write<float>(animation->duration);
+	file->Write<float>(animation->frameRate);
+	file->Write<uint32>(animation->frameCount);
+
+	file->Write<uint32>(animation->keyframes.size());
+
+	for (const shared_ptr<asKeyframe>& keyframe : animation->keyframes)
+	{
+		file->Write<std::string>(keyframe->boneName);
+		file->Write<uint32>(keyframe->transforms.size());
+		file->Write(keyframe->transforms.data(), sizeof(asKeyframeData) * keyframe->transforms.size());
+	}
+}
+
 void Converter::ReadMaterialData()
 {
 	for (uint32 i = 0; i < _scene->mNumMaterials; i++)
@@ -398,8 +565,8 @@ std::string Converter::WriteTexture(std::string saveFolder, std::string file)
 	const aiTexture* srcTexture = _scene->GetEmbeddedTexture(file.c_str());
 	if (srcTexture)
 	{
-		string pathStr = saveFolder + fileName;
-
+		string pathStr = (filesystem::path(saveFolder) / fileName).string();
+		
 		if (srcTexture->mHeight == 0)
 		{
 			shared_ptr<FileUtils> file = make_shared<FileUtils>();

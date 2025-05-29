@@ -1,6 +1,6 @@
 #pragma once
 
-class AssimpToolDemo : public IExecute
+class AssimpTool : public IExecute
 {
 public:
 	void Init() override;

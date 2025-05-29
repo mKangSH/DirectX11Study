@@ -1,5 +1,8 @@
 #pragma once
 
+class asAnimation;
+class asAnimationNode;
+
 class Converter
 {
 public:
@@ -10,12 +13,19 @@ public:
 	void ReadAssetFile(const std::wstring& path);
 	void ExportModelData(const std::wstring& savePath);
 	void ExportMaterialData(const std::wstring& savePath);
+	void ExportAnimationData(const std::wstring& savePath, uint32 index = 0);
 
 private:
 	void ReadModelData(aiNode* node, int32 index, int32 parentIndex );
 	void ReadMeshData(aiNode* node, int32 bone);
 	void ReadSkinData();
 	void WriteModelFile(std::wstring finalPath);
+
+private:
+	std::shared_ptr<asAnimation> ReadAnimationData(const aiAnimation* srcAnimation);
+	std::shared_ptr<asAnimationNode> ParseAnimationNode(std::shared_ptr<asAnimation> animation, aiNodeAnim* srcNode);
+	void ReadKeyframeData(std::shared_ptr<asAnimation> animation, aiNode* srcNode, std::map<std::string, std::shared_ptr<asAnimationNode>>& cache);
+	void WriteAnimationFile(std::shared_ptr<asAnimation> animation, std::wstring finalPath);
 
 private:
 	void ReadMaterialData();

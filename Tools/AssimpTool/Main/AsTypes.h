@@ -111,3 +111,33 @@ struct asBoneWeights
 		}
 	}
 };
+
+struct asKeyframeData
+{
+	float time;
+	Vec3 scale;
+	Quaternion rotation;
+	Vec3 translation;
+};
+
+struct asKeyframe
+{
+	std::string boneName;
+	std::vector<asKeyframeData> transforms;
+};
+
+struct asAnimation
+{
+	std::string name;
+	uint32 frameCount;
+	float frameRate;
+	float duration;
+	std::vector<std::shared_ptr<asKeyframe>> keyframes;
+};
+
+// Cache
+struct asAnimationNode
+{
+	std::string name;
+	std::vector<asKeyframeData> keyframe;
+};

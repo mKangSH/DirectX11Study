@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "AssimpToolDemo.h"
+#include "AssimpTool.h"
 #include "../Utils/Converter.h"
 
-void AssimpToolDemo::Init()
+void AssimpTool::Init()
 {
 	{
 		std::shared_ptr<Converter> converter = std::make_shared<Converter>();
@@ -68,12 +68,30 @@ void AssimpToolDemo::Init()
 
 		// CustomData (File) -> Memory
 	}
+	{
+		std::shared_ptr<Converter> converter = std::make_shared<Converter>();
+		// FBX -> Memory
+		converter->ReadAssetFile(L"Kachujin/Idle.fbx");
+		converter->ExportAnimationData(L"Kachujin/Idle");
+	}
+	{
+		std::shared_ptr<Converter> converter = std::make_shared<Converter>();
+		// FBX -> Memory
+		converter->ReadAssetFile(L"Kachujin/Run.fbx");
+		converter->ExportAnimationData(L"Kachujin/Run");
+	}
+	{
+		std::shared_ptr<Converter> converter = std::make_shared<Converter>();
+		// FBX -> Memory
+		converter->ReadAssetFile(L"Kachujin/Slash.fbx");
+		converter->ExportAnimationData(L"Kachujin/Slash");
+	}
 }
 
-void AssimpToolDemo::Update()
+void AssimpTool::Update()
 {
 }
 
-void AssimpToolDemo::Render()
+void AssimpTool::Render()
 {
 }
