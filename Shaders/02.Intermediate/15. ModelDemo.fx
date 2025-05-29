@@ -48,6 +48,15 @@ float4 PS(MeshOutput input) : SV_TARGET
     return color;
 }
 
+float4 PS_Mesh(MeshOutput input) : SV_TARGET
+{
+    ComputeNormalMapping(input.normal, input.tangent, input.uv);
+    float4 color = ComputeLight(input.normal, input.uv, input.worldPosition);
+    
+    //float4 color = DiffuseMap.Sample(LinearSampler, input.uv);
+    return color;
+}
+
 float4 PS_RED(MeshOutput input) : SV_TARGET
 {
     return float4(1, 0, 0, 1);
@@ -66,9 +75,9 @@ technique11 T0
 
 technique11 T1
 {
-    PASS_VP(P0, VS_Mesh, PS)
+    PASS_VP(P0, VS_Mesh, PS_Mesh)
 
-    PASS_RS_VP(P1, FillModeWireframe, VS_Mesh, PS)
+    PASS_RS_VP(P1, FillModeWireframe, VS_Mesh, PS_Mesh)
 
     PASS_VP(P2, VS_Mesh, PS_RED)
 
