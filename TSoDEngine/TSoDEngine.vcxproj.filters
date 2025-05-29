@@ -16,6 +16,7 @@
     <ClCompile Include="UI\DirectXScene.cpp" />
     <ClCompile Include="UI\VisualSequenceGraph.cpp" />
     <ClCompile Include="Manager\LayoutManager.cpp" />
+    <ClCompile Include="UI\GraphingCanvas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\Main.h" />
@@ -27,5 +28,6 @@
     <ClInclude Include="UI\DirectXScene.h" />
     <ClInclude Include="UI\VisualSequenceGraph.h" />
     <ClInclude Include="Manager\LayoutManager.h" />
+    <ClInclude Include="UI\GraphingCanvas.h" />
   </ItemGroup>
 </Project>

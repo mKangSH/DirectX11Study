@@ -4,6 +4,7 @@
 #include "../UI/AssetBrowser.h"
 #include "../UI/DirectXScene.h"
 #include "../UI/VisualSequenceGraph.h"
+#include "../UI/GraphingCanvas.h"
 
 void LayoutManager::Init()
 {
@@ -15,6 +16,9 @@ void LayoutManager::Init()
 
 	std::shared_ptr<VisualSequenceGraph> vsg = std::make_shared<VisualSequenceGraph>();
 	_uiComponents.push_back(vsg);
+
+	std::shared_ptr<GraphingCanvas> graphingCanvas = std::make_shared<GraphingCanvas>();
+	_uiComponents.push_back(graphingCanvas);
 }
 
 void LayoutManager::Update()
