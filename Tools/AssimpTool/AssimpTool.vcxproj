@@ -144,7 +144,7 @@
     <ClInclude Include="Demo\ImGuiDemo.h" />
     <ClInclude Include="Demo\ImGuiDemo_Window.h" />
     <ClInclude Include="Main\AsTypes.h" />
-    <ClInclude Include="Demo\AssimpToolDemo.h" />
+    <ClInclude Include="Demo\AssimpTool.h" />
     <ClInclude Include="Demo\StaticMeshDemo.h" />
     <ClInclude Include="Utils\Converter.h" />
     <ClInclude Include="Utils\CameraScript.h" />
@@ -155,7 +155,7 @@
     <ClCompile Include="Demo\ImGuiDemo.cpp" />
     <ClCompile Include="Demo\ImGuiDemo_Window.cpp" />
     <ClCompile Include="Main\AsTypes.cpp" />
-    <ClCompile Include="Demo\AssimpToolDemo.cpp" />
+    <ClCompile Include="Demo\AssimpTool.cpp" />
     <ClCompile Include="Demo\StaticMeshDemo.cpp" />
     <ClCompile Include="Utils\Converter.cpp" />
     <ClCompile Include="Utils\CameraScript.cpp" />
