@@ -99,6 +99,11 @@ void LayoutManager::ConstructUI()
 			{
 				selected = 4;
 			}
+
+			if (ImGui::Selectable("Kachujin", selected == 5))
+			{
+				selected = 5;
+			}
 			ImGui::TreePop();
 		}
 		ImGui::End();

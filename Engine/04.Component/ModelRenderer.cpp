@@ -81,7 +81,7 @@ void ModelRenderer::Update()
 		DEVICECONTEXT->IASetIndexBuffer(mesh->indexBuffer->GetBuffer().Get(), DXGI_FORMAT_R32_UINT, 0);
 
 		RasterizerType rasterizerType = RENDER->GetRasterizerState();
-		_shader->DrawIndexed(0, static_cast<UINT>(rasterizerType), mesh->indexBuffer->GetCount(), 0, 0);
+		_shader->DrawIndexed(1, static_cast<UINT>(rasterizerType), mesh->indexBuffer->GetCount(), 0, 0);
 	}
 }
 

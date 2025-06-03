@@ -28,22 +28,22 @@ void CameraScript::KeyboardScript(const float& deltaTime)
 
 	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_A))
 	{
-		pos -= _cameraTransform->GetRight() * 3.f * deltaTime;
+		pos -= _cameraTransform->GetRight() * _speed * deltaTime;
 	}
 
 	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_D))
 	{
-		pos += _cameraTransform->GetRight() * 3.f * deltaTime;
+		pos += _cameraTransform->GetRight() * _speed * deltaTime;
 	}
 
 	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_W))
 	{
-		pos += _cameraTransform->GetLook() * 3.f * deltaTime;
+		pos += _cameraTransform->GetLook() * _speed * deltaTime;
 	}
 
 	if (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_S))
 	{
-		pos -= _cameraTransform->GetLook() * 3.f * deltaTime;
+		pos -= _cameraTransform->GetLook() * _speed * deltaTime;
 	}
 
 	_cameraTransform->SetPosition(pos);
@@ -86,7 +86,7 @@ void CameraScript::MouseScript(const float& deltaTime)
 	{
 		Vec3 rotation = GetTransform()->GetRotation();
 		rotation.x += mouseDelta.y * 0.1f * deltaTime;
-		rotation.y += mouseDelta.x * 0.05f * deltaTime;
+		rotation.y += mouseDelta.x * 0.1f * deltaTime;
 		GetTransform()->SetRotation(rotation);
 	}
 

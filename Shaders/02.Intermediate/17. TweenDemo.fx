@@ -123,6 +123,20 @@ MeshOutput VS(VertexTextureNormalTangentBlend input)
     return output;
 }
 
+MeshOutput VS_Model(VertexTextureNormalTangent input)
+{
+    MeshOutput output;
+    output.position = mul(input.position, BoneTransforms[BoneIndex]);
+    output.position = mul(output.position, World);
+    output.worldPosition = output.position.xyz;
+    output.position = mul(output.position, ViewProjection);
+    output.uv = input.uv;
+    output.normal = mul(input.normal, (float3x3) World);
+    output.tangent = mul(input.tangent, (float3x3) World);
+    
+    return output;
+}
+
 MeshOutput VS_Mesh(VertexTextureNormalTangent input)
 {
     MeshOutput output;
@@ -171,6 +185,17 @@ technique11 T0
 };
 
 technique11 T1
+{
+    PASS_VP(P0, VS_Model, PS)
+
+    PASS_RS_VP(P1, FillModeWireframe, VS_Model, PS)
+
+    PASS_VP(P2, VS_Model, PS_RED)
+
+    PASS_RS_VP(P3, FillModeWireframe, VS_Model, PS_RED)
+};
+
+technique11 T2
 {
     PASS_VP(P0, VS_Mesh, PS_Mesh)
 

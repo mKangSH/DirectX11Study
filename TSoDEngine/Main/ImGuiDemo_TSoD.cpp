@@ -9,6 +9,7 @@
 #include "Engine/04.Component/Camera.h"
 #include "Engine/04.Component/MeshRenderer.h"
 #include "Engine/04.Component/ModelRenderer.h"
+#include "Engine/04.Component/ModelAnimator.h"
 #include "Camera/CameraScript.h"
 #include "../UI/UIComponentBase.h"
 #include "../Manager/LayoutManager.h"
@@ -16,7 +17,7 @@
 void ImGuiDemo_TSoD::Init()
 {
 	RESOURCES->Init(L"");
-	_shader = std::make_shared<Shader>(L"..\\Shaders\\02.Intermediate\\15. ModelDemo.fx");
+	_shader = std::make_shared<Shader>(L"..\\Shaders\\02.Intermediate\\17. TweenDemo.fx");
 	RENDER->Init(_shader);
 
 	// Material
@@ -86,6 +87,7 @@ void ImGuiDemo_TSoD::Init()
 	CreateWolf();
 	CreateTower();
 	CreateTank();
+	CreateKachujin();
 
 	_layoutManager = std::make_shared<LayoutManager>();
 	_layoutManager->Init();
@@ -131,6 +133,11 @@ void ImGuiDemo_TSoD::Update()
 		case 4:
 			{
 				_cube->Update();
+			}
+			break;
+		case 5:
+			{
+				_kachujin->Update();
 			}
 			break;
 	}
@@ -194,5 +201,25 @@ void ImGuiDemo_TSoD::CreateTank()
 	_tank->AddComponent(std::make_shared<ModelRenderer>(_shader));
 	{
 		_tank->GetModelRenderer()->SetModel(model);
+	}
+}
+
+void ImGuiDemo_TSoD::CreateKachujin()
+{
+	std::shared_ptr<Model> model = std::make_shared<Model>();
+	model->ReadModel(L"Kachujin/Kachujin");
+	model->ReadMaterial(L"Kachujin/Kachujin");
+	model->ReadAnimation(L"Kachujin/Idle");
+	model->ReadAnimation(L"Kachujin/Run");
+	model->ReadAnimation(L"Kachujin/Slash");
+
+	_kachujin = std::make_shared<SceneObject>();
+	_kachujin->GetOrAddTransform()->SetPosition(Vec3(0, 0, 50));
+	_kachujin->GetOrAddTransform()->SetScale(Vec3(0.1f));
+
+	_kachujin->AddComponent(std::make_shared<ModelAnimator>(_shader));
+	{
+		_kachujin->GetModelAnimator()->SetModel(model);
+		//_kachujin->GetModelAnimator()->SetPass(3);
 	}
 }

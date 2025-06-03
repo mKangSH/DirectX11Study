@@ -125,13 +125,15 @@ void Game::Update()
 	TIME->Update();
 	INPUT->Update();
 
+	GUI->Update();
+
 	GRAPHICS->RenderBegin();
 	_desc.app->Update();
 	_desc.app->Render();
 	
 	GRAPHICS->UIRenderBegin();
-	GUI->Update();
 	_desc.app->ImGuiRender();
+
 	GUI->Render();
 
 	GRAPHICS->RenderEnd();

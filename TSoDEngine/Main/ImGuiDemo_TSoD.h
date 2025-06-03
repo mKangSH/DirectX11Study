@@ -11,6 +11,7 @@ public:
 	void CreateWolf();
 	void CreateTower();
 	void CreateTank();
+	void CreateKachujin();
 	
 private:
 	std::shared_ptr<Shader> _shader;
@@ -18,6 +19,7 @@ private:
 	std::shared_ptr<SceneObject> _tower;
 	std::shared_ptr<SceneObject> _tank;
 	std::shared_ptr<SceneObject> _sphere;
+	std::shared_ptr<SceneObject> _kachujin;
 	std::shared_ptr<SceneObject> _cube;
 	std::shared_ptr<SceneObject> _mainCamera;
 
