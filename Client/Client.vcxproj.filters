@@ -214,5 +214,7 @@
     <FxCompile Include="..\Shaders\02.Intermediate\15. ModelDemo.fx">
       <Filter>Shaders\02.intermediate</Filter>
     </FxCompile>
+    <FxCompile Include="..\Shaders\02.Intermediate\16. AnimationDemo.fx" />
+    <FxCompile Include="..\Shaders\02.Intermediate\17. TweenDemo.fx" />
   </ItemGroup>
 </Project>

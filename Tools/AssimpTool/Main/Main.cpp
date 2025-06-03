@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Main.h"
-#include "../Demo/AssimpTool.h"
+#include "../Demo/TweenDemo.h"
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
@@ -12,7 +12,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	desc.width = 1920;
 	desc.height = 1080;
 	desc.clearColor = DirectX::Colors::Black;
-	desc.app = std::make_shared<AssimpTool>();
+	desc.app = std::make_shared<TweenDemo>();
 
 	GAME->Run(desc);
 
