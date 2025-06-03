@@ -141,8 +141,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Demo\AnimationDemo.h" />
     <ClInclude Include="Demo\ImGuiDemo.h" />
     <ClInclude Include="Demo\ImGuiDemo_Window.h" />
+    <ClInclude Include="Demo\TweenDemo.h" />
     <ClInclude Include="Main\AsTypes.h" />
     <ClInclude Include="Demo\AssimpTool.h" />
     <ClInclude Include="Demo\StaticMeshDemo.h" />
@@ -152,8 +154,10 @@
     <ClInclude Include="Main\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Demo\AnimationDemo.cpp" />
     <ClCompile Include="Demo\ImGuiDemo.cpp" />
     <ClCompile Include="Demo\ImGuiDemo_Window.cpp" />
+    <ClCompile Include="Demo\TweenDemo.cpp" />
     <ClCompile Include="Main\AsTypes.cpp" />
     <ClCompile Include="Demo\AssimpTool.cpp" />
     <ClCompile Include="Demo\StaticMeshDemo.cpp" />

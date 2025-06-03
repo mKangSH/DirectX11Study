@@ -228,6 +228,8 @@
     <ClInclude Include="00.Engine\Resource\Model\ModelMesh.h" />
     <ClInclude Include="04.Component\ModelRenderer.h" />
     <ClInclude Include="02.Managers\ImGuiManager.h" />
+    <ClInclude Include="00.Engine\Resource\Model\ModelAnimation.h" />
+    <ClInclude Include="04.Component\ModelAnimator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="00.Engine\Resource\Mesh.cpp" />
@@ -328,6 +330,8 @@
     <ClCompile Include="00.Engine\Resource\Model\ModelMesh.cpp" />
     <ClCompile Include="04.Component\ModelRenderer.cpp" />
     <ClCompile Include="02.Managers\ImGuiManager.cpp" />
+    <ClCompile Include="00.Engine\Resource\Model\ModelAnimation.cpp" />
+    <ClCompile Include="04.Component\ModelAnimator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="98.Utils\ImGUINodeEditor\imgui_bezier_math.inl" />

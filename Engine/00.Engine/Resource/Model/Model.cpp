@@ -6,6 +6,7 @@
 #include <filesystem>
 #include "../Material.h"
 #include "ModelMesh.h"
+#include "ModelAnimation.h"
 
 Model::Model()
 {
@@ -206,6 +207,44 @@ void Model::ReadModel(const std::wstring& fileName)
 	BindCacheInfo();
 }
 
+void Model::ReadAnimation(const std::wstring& fileName)
+{
+	using namespace std;
+
+	wstring fullPath = _modelPath + fileName + L".clip";
+
+	shared_ptr<FileUtils> file = make_shared<FileUtils>();
+	file->Open(fullPath, FileMode::Read);
+
+	shared_ptr<ModelAnimation> animation = make_shared<ModelAnimation>();
+
+	animation->name = Utils::ToWString(file->Read<string>());
+	animation->duration = file->Read<float>();
+	animation->frameRate = file->Read<float>();
+	animation->frameCount = file->Read<uint32>();
+
+	uint32 keyframeCount = file->Read<uint32>();
+
+	for (uint32 i = 0; i < keyframeCount; i++)
+	{
+		shared_ptr<ModelKeyframe> keyframe = make_shared<ModelKeyframe>();
+		keyframe->boneName = Utils::ToWString(file->Read<string>());
+
+		uint32 size = file->Read<uint32>();
+
+		if (size > 0)
+		{
+			keyframe->transforms.resize(size);
+			void* ptr = &keyframe->transforms[0];
+			file->Read(&ptr, sizeof(ModelKeyframeData) * size);
+		}
+
+		animation->keyframes[keyframe->boneName] = keyframe;
+	}
+
+	_animations.push_back(animation);
+}
+
 std::shared_ptr<Material> Model::GetMaterialByName(const std::wstring& name)
 {
 	for (auto& material : _materials)
@@ -239,6 +278,19 @@ std::shared_ptr<ModelBone> Model::GetBoneByName(const std::wstring& name)
 		if (bone->name == name)
 		{
 			return bone;
+		}
+	}
+
+	return nullptr;
+}
+
+std::shared_ptr<ModelAnimation> Model::GetAnimationByName(const std::wstring& name)
+{
+	for (auto& animation : _animations)
+	{
+		if (animation->name == name)
+		{
+			return animation;
 		}
 	}
 

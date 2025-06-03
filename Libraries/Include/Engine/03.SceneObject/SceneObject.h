@@ -7,7 +7,7 @@ class MonoBehaviour;
 class Camera;
 class MeshRenderer;
 class ModelRenderer;
-//class Animator;
+class ModelAnimator;
 
 class SceneObject : public std::enable_shared_from_this<SceneObject>
 {
@@ -26,7 +26,7 @@ public:
 	std::shared_ptr<Camera> GetCamera();
 	std::shared_ptr<MeshRenderer> GetMeshRenderer();
 	std::shared_ptr<ModelRenderer> GetModelRenderer();
-	//std::shared_ptr<Animator> GetAnimator();
+	std::shared_ptr<ModelAnimator> GetModelAnimator();
 
 	std::shared_ptr<Transform> GetOrAddTransform();
 	void AddComponent(std::shared_ptr<Component> component);

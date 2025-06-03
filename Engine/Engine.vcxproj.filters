@@ -131,6 +131,8 @@
     <ClInclude Include="98.Utils\ImGUI\imstb_truetype.h" />
     <ClInclude Include="98.Utils\ImGUI\imstb_rectpack.h" />
     <ClInclude Include="02.Managers\ImGuiManager.h" />
+    <ClInclude Include="00.Engine\Resource\Model\ModelAnimation.h" />
+    <ClInclude Include="04.Component\ModelAnimator.h" />
     <ClInclude Include="98.Utils\ImGUINodeEditor\imgui_bezier_math.h" />
     <ClInclude Include="98.Utils\ImGUINodeEditor\imgui_canvas.h" />
     <ClInclude Include="98.Utils\ImGUINodeEditor\imgui_extra_math.h" />
@@ -265,6 +267,8 @@
       <Filter>99.Header</Filter>
     </ClCompile>
     <ClCompile Include="02.Managers\ImGuiManager.cpp" />
+    <ClCompile Include="00.Engine\Resource\Model\ModelAnimation.cpp" />
+    <ClCompile Include="04.Component\ModelAnimator.cpp" />
     <ClCompile Include="98.Utils\ImGUINodeEditor\imgui_canvas.cpp" />
     <ClCompile Include="98.Utils\ImGUINodeEditor\imgui_node_editor.cpp" />
     <ClCompile Include="98.Utils\ImGUINodeEditor\imgui_node_editor_api.cpp" />
