@@ -25,6 +25,14 @@ void RenderManager::Init(std::shared_ptr<Shader> shader)
 	_boneBuffer = std::make_shared<ConstantBuffer<BoneDesc>>();
 	_boneBuffer->CreateBuffer();
 	_boneEffectBuffer = _shader->GetConstantBuffer("BoneBuffer");
+
+	_keyframeBuffer = std::make_shared<ConstantBuffer<KeyframeDesc>>();
+	_keyframeBuffer->CreateBuffer();
+	_keyframeEffectBuffer = _shader->GetConstantBuffer("KeyframeBuffer");
+
+	_tweenFrameBuffer = std::make_shared<ConstantBuffer<TweenFrameDesc>>();
+	_tweenFrameBuffer->CreateBuffer();
+	_tweenFrameEffectBuffer = _shader->GetConstantBuffer("TweenFrameBuffer");
 }
 
 void RenderManager::Update()
@@ -73,4 +81,20 @@ void RenderManager::UploadBoneDesc(const BoneDesc& desc)
 
 	_boneBuffer->UpdateBuffer(_boneDesc);
 	_boneEffectBuffer->SetConstantBuffer(_boneBuffer->GetConstantBuffer().Get());
+}
+
+void RenderManager::UploadKeyframeDesc(const KeyframeDesc& desc)
+{
+	_keyframeDesc = desc;
+
+	_keyframeBuffer->UpdateBuffer(_keyframeDesc);
+	_keyframeEffectBuffer->SetConstantBuffer(_keyframeBuffer->GetConstantBuffer().Get());
+}
+
+void RenderManager::UploadTweenFrameDesc(const TweenFrameDesc& desc)
+{
+	_tweenFrameDesc = desc;
+
+	_tweenFrameBuffer->UpdateBuffer(_tweenFrameDesc);
+	_tweenFrameEffectBuffer->SetConstantBuffer(_tweenFrameBuffer->GetConstantBuffer().Get());
 }

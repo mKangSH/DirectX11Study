@@ -4,8 +4,8 @@
 #include "../04.Component/MonoBehaviour.h"
 #include "../04.Component/Camera.h"
 #include "../04.Component/MeshRenderer.h"
-//#include "../04.Component/Animation/Animator.h"
 #include "../04.Component/ModelRenderer.h"
+#include "../04.Component/ModelAnimator.h"
 
 SceneObject::SceneObject()
 {
@@ -136,12 +136,12 @@ std::shared_ptr<ModelRenderer> SceneObject::GetModelRenderer()
 	std::shared_ptr<Component> component = GetFixedComponent(ComponentType::ModelRenderer);
 	return std::static_pointer_cast<ModelRenderer>(component);
 }
- 
-//std::shared_ptr<Animator> SceneObject::GetAnimator()
-//{
-//	std::shared_ptr<Component> component = GetFixedComponent(ComponentType::Animator);
-//	return std::static_pointer_cast<Animator>(component);
-//}
+
+std::shared_ptr<ModelAnimator> SceneObject::GetModelAnimator()
+{
+	std::shared_ptr<Component> component = GetFixedComponent(ComponentType::Animator);
+	return std::static_pointer_cast<ModelAnimator>(component);
+}
 
 std::shared_ptr<Transform> SceneObject::GetOrAddTransform()
 {
