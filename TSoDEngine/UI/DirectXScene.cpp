@@ -37,20 +37,20 @@ void DirectXScene::Draw()
 
 	if (ImGui::BeginMenuBar())
 	{
-		if (ImGui::BeginTable("Scene Tool Bar", 3))
+		if (ImGui::BeginTable("Scene Tool Bar", 7))
 		{
 			ImGui::TableNextColumn();
-
-			ImGui::RadioButton("SOLID", &_rasterizerState, static_cast<int>(RasterizerType::SOLID));
-			ImGui::RadioButton("WIREFRAME", &_rasterizerState, static_cast<int>(RasterizerType::WIREFRAME));
-			ImGui::RadioButton("SOLID_RED", &_rasterizerState, static_cast<int>(RasterizerType::SOLID_RED));
-			ImGui::RadioButton("WIREFRAME_RED", &_rasterizerState, static_cast<int>(RasterizerType::WIREFRAME_RED));
+			ImGui::Combo("Rasterizer", &_rasterizerState, _rasterizerType, IM_ARRAYSIZE(_rasterizerType));
 
 			ImGui::TableNextColumn();
+			ImGui::TableNextColumn();
 
-			ImGui::RadioButton("UNDEFINED", &_topology, D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_UNDEFINED);
-			ImGui::RadioButton("POINTLIST", &_topology, D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+			ImGui::Combo("Topology", &_topology, _primitiveType, IM_ARRAYSIZE(_primitiveType));
+
+			ImGui::TableNextColumn();
+			ImGui::TableNextColumn();
 			
+			ImGui::TableNextColumn();
 			ImGui::TableNextColumn();
 
 			ImGui::Text("Background Color");

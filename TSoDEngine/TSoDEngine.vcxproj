@@ -151,6 +151,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="UI\DataAnalysisGraph3D.cpp" />
     <ClCompile Include="UI\GraphingCanvas.cpp" />
     <ClCompile Include="Manager\LayoutManager.cpp" />
     <ClCompile Include="UI\DirectXScene.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="UI\VisualSequenceGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UI\DataAnalysisGraph3D.h" />
     <ClInclude Include="UI\GraphingCanvas.h" />
     <ClInclude Include="Manager\LayoutManager.h" />
     <ClInclude Include="UI\DirectXScene.h" />

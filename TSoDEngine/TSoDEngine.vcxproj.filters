@@ -17,6 +17,7 @@
     <ClCompile Include="UI\VisualSequenceGraph.cpp" />
     <ClCompile Include="Manager\LayoutManager.cpp" />
     <ClCompile Include="UI\GraphingCanvas.cpp" />
+    <ClCompile Include="UI\DataAnalysisGraph3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\Main.h" />
@@ -29,5 +30,6 @@
     <ClInclude Include="UI\VisualSequenceGraph.h" />
     <ClInclude Include="Manager\LayoutManager.h" />
     <ClInclude Include="UI\GraphingCanvas.h" />
+    <ClInclude Include="UI\DataAnalysisGraph3D.h" />
   </ItemGroup>
 </Project>

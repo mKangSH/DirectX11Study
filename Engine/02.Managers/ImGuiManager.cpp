@@ -6,6 +6,7 @@ void ImGuiManager::Init()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImPlot::CreateContext();
+	ImPlot3D::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
@@ -56,6 +57,7 @@ void ImGuiManager::Render()
 
 void ImGuiManager::Cleanup()
 {
+	ImPlot3D::DestroyContext();
 	ImPlot::DestroyContext();
 	ImGui::DestroyContext();
 }

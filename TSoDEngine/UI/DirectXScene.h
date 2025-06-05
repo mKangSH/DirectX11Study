@@ -16,7 +16,10 @@ private:
 	void Draw();
 
 private:
-	int _rasterizerState;
-	int _topology;
+	int _rasterizerState = 0;
+	int _topology = 0;
+
+	const char* _rasterizerType[4] = { "SOLID", "WIREFRAME", "SOLID_RED", "WIREFRAME_RED"};
+	const char* _primitiveType[2] = { "AUTO", "POINT LIST"};
 };
 

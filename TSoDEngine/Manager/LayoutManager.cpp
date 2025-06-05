@@ -5,6 +5,7 @@
 #include "../UI/DirectXScene.h"
 #include "../UI/VisualSequenceGraph.h"
 #include "../UI/GraphingCanvas.h"
+#include "../UI/DataAnalysisGraph3D.h"
 
 void LayoutManager::Init()
 {
@@ -19,6 +20,9 @@ void LayoutManager::Init()
 
 	std::shared_ptr<GraphingCanvas> graphingCanvas = std::make_shared<GraphingCanvas>();
 	_uiComponents.push_back(graphingCanvas);
+
+	std::shared_ptr<DataAnalysisGraph3D> dataAnalysisGraph3D = std::make_shared<DataAnalysisGraph3D>();
+	_uiComponents.push_back(dataAnalysisGraph3D);
 }
 
 void LayoutManager::Update()

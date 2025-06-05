@@ -50,6 +50,7 @@ using namespace Microsoft::WRL;
 #include "../98.Utils/ImGUI/imgui_impl_win32.h"
 #include "../98.Utils/ImGUINodeEditor/imgui_node_editor.h"
 #include "../98.Utils/ImPlot/implot.h"
+#include "../98.Utils/ImPlot3D/implot3d.h"
 
 // Libs
 #pragma comment(lib, "d3d11.lib")

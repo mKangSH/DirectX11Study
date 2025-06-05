@@ -364,3 +364,5 @@ FodyWeavers.xsd
 /Libraries/Lib/Engine/Engine_debug.idb
 /Libraries/Lib/Engine/Engine_debug.lib
 /Libraries/Lib/Engine/Engine.lib
+/TSoDEngine/Blueprints.json
+/TSoDEngine/imgui.ini
