@@ -85,6 +85,7 @@
     <FxCompile Include="..\Shaders\02.Intermediate\15. ModelDemo.fx" />
     <FxCompile Include="..\Shaders\02.Intermediate\16. AnimationDemo.fx" />
     <FxCompile Include="..\Shaders\02.Intermediate\17. TweenDemo.fx" />
+    <FxCompile Include="..\Shaders\02.Intermediate\18. SkyDemo.fx" />
     <FxCompile Include="..\Shaders\Common\00. Global.fx" />
     <FxCompile Include="..\Shaders\Common\00. Light.fx" />
   </ItemGroup>

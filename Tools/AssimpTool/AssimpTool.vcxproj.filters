@@ -27,6 +27,7 @@
     </ClCompile>
     <ClCompile Include="Demo\AnimationDemo.cpp" />
     <ClCompile Include="Demo\TweenDemo.cpp" />
+    <ClCompile Include="Demo\SkyDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Demo\AssimpTool.h">
@@ -55,6 +56,7 @@
     </ClInclude>
     <ClInclude Include="Demo\AnimationDemo.h" />
     <ClInclude Include="Demo\TweenDemo.h" />
+    <ClInclude Include="Demo\SkyDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Demo">
