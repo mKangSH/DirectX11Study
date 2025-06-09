@@ -22,11 +22,16 @@ public:
 	// Legacy
 	void SetShader(std::shared_ptr<Shader> shader) { }
 	void SetTexture(std::shared_ptr<Texture> texture) { }
+	void SetTechnique(uint8 value) { _technique = value; }
+	void SetPass(uint8 value) { _pass = value; }
 
 private:
 	// Mesh
 	std::shared_ptr<Mesh> _mesh = nullptr;
 	std::shared_ptr<Material> _material = nullptr;
+
+	uint8 _technique = 2;
+	uint8 _pass = 255;
 
 	// std::shared_ptr<Shader> _shader = nullptr;
 	// std::shared_ptr<Texture> _texture = nullptr;

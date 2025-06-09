@@ -123,8 +123,35 @@ MeshOutput VS(VertexTextureNormalTangentBlend input)
     output.worldPosition = output.position.xyz;
     output.position = mul(output.position, ViewProjection);
     output.uv = input.uv;
-    output.normal = mul(input.normal, (float3x3)World);
-    output.tangent = mul(input.tangent, (float3x3)World);
+    output.normal = mul(input.normal, (float3x3) World);
+    output.tangent = mul(input.tangent, (float3x3) World);
+    
+    return output;
+}
+
+MeshOutput VS_Model(VertexTextureNormalTangent input)
+{
+    MeshOutput output;
+    output.position = mul(input.position, BoneTransforms[BoneIndex]);
+    output.position = mul(output.position, World);
+    output.worldPosition = output.position.xyz;
+    output.position = mul(output.position, ViewProjection);
+    output.uv = input.uv;
+    output.normal = mul(input.normal, (float3x3) World);
+    output.tangent = mul(input.tangent, (float3x3) World);
+    
+    return output;
+}
+
+MeshOutput VS_Mesh(VertexTextureNormalTangent input)
+{
+    MeshOutput output;
+    output.position = mul(input.position, World);
+    output.worldPosition = output.position.xyz;
+    output.position = mul(output.position, ViewProjection);
+    output.uv = input.uv;
+    output.normal = mul(input.normal, (float3x3) World);
+    output.tangent = mul(input.tangent, (float3x3) World);
     
     return output;
 }
@@ -141,20 +168,6 @@ VS_OUT VS_Sky(VertexTextureNormalTangent input)
     output.position.z = clipPosition.w * 0.9999999f;
     
     output.uv = input.uv;
-    
-    return output;
-}
-
-
-MeshOutput VS_Mesh(VertexTextureNormalTangent input)
-{
-    MeshOutput output;
-    output.position = mul(input.position, World);
-    output.worldPosition = output.position.xyz;
-    output.position = mul(output.position, ViewProjection);
-    output.uv = input.uv;
-    output.normal = mul(input.normal, (float3x3) World);
-    output.tangent = mul(input.tangent, (float3x3) World);
     
     return output;
 }
@@ -177,15 +190,15 @@ float4 PS_Mesh(MeshOutput input) : SV_TARGET
     return color;
 }
 
+float4 PS_RED(MeshOutput input) : SV_TARGET
+{
+    return float4(1, 0, 0, 1);
+}
+
 float4 PS_Sky(VS_OUT input) : SV_TARGET
 {
     float4 color = DiffuseMap.Sample(LinearSampler, input.uv);
     return color;
-}
-
-float4 PS_RED(MeshOutput input) : SV_TARGET
-{
-    return float4(1, 0, 0, 1);
 }
 
 technique11 T0
@@ -201,17 +214,32 @@ technique11 T0
 
 technique11 T1
 {
-    //PASS_VP(P0, VS_Mesh, PS_Mesh)
-    pass P0
-    {
-        SetRasterizerState(FrontCounterClockwiseTrue);
-        SetVertexShader(CompileShader(vs_5_0, VS_Sky()));
-        SetPixelShader(CompileShader(ps_5_0, PS_Sky()));
-    }
+    PASS_VP(P0, VS_Model, PS)
+
+    PASS_RS_VP(P1, FillModeWireframe, VS_Model, PS)
+
+    PASS_VP(P2, VS_Model, PS_RED)
+
+    PASS_RS_VP(P3, FillModeWireframe, VS_Model, PS_RED)
+};
+
+technique11 T2
+{
+    PASS_VP(P0, VS_Mesh, PS_Mesh)
 
     PASS_RS_VP(P1, FillModeWireframe, VS_Mesh, PS_Mesh)
 
     PASS_VP(P2, VS_Mesh, PS_RED)
 
     PASS_RS_VP(P3, FillModeWireframe, VS_Mesh, PS_RED)
+};
+
+technique11 T3
+{
+    pass P0
+    {
+        SetRasterizerState(FrontCounterClockwiseTrue);
+        SetVertexShader(CompileShader(vs_5_0, VS_Sky()));
+        SetPixelShader(CompileShader(ps_5_0, PS_Sky()));
+    }
 };

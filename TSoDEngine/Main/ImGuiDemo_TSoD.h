@@ -21,6 +21,7 @@ private:
 	std::shared_ptr<SceneObject> _sphere;
 	std::shared_ptr<SceneObject> _kachujin;
 	std::shared_ptr<SceneObject> _cube;
+	std::shared_ptr<SceneObject> _sky;
 	std::shared_ptr<SceneObject> _mainCamera;
 
 	std::shared_ptr<class LayoutManager> _layoutManager = nullptr;

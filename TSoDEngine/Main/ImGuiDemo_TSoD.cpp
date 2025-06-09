@@ -17,7 +17,7 @@
 void ImGuiDemo_TSoD::Init()
 {
 	RESOURCES->Init(L"");
-	_shader = std::make_shared<Shader>(L"..\\Shaders\\02.Intermediate\\17. TweenDemo.fx");
+	_shader = std::make_shared<Shader>(L"..\\Shaders\\02.Intermediate\\18. SkyDemo.fx");
 	RENDER->Init(_shader);
 
 	// Material
@@ -42,6 +42,20 @@ void ImGuiDemo_TSoD::Init()
 		desc.emissive = Vec4(1.0f);
 
 		RESOURCES->Add(L"Background", material);
+	}
+	// Material
+	{
+		std::shared_ptr<Material> material = std::make_shared<Material>();
+		material->SetShader(_shader);
+		auto texture = RESOURCES->Load<Texture>(L"Sky", L"..\\Resources\\Textures\\Sky02.png");
+		material->SetDiffuseMap(texture);
+		MaterialDesc& desc = material->GetMaterialDesc();
+
+		desc.ambient = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		desc.diffuse = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		desc.specular = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+		RESOURCES->Add(L"Sky", material);
 	}
 
 	// Camera
@@ -83,6 +97,22 @@ void ImGuiDemo_TSoD::Init()
 		_cube->GetMeshRenderer()->SetMaterial(material);
 	}
 
+	{
+		_sky = std::make_shared<SceneObject>();
+		_sky->GetOrAddTransform();
+		_sky->AddComponent(std::make_shared<MeshRenderer>());
+		{
+			auto mesh = RESOURCES->Get<Mesh>(L"Cube");
+			_sky->GetMeshRenderer()->SetMesh(mesh);
+		}
+		{
+			auto material = RESOURCES->Get<Material>(L"Sky");
+			_sky->GetMeshRenderer()->SetMaterial(material);
+		}
+		_sky->GetMeshRenderer()->SetTechnique(3);
+		_sky->GetMeshRenderer()->SetPass(0);
+	}
+
 	// Object
 	CreateWolf();
 	CreateTower();
@@ -106,7 +136,7 @@ void ImGuiDemo_TSoD::Update()
 		RENDER->UploadLightDesc(lightDesc);
 	}
 
-	// TODO : Transform 테스트 해볼까요
+	_sky->Update();
 
 	switch (_layoutManager->GetSelected())
 	{
