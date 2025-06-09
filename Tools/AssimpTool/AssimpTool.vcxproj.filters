@@ -28,6 +28,7 @@
     <ClCompile Include="Demo\AnimationDemo.cpp" />
     <ClCompile Include="Demo\TweenDemo.cpp" />
     <ClCompile Include="Demo\ImGuiDemo_Window.cpp" />
+    <ClCompile Include="Demo\SkyDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Demo\AssimpTool.h">
@@ -57,6 +58,7 @@
     <ClInclude Include="Demo\AnimationDemo.h" />
     <ClInclude Include="Demo\TweenDemo.h" />
     <ClInclude Include="Demo\ImGuiDemo_Window.h" />
+    <ClInclude Include="Demo\SkyDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Demo">

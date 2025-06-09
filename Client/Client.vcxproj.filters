@@ -216,5 +216,6 @@
     </FxCompile>
     <FxCompile Include="..\Shaders\02.Intermediate\16. AnimationDemo.fx" />
     <FxCompile Include="..\Shaders\02.Intermediate\17. TweenDemo.fx" />
+    <FxCompile Include="..\Shaders\02.Intermediate\18. SkyDemo.fx" />
   </ItemGroup>
 </Project>
