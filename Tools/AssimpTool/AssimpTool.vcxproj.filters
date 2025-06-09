@@ -25,9 +25,15 @@
     <ClCompile Include="Demo\ImGuiDemo.cpp">
       <Filter>Demo</Filter>
     </ClCompile>
-    <ClCompile Include="Demo\AnimationDemo.cpp" />
-    <ClCompile Include="Demo\TweenDemo.cpp" />
-    <ClCompile Include="Demo\SkyDemo.cpp" />
+    <ClCompile Include="Demo\AnimationDemo.cpp">
+      <Filter>Demo</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo\SkyDemo.cpp">
+      <Filter>Demo</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo\TweenDemo.cpp">
+      <Filter>Demo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Demo\AssimpTool.h">
@@ -54,9 +60,15 @@
     <ClInclude Include="Demo\ImGuiDemo.h">
       <Filter>Demo</Filter>
     </ClInclude>
-    <ClInclude Include="Demo\AnimationDemo.h" />
-    <ClInclude Include="Demo\TweenDemo.h" />
-    <ClInclude Include="Demo\SkyDemo.h" />
+    <ClInclude Include="Demo\AnimationDemo.h">
+      <Filter>Demo</Filter>
+    </ClInclude>
+    <ClInclude Include="Demo\SkyDemo.h">
+      <Filter>Demo</Filter>
+    </ClInclude>
+    <ClInclude Include="Demo\TweenDemo.h">
+      <Filter>Demo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Demo">

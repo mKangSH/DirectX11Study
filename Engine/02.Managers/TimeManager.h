@@ -8,7 +8,7 @@ public:
 	void Init();
 	void Update();
 
-	uint64 GetFps() const { return _fps; }
+	float GetFps() const { return _fps; }
 	float GetDeltaTime() const { return _deltaTime; }
 
 private:
@@ -19,6 +19,6 @@ private:
 private:
 	uint64 _frameCount = 0;
 	float _frameTime = 0.0f;
-	uint64 _fps = 0;
+	float _fps = 0;
 };
 

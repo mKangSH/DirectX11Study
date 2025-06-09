@@ -33,6 +33,7 @@
     <ClInclude Include="Demo\01.Beginner\16. LightingDemo.h" />
     <ClInclude Include="Demo\01.Beginner\17. MaterialDemo.h" />
     <ClInclude Include="Demo\01.Beginner\18. NormalMappingDemo.h" />
+    <ClInclude Include="Demo\02.Intermediate\InstancingDemo.h" />
     <ClInclude Include="Main\Camera\CameraScript.h" />
     <ClInclude Include="Demo\00.Startup\02. QuadDemo.h" />
     <ClInclude Include="Demo\00.Startup\03. ConstBufferDemo.h" />
@@ -56,6 +57,7 @@
     <ClCompile Include="Demo\01.Beginner\16. LightingDemo.cpp" />
     <ClCompile Include="Demo\01.Beginner\17. MaterialDemo.cpp" />
     <ClCompile Include="Demo\01.Beginner\18. NormalMappingDemo.cpp" />
+    <ClCompile Include="Demo\02.Intermediate\InstancingDemo.cpp" />
     <ClCompile Include="Main\Camera\CameraScript.cpp" />
     <ClCompile Include="Demo\00.Startup\02. QuadDemo.cpp" />
     <ClCompile Include="Demo\00.Startup\03. ConstBufferDemo.cpp" />
@@ -86,6 +88,7 @@
     <FxCompile Include="..\Shaders\02.Intermediate\16. AnimationDemo.fx" />
     <FxCompile Include="..\Shaders\02.Intermediate\17. TweenDemo.fx" />
     <FxCompile Include="..\Shaders\02.Intermediate\18. SkyDemo.fx" />
+    <FxCompile Include="..\Shaders\02.Intermediate\19. InstancingDemo.fx" />
     <FxCompile Include="..\Shaders\Common\00. Global.fx" />
     <FxCompile Include="..\Shaders\Common\00. Light.fx" />
   </ItemGroup>

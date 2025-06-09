@@ -14,6 +14,11 @@ public:
 
 	void CreateBuffer(const std::vector<uint32>& indices);
 
+	void PushData()
+	{
+		DEVICECONTEXT->IASetIndexBuffer(_indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	}
+
 private:
 	ComPtr<ID3D11Device> _device = nullptr;
 	ComPtr<ID3D11Buffer> _indexBuffer = nullptr;

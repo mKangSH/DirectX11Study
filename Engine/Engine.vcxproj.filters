@@ -127,12 +127,24 @@
     <ClInclude Include="99.Header\Types.h">
       <Filter>99.Header</Filter>
     </ClInclude>
-    <ClInclude Include="98.Utils\ImGUI\imstb_textedit.h" />
-    <ClInclude Include="98.Utils\ImGUI\imstb_truetype.h" />
-    <ClInclude Include="98.Utils\ImGUI\imstb_rectpack.h" />
-    <ClInclude Include="02.Managers\ImGuiManager.h" />
-    <ClInclude Include="00.Engine\Resource\Model\ModelAnimation.h" />
-    <ClInclude Include="04.Component\ModelAnimator.h" />
+    <ClInclude Include="02.Managers\ImGuiManager.h">
+      <Filter>02.Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="04.Component\ModelAnimator.h">
+      <Filter>04.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="00.Engine\Resource\Model\ModelAnimation.h">
+      <Filter>00.Engine\Resource\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="98.Utils\ImGUI\imstb_truetype.h">
+      <Filter>98.Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="98.Utils\ImGUI\imstb_rectpack.h">
+      <Filter>98.Utils\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="98.Utils\ImGUI\imstb_textedit.h">
+      <Filter>98.Utils\ImGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="00.Engine\IExecute.cpp">
@@ -258,9 +270,15 @@
     <ClCompile Include="99.Header\pch.cpp">
       <Filter>99.Header</Filter>
     </ClCompile>
-    <ClCompile Include="02.Managers\ImGuiManager.cpp" />
-    <ClCompile Include="00.Engine\Resource\Model\ModelAnimation.cpp" />
-    <ClCompile Include="04.Component\ModelAnimator.cpp" />
+    <ClCompile Include="02.Managers\ImGuiManager.cpp">
+      <Filter>02.Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="04.Component\ModelAnimator.cpp">
+      <Filter>04.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="00.Engine\Resource\Model\ModelAnimation.cpp">
+      <Filter>00.Engine\Resource\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="00.Engine">

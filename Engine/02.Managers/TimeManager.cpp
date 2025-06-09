@@ -20,7 +20,7 @@ void TimeManager::Update()
 	
 	if (_frameTime >= 1.0f)
 	{
-		_fps = static_cast<uint64>(_frameCount / _frameTime);
+		_fps = ((float)_frameCount / _frameTime);
 
 		_frameTime = 0.0f;
 		_frameCount = 0;

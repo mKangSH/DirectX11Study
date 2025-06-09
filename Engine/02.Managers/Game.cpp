@@ -114,6 +114,9 @@ void Game::Update()
 	GUI->Update();
 	_desc.app->Update();
 	_desc.app->Render();
+
+	ImGui::Text("FPS : %f", TIME->GetFps());
+
 	GUI->Render();
 
 	GRAPHICS->RenderEnd();
