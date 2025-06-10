@@ -1,36 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Demo\00.Startup\01. TriangleDemo.h">
-      <Filter>Demo\00.Startup</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\00.Startup\02. QuadDemo.h">
-      <Filter>Demo\00.Startup</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\00.Startup\03. ConstBufferDemo.h">
-      <Filter>Demo\00.Startup</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\00.Startup\04. CameraDemo.h">
-      <Filter>Demo\00.Startup</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\00.Startup\05. TextureDemo.h">
-      <Filter>Demo\00.Startup</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\00.Startup\06. SamplerDemo.h">
-      <Filter>Demo\00.Startup</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\00.Startup\07. HeightMapDemo.h">
-      <Filter>Demo\00.Startup</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\00.Startup\08. NormalDemo.h">
-      <Filter>Demo\00.Startup</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\00.Startup\09. MeshDemo.h">
-      <Filter>Demo\00.Startup</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\01.Beginner\10. GlobalTestDemo.h">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClInclude>
     <ClInclude Include="Main\Camera\CameraScript.h">
       <Filter>Main\Camera</Filter>
     </ClInclude>
@@ -40,65 +10,14 @@
     <ClInclude Include="Main\pch.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="Demo\01.Beginner\11. DepthStencilDemo.h">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\01.Beginner\12. AmbientDemo.h">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\01.Beginner\13. DiffuseDemo.h">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\01.Beginner\14. SpecularDemo.h">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\01.Beginner\15. EmissiveDemo.h">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\01.Beginner\16. LightingDemo.h">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\01.Beginner\17. MaterialDemo.h">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo\01.Beginner\18. NormalMappingDemo.h">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClInclude>
     <ClInclude Include="Demo\02.Intermediate\InstancingDemo.h">
+      <Filter>Demo\02.Intermediate</Filter>
+    </ClInclude>
+    <ClInclude Include="Demo\02.Intermediate\MeshInstancingDemo.h">
       <Filter>Demo\02.Intermediate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Demo\00.Startup\01. TriangleDemo.cpp">
-      <Filter>Demo\00.Startup</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\00.Startup\02. QuadDemo.cpp">
-      <Filter>Demo\00.Startup</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\00.Startup\03. ConstBufferDemo.cpp">
-      <Filter>Demo\00.Startup</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\00.Startup\04. CameraDemo.cpp">
-      <Filter>Demo\00.Startup</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\00.Startup\05. TextureDemo.cpp">
-      <Filter>Demo\00.Startup</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\00.Startup\06. SamplerDemo.cpp">
-      <Filter>Demo\00.Startup</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\00.Startup\07. HeightMapDemo.cpp">
-      <Filter>Demo\00.Startup</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\00.Startup\08. NormalDemo.cpp">
-      <Filter>Demo\00.Startup</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\00.Startup\09. MeshDemo.cpp">
-      <Filter>Demo\00.Startup</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\01.Beginner\10. GlobalTestDemo.cpp">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClCompile>
     <ClCompile Include="Main\Camera\CameraScript.cpp">
       <Filter>Main\Camera</Filter>
     </ClCompile>
@@ -108,31 +27,10 @@
     <ClCompile Include="Main\pch.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Demo\01.Beginner\11. DepthStencilDemo.cpp">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\01.Beginner\12. AmbientDemo.cpp">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\01.Beginner\13. DiffuseDemo.cpp">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\01.Beginner\14. SpecularDemo.cpp">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\01.Beginner\15. EmissiveDemo.cpp">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\01.Beginner\16. LightingDemo.cpp">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\01.Beginner\17. MaterialDemo.cpp">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClCompile>
-    <ClCompile Include="Demo\01.Beginner\18. NormalMappingDemo.cpp">
-      <Filter>Demo\01.Beginner</Filter>
-    </ClCompile>
     <ClCompile Include="Demo\02.Intermediate\InstancingDemo.cpp">
+      <Filter>Demo\02.Intermediate</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo\02.Intermediate\MeshInstancingDemo.cpp">
       <Filter>Demo\02.Intermediate</Filter>
     </ClCompile>
   </ItemGroup>
@@ -143,12 +41,6 @@
     <Filter Include="Main">
       <UniqueIdentifier>{306afa96-8d12-40c1-924e-ee3fc6a36885}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Demo\00.Startup">
-      <UniqueIdentifier>{d59b0869-5839-4c6b-a688-7162f3dee215}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Demo\01.Beginner">
-      <UniqueIdentifier>{70771a8a-3791-4f3c-bd91-cafd3300368d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main\Camera">
       <UniqueIdentifier>{d1193bf5-feb6-4d47-ab60-0834e0d8afe1}</UniqueIdentifier>
     </Filter>
@@ -158,12 +50,6 @@
     <Filter Include="Shaders\Common">
       <UniqueIdentifier>{60d6e06a-47fb-4acb-86d8-db3551abddf6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\00.Startup">
-      <UniqueIdentifier>{12a3057d-abfc-4976-b7b5-253993906a86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\01.Beginner">
-      <UniqueIdentifier>{9eca2825-6f42-4d26-8234-048d2addc50f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders\02.intermediate">
       <UniqueIdentifier>{c18c0007-b6d6-4195-aa3d-7f7b72f3b7b1}</UniqueIdentifier>
     </Filter>
@@ -172,53 +58,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Shaders\00.Startup\03. ConstBuffer.fx">
-      <Filter>Shaders\00.Startup</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\00.Startup\04. Texture.fx">
-      <Filter>Shaders\00.Startup</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\00.Startup\05. Sampler.fx">
-      <Filter>Shaders\00.Startup</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\00.Startup\06. Terrain.fx">
-      <Filter>Shaders\00.Startup</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\00.Startup\07. Normal.fx">
-      <Filter>Shaders\00.Startup</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\00.Startup\01. Triangle.fx">
-      <Filter>Shaders\00.Startup</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\00.Startup\02. Quad.fx">
-      <Filter>Shaders\00.Startup</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\01.Beginner\08. GlobalTest.fx">
-      <Filter>Shaders\01.Beginner</Filter>
-    </FxCompile>
     <FxCompile Include="..\Shaders\Common\00. Global.fx">
       <Filter>Shaders\Common</Filter>
     </FxCompile>
-    <FxCompile Include="..\Shaders\01.Beginner\09. Lighting_Ambient.fx">
-      <Filter>Shaders\01.Beginner</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\01.Beginner\10. Lighting_Diffuse.fx">
-      <Filter>Shaders\01.Beginner</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\01.Beginner\11. Lighting_Specular.fx">
-      <Filter>Shaders\01.Beginner</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\01.Beginner\12. Lighting_Emissive.fx">
-      <Filter>Shaders\01.Beginner</Filter>
-    </FxCompile>
     <FxCompile Include="..\Shaders\Common\00. Light.fx">
       <Filter>Shaders\Common</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\01.Beginner\13. Lighting.fx">
-      <Filter>Shaders\01.Beginner</Filter>
-    </FxCompile>
-    <FxCompile Include="..\Shaders\01.Beginner\14. NormalMapping.fx">
-      <Filter>Shaders\01.Beginner</Filter>
     </FxCompile>
     <FxCompile Include="..\Shaders\02.Intermediate\15. ModelDemo.fx">
       <Filter>Shaders\02.intermediate</Filter>
@@ -233,6 +77,9 @@
       <Filter>Shaders\02.intermediate</Filter>
     </FxCompile>
     <FxCompile Include="..\Shaders\02.Intermediate\19. InstancingDemo.fx">
+      <Filter>Shaders\02.intermediate</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shaders\02.Intermediate\20. MeshInstancingDemo.fx">
       <Filter>Shaders\02.intermediate</Filter>
     </FxCompile>
   </ItemGroup>

@@ -14,7 +14,7 @@ MeshRenderer::~MeshRenderer()
 {
 }
 
-void MeshRenderer::Update()
+void MeshRenderer::RenderInstancing(std::shared_ptr<class InstancingBuffer>& buffer)
 {
 	if (_mesh == nullptr || _material == nullptr)
 	{
@@ -29,15 +29,14 @@ void MeshRenderer::Update()
 
 	_material->Update();
 
-	Matrix world = GetTransform()->GetWorldMatrix();
-	RENDER->UploadTransformDesc(TransformDesc(world));
+	_mesh->GetVertexBuffer()->PushData();
+	_mesh->GetIndexBuffer()->PushData();
 
-	uint32 stride = _mesh->GetVertexBuffer()->GetStride();
-	uint32 offset = _mesh->GetVertexBuffer()->GetOffset();
+	buffer->PushDataToGPU();
+	shader->DrawIndexedInstanced(1, _pass, _mesh->GetIndexBuffer()->GetCount(), buffer->GetCount());
+}
 
-	DEVICECONTEXT->IASetVertexBuffers(0, 1, _mesh->GetVertexBuffer()->GetBuffer().GetAddressOf(), &stride, &offset);
-	DEVICECONTEXT->IASetIndexBuffer(_mesh->GetIndexBuffer()->GetBuffer().Get(), DXGI_FORMAT_R32_UINT, 0);
-
-	RasterizerType rasterizerType = RENDER->GetRasterizerState();
-	shader->DrawIndexed(1, static_cast<UINT>(rasterizerType), _mesh->GetIndexBuffer()->GetCount(), 0, 0);
+const InstanceID MeshRenderer::GetInstanceID() const
+{
+	return std::make_pair((uint64)_mesh.get(), (uint64)_material.get());
 }

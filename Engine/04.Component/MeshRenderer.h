@@ -13,24 +13,20 @@ public:
 	MeshRenderer();
 	virtual ~MeshRenderer();
 
-	virtual void Update() override;
+public:
+	void RenderInstancing(std::shared_ptr<class InstancingBuffer>& buffer);
 
 public:
 	void SetMesh(std::shared_ptr<Mesh> mesh) { _mesh = mesh; }
 	void SetMaterial(std::shared_ptr<Material> material) { _material = material; }
+	void SetPass(uint8 pass) { _pass = pass; }
 
-	// Legacy
-	void SetShader(std::shared_ptr<Shader> shader) { }
-	void SetTexture(std::shared_ptr<Texture> texture) { }
+	const InstanceID GetInstanceID() const;
 
 private:
 	// Mesh
 	std::shared_ptr<Mesh> _mesh = nullptr;
 	std::shared_ptr<Material> _material = nullptr;
-
-	// std::shared_ptr<Shader> _shader = nullptr;
-	// std::shared_ptr<Texture> _texture = nullptr;
-
-	// ComPtr<ID3DX11EffectShaderResourceVariable> _textureVariable;
+	uint8 _pass = 0;
 };
 

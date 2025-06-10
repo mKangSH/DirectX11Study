@@ -145,6 +145,12 @@
     <ClInclude Include="98.Utils\ImGUI\imstb_textedit.h">
       <Filter>98.Utils\ImGUI</Filter>
     </ClInclude>
+    <ClInclude Include="02.Managers\InstancingManager.h">
+      <Filter>02.Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="01.Graphics\Buffer\InstancingBuffer.h">
+      <Filter>01.Graphics\Buffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="00.Engine\IExecute.cpp">
@@ -278,6 +284,12 @@
     </ClCompile>
     <ClCompile Include="00.Engine\Resource\Model\ModelAnimation.cpp">
       <Filter>00.Engine\Resource\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="02.Managers\InstancingManager.cpp">
+      <Filter>02.Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="01.Graphics\Buffer\InstancingBuffer.cpp">
+      <Filter>01.Graphics\Buffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

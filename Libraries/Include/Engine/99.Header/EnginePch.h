@@ -68,6 +68,7 @@ using namespace Microsoft::WRL;
 #include "../02.Managers/TimeManager.h"
 #include "../02.Managers/ResourceManager.h"
 #include "../02.Managers/RenderManager.h"
+#include "../02.Managers/InstancingManager.h"
 #include "../02.Managers/ImGuiManager.h"
 
 // Engine

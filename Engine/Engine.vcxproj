@@ -222,6 +222,8 @@
     <ClInclude Include="02.Managers\ImGuiManager.h" />
     <ClInclude Include="00.Engine\Resource\Model\ModelAnimation.h" />
     <ClInclude Include="04.Component\ModelAnimator.h" />
+    <ClInclude Include="02.Managers\InstancingManager.h" />
+    <ClInclude Include="01.Graphics\Buffer\InstancingBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="00.Engine\Resource\Mesh.cpp" />
@@ -300,6 +302,8 @@
     <ClCompile Include="02.Managers\ImGuiManager.cpp" />
     <ClCompile Include="00.Engine\Resource\Model\ModelAnimation.cpp" />
     <ClCompile Include="04.Component\ModelAnimator.cpp" />
+    <ClCompile Include="02.Managers\InstancingManager.cpp" />
+    <ClCompile Include="01.Graphics\Buffer\InstancingBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="98.Utils\SimpleMath.inl" />
