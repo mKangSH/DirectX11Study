@@ -9,7 +9,8 @@ Animation FBX 재생
 Viewport, Render Target 테스트
 
 ## Overview
-<video controls src="Capture/Dx11ModelViewer.mp4" title="overview"></video>
+
+[Capture/Dx11ModelViewer.mp4](https://github.com/mKangSH/DirectX11Study/blob/Feature/portfolio/Capture/Dx11ModelViewer.mp4)
 
 ## Cube Solid
 ![Cube Solid](Capture/Cube_Solid.png)
