@@ -77,6 +77,15 @@ void Graphics::MainRenderResize()
 		_depthStencilBuffer = nullptr;
 		_depthStencilView = nullptr;
 
+		RECT rect;
+		GetClientRect(_hwnd, &rect);
+
+		GAME->GetGameDesc().width = rect.right - rect.left;
+		GAME->GetGameDesc().height = rect.bottom - rect.top;
+
+		_sceneTextureWidth = rect.right - rect.left;
+		_sceneTextureHeight = rect.bottom - rect.top;
+
 		CreateRenderTargetView();
 		CreateDepthStencilView();
 	}

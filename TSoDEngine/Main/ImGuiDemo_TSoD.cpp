@@ -128,8 +128,8 @@ void ImGuiDemo_TSoD::Update()
 	{
 		LightDesc lightDesc;
 		lightDesc.ambient = Vec4(0.7f, 0.7f, 0.7f, 1.0f);
-		lightDesc.diffuse = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
-		lightDesc.specular = Vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		lightDesc.diffuse = Vec4(0.8f, 0.8f, 0.8f, 1.0f);
+		lightDesc.specular = Vec4(0.5f, 0.5f, 0.5f, 1.0f);
 		lightDesc.emissive = Vec4(0.0f, 1.0f, 1.0f, 1.0f);
 		lightDesc.direction = Vec3(1.0f, 0.0f, 1.0f);
 
